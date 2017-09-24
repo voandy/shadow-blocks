@@ -18,9 +18,9 @@ import org.newdawn.slick.Input;
 public class App extends BasicGame
 {
  	/** screen width, in pixels */
-    public static final int SCREEN_WIDTH = 800;
+    public static final int SCREEN_WIDTH = 1024;
     /** screen height, in pixels */
-    public static final int SCREEN_HEIGHT = 600;
+    public static final int SCREEN_HEIGHT = 768;
     /** size of the tiles, in pixels */
     public static final int TILE_SIZE = 32;
     
@@ -69,7 +69,8 @@ public class App extends BasicGame
     {
         AppGameContainer app = new AppGameContainer(new App());
         // setShowFPS(true), to show frames-per-second.
-        app.setShowFPS(false);
+        app.setVSync(true);
+        app.setShowFPS(true);
         app.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
         app.start();
     }
