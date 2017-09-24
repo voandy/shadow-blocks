@@ -1,8 +1,8 @@
 public class WorldDimensions {
 	private int levelWidth;
 	private int levelHeight;
-	private int xOffset;
-	private int yOffset;
+	private float xOffset;
+	private float yOffset;
 
 	public WorldDimensions(int levelWidth, int levelHeight) {
 		this.levelWidth = levelWidth;
@@ -19,11 +19,11 @@ public class WorldDimensions {
 		return levelHeight;
 	}
 	
-	public int getXOffset() {
+	public float getXOffset() {
 		return xOffset;
 	}
 	
-	public int getYOffset() {
+	public float getYOffset() {
 		return yOffset;
 	}
 }
