@@ -20,6 +20,7 @@ public abstract class Sprite {
 	public void update(Input input, int delta) {
 	}
 	
-	public void render(Graphics g) {
+	public void render(Graphics g, float xOffset, float yOffset) {
+		image.draw(position.getXPos() * App.TILE_SIZE + xOffset, position.getYPos() * App.TILE_SIZE + yOffset);
 	}
 }

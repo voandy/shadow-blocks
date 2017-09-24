@@ -27,15 +27,43 @@ public class Loader {
 		return dimensions;
 	}
 	
+	public static Sprite createSprite(String type, Position position) {
+		switch (type) {
+			case "wall":
+				return new Wall(position);
+			case "floor":
+				return new Floor(position);
+			case "stone":
+				return new Stone(position);
+			case "target":
+				return new Target(position);
+			case "player":
+				return new Player(position);
+		}
+		return null;
+	}
+	
 	public static ArrayList<Sprite> loadSprites(String filename) {
 		ArrayList<Sprite> sprites = new ArrayList<>();
 		
 		try (Scanner scanner = new Scanner(new FileReader(filename))) {
-        	// skips the first line which only contains dimensions
-        	scanner.nextLine();
+        	// declares input String and skips the first line which only contains dimensions
+        	String inputLine = scanner.nextLine();
+        	String[] parts = inputLine.split(",");
 			
         	while (scanner.hasNextLine()) {
+        		String type;
+        		int x, y;
+        		Position position;
         		
+        		inputLine = scanner.nextLine();
+        		parts = inputLine.split(",");
+        		type = parts[0];
+				x = Integer.parseInt(parts[1]);
+				y = Integer.parseInt(parts[2]);
+				position = new Position(x, y);
+				
+				sprites.add(createSprite(type, position));
         	}
 		}
         catch (Exception e) {
