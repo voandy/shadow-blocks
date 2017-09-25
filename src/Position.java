@@ -10,7 +10,7 @@ public class Position{
 		this.direction = direction;
 	}
 	
-	// if a Position is created without specifying a Direction it defults to DIR_NONE
+	// if a Position is created without specifying a Direction it defaults to DIR_NONE
 	public Position(int xPos, int yPos) {
 		this.xPos = xPos;
 		this.yPos = yPos;
