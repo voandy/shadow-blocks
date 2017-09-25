@@ -31,6 +31,7 @@ public class Position{
 	public int getYPos() {
 		return yPos;
 	}
+	
 	public void setDirection(Direction direction) {
 		this.direction = direction;
 	}
