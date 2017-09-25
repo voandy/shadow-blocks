@@ -72,4 +72,15 @@ public class Loader {
 		
 		return sprites;
 	}
+	
+	// returns map items (Wall/Floor and their subclasses) from sprites in a separate ArrayList
+	public static ArrayList<Sprite> loadMap(ArrayList<Sprite> sprites) {
+		ArrayList<Sprite> map = new ArrayList<>();
+		for (Sprite sprite : sprites) {
+			if (sprite instanceof Wall || sprite instanceof Floor) {
+				map.add(sprite);
+			}
+		}
+		return map;
+	}
 }
