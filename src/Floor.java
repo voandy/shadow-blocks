@@ -1,4 +1,5 @@
-public class Floor extends Sprite {
+
+public class Floor extends StaticTile {
 	public Floor(Position position) {
 		super("res/floor.png", position);
 	}

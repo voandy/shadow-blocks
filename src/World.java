@@ -6,18 +6,13 @@ import java.util.ArrayList;
 
 public class World {	
 	private ArrayList<Sprite> sprites;
-	private ArrayList<Sprite> map;
+	private Sprite[][] map;
 	WorldDimensions dimensions;
-	
-	private Sound sonicBoom = null;
 	
 	public World() throws SlickException {
 		dimensions = Loader.loadDimensions("res/levels/0.lvl");
 		sprites = Loader.loadSprites("res/levels/0.lvl");
-		map = Loader.loadMap(sprites);
-		
-		sonicBoom = new Sound("res/guile/sonic_boom.ogg");
-		sonicBoom.play();
+		map = Loader.loadMap(sprites, dimensions.getLevelHeight(), dimensions.getLevelWidth());
 		
 	}
 	
@@ -25,10 +20,15 @@ public class World {
 	}
 	
 	public void render(Graphics g) {
-		for (Sprite sprite : map) {
-			if (sprite != null) {
-				sprite.render(g, dimensions.getXOffset(), dimensions.getYOffset());
+		
+		//renders the map
+		for (int i = 0; i < dimensions.getLevelHeight(); i++) {
+			for (int j = 0; j < dimensions.getLevelWidth(); j++) {
+				if (map[i][j] != null) {
+					map[i][j].render(g, dimensions.getXOffset(), dimensions.getYOffset());
+				}
 			}
 		}
 	}
+	
 }

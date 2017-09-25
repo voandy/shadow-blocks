@@ -1,3 +1,4 @@
+
 public class Position{
 	// stores the x and y coordinates of a Sprite and the direction it's facing
 	private int xPos;

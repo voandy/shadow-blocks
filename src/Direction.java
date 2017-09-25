@@ -1,3 +1,4 @@
+
 public enum Direction {
 	DIR_NONE,
 	DIR_UP,

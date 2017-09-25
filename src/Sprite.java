@@ -1,5 +1,7 @@
+
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
@@ -16,6 +18,11 @@ public abstract class Sprite {
 		
 		this.position = position;
 	}
+	
+	public Position getPos() {
+		return position;
+	}
+	
 	
 	public void update(Input input, int delta) {
 	}

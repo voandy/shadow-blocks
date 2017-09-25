@@ -73,14 +73,19 @@ public class Loader {
 		return sprites;
 	}
 	
-	// returns map items (Wall/Floor and their subclasses) from sprites in a separate ArrayList
-	public static ArrayList<Sprite> loadMap(ArrayList<Sprite> sprites) {
-		ArrayList<Sprite> map = new ArrayList<>();
+	// returns a 2d array of map items (StaticTile and its subclasses) from sprites in an ArrayList
+	// note that the returned array only references the sprites and does not copy them
+	public static Sprite[][] loadMap(ArrayList<Sprite> sprites, int levelWidth, int levelHeight) {
+		Sprite[][] map = new Sprite[levelWidth][levelHeight];
+		
 		for (Sprite sprite : sprites) {
-			if (sprite instanceof Wall || sprite instanceof Floor) {
-				map.add(sprite);
+			if (sprite instanceof StaticTile) {
+				map[sprite.getPos().getXPos()][sprite.getPos().getYPos()] = sprite;
 			}
 		}
+		
 		return map;
 	}
+	
+	//public static ArrayList<Sprite> load
 }
