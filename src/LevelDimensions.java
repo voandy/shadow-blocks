@@ -1,10 +1,11 @@
-public class WorldDimensions {
+public class LevelDimensions {
+	// stores the dimensions of a level and calculates offsets for rendering
 	private int levelWidth;
 	private int levelHeight;
 	private float xOffset;
 	private float yOffset;
 
-	public WorldDimensions(int levelWidth, int levelHeight) {
+	public LevelDimensions(int levelWidth, int levelHeight) {
 		this.levelWidth = levelWidth;
 		this.levelHeight = levelHeight;
 		xOffset = (App.SCREEN_WIDTH - (levelWidth * App.TILE_SIZE)) / 2;

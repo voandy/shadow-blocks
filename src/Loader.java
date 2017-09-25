@@ -1,15 +1,14 @@
 import java.io.FileReader;
 import java.util.Scanner;
-import org.newdawn.slick.SlickException;
 import java.util.ArrayList;
 
 public class Loader {	
 	private static final int NO_DIMENSIONS = 2;
 
-	public static WorldDimensions loadDimensions(String filename) {
+	public static LevelDimensions loadDimensions(String filename) {
 		int levelWidth = 0;
 		int levelHeight = 0;
-		WorldDimensions dimensions;
+		LevelDimensions dimensions;
 		
 		try (Scanner scanner = new Scanner(new FileReader(filename))) {
 			String[] line = new String[NO_DIMENSIONS];
@@ -22,7 +21,7 @@ public class Loader {
             e.printStackTrace();
         }
 		
-		dimensions = new WorldDimensions(levelWidth, levelHeight);
+		dimensions = new LevelDimensions(levelWidth, levelHeight);
 		
 		return dimensions;
 	}
@@ -71,20 +70,6 @@ public class Loader {
         }
 		
 		return sprites;
-	}
-	
-	// returns a 2d array of map items (StaticTile and its subclasses) from sprites in an ArrayList
-	// note that the returned array only references the sprites and does not copy them
-	public static Sprite[][] loadMap(ArrayList<Sprite> sprites, int levelWidth, int levelHeight) {
-		Sprite[][] map = new Sprite[levelWidth][levelHeight];
-		
-		for (Sprite sprite : sprites) {
-			if (sprite instanceof StaticTile) {
-				map[sprite.getPos().getXPos()][sprite.getPos().getYPos()] = sprite;
-			}
-		}
-		
-		return map;
 	}
 	
 	//public static ArrayList<Sprite> load
