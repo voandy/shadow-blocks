@@ -32,10 +32,10 @@ public class Position{
 		return yPos;
 	}
 	
-	public void setDirection(Direction direction) {
+	public void setDir(Direction direction) {
 		this.direction = direction;
 	}
-	public Direction getDirection() {
+	public Direction getDir() {
 		return direction;
 	}
 }

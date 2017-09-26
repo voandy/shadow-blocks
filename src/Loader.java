@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Loader {	
 	private static final int NO_DIMENSIONS = 2;
 
+	// loads level dimensions from file
 	public static LevelDimensions loadDimensions(String filename) {
 		int levelWidth = 0;
 		int levelHeight = 0;
@@ -26,6 +27,7 @@ public class Loader {
 		return dimensions;
 	}
 	
+	// creates a new sprite given the type and position
 	public static Sprite createSprite(String type, Position position) {
 		switch (type) {
 			case "wall":
@@ -42,6 +44,7 @@ public class Loader {
 		return null;
 	}
 	
+	// loads all the level data into an array list
 	public static ArrayList<Sprite> loadSprites(String filename) {
 		ArrayList<Sprite> sprites = new ArrayList<>();
 		
@@ -72,5 +75,29 @@ public class Loader {
 		return sprites;
 	}
 	
-	//public static ArrayList<Sprite> load
+	// returns a 2d array of sprites which are an instance of "type"
+	// primarily intended to create a 2d maps of map items and stones
+	// note that the returned array only references the sprites and does not copy them
+	public static Sprite[][] populateLevel(ArrayList<Sprite> sprites, int levelWidth, int levelHeight, Class<?> type) {
+		Sprite[][] entities = new Sprite[levelWidth][levelHeight];
+		
+		for (Sprite sprite : sprites) {
+			if (type.isInstance(sprite)) {
+				entities[sprite.getPos().getXPos()][sprite.getPos().getYPos()] = sprite;
+			}
+		}
+		
+		return entities;
+	}
+	
+	// given an ArrayList of sprites returns an ArrayList of all sprites of type Unit
+	public static ArrayList<Unit> getUnits(ArrayList<Sprite> sprites){
+		ArrayList<Unit> units = new ArrayList<>();
+		for (Sprite sprite : sprites) {
+			if (sprite instanceof Unit) {
+				units.add((Unit) sprite);
+			}
+		}
+		return units;
+	}
 }

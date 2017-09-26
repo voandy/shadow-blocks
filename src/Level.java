@@ -1,51 +1,51 @@
 import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 
 public class Level {
 	private ArrayList<Sprite> sprites;
 	LevelDimensions dimensions;
+	
+	// map items and stone are represented by a 2d array as they will never occupy the same grid coordinates
 	private Sprite[][] map;
-	private Sprite[][] actors;
+	private Sprite[][] stones;
+	// units are represented by and ArrayList as they may occupy the same grid coordinates
+	private ArrayList<Unit> units;
 	
 	public Level(String levelName) {
 		sprites = Loader.loadSprites(levelName);
 		dimensions = Loader.loadDimensions(levelName);
-		map = populateLevel(sprites, dimensions.getLevelHeight(), dimensions.getLevelWidth(), MapItem.class);
-		actors = populateLevel(sprites, dimensions.getLevelHeight(), dimensions.getLevelWidth(), Actor.class);
+		map = Loader.populateLevel(sprites, dimensions.getLevelHeight(), dimensions.getLevelWidth(), MapItem.class);
+		stones = Loader.populateLevel(sprites, dimensions.getLevelHeight(), dimensions.getLevelWidth(), Stone.class);
+		units = Loader.getUnits(sprites);
 	}
 	
-	// returns a 2d array of sprites which are an instance of "type"
-	// note that the returned array only references the sprites and does not copy them
-	private Sprite[][] populateLevel(ArrayList<Sprite> sprites, int levelWidth, int levelHeight, Class<?> type) {
-		Sprite[][] entities = new Sprite[levelWidth][levelHeight];
-		
-		for (Sprite sprite : sprites) {
-			if (type.isInstance(sprite)) {
-				entities[sprite.getPos().getXPos()][sprite.getPos().getYPos()] = sprite;
-			}
-		}
-		
-		return entities;
-	}
-	
-	private void renderSpriteArray(Graphics g, Sprite[][] spriteArray, int levelWidth, int levelHeight, 
-			float xOffset, float yOffset) {
-		for (int i = 0; i < levelHeight; i++) {
-			for (int j = 0; j < levelWidth; j++) {
+	private void renderSpriteArray(Graphics g, Sprite[][] spriteArray) {
+		for (int i = 0; i < dimensions.getLevelHeight(); i++) {
+			for (int j = 0; j < dimensions.getLevelWidth(); j++) {
 				if (spriteArray[i][j] != null) {
-					spriteArray[i][j].render(g, xOffset, yOffset);
+					spriteArray[i][j].render(g, dimensions.getXOffset(), dimensions.getYOffset());
 				}
 			}
 		}
 	}
 	
+	public void renderUnits(Graphics g, ArrayList<Unit> units) {
+		for (Sprite unit : units) {
+			unit.render(g, dimensions.getXOffset(), dimensions.getYOffset());
+		}
+	}
+	
+	public void update(Input input, int delta) {
+	}
+	
 	public void render(Graphics g) {
 		// renders map items
-		renderSpriteArray(g, map, dimensions.getLevelHeight(), dimensions.getLevelWidth(), dimensions.getXOffset(),
-				dimensions.getYOffset());
+		renderSpriteArray(g, map);
 		// renders actors
-		renderSpriteArray(g, actors, dimensions.getLevelHeight(), dimensions.getLevelWidth(), dimensions.getXOffset(),
-				dimensions.getYOffset());
+		renderSpriteArray(g, stones);
+		// renders units
+		renderUnits(g, units);
 	}
 }
