@@ -11,6 +11,7 @@ public class World {
 	}
 	
 	public void update(Input input, int delta) {
+		level.update(input, delta);
 	}
 	
 	public void render(Graphics g) {

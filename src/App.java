@@ -1,9 +1,3 @@
-/**
- * Project skeleton for SWEN20003: Object Oriented Software Development 2017
- * by Eleanor McMurtry
- */
-
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;

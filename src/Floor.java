@@ -1,4 +1,3 @@
-
 public class Floor extends MapItem {
 	public Floor(Position position) {
 		super("res/floor.png", position);

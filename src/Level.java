@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
@@ -38,6 +37,9 @@ public class Level {
 	}
 	
 	public void update(Input input, int delta) {
+		for (Sprite unit : units) {
+			unit.update(input, delta, map, stones, units);
+		}
 	}
 	
 	public void render(Graphics g) {

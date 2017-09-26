@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import org.newdawn.slick.Input;
 
 public abstract class Actor extends Sprite{
@@ -6,30 +7,68 @@ public abstract class Actor extends Sprite{
 		super(image_src, position);
 	}
 	
-	public boolean move() {
+	// moves the director one grid length in the direction which it is currently facing
+	public boolean move(Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
 		Position position = getPos();
-		switch(position.getDir()) {
+		switch (position.getDir()) {
 		case DIR_UP:
-			position.setYPos(position.getYPos() + 1);
-			return true;
+			if (isValidMove(position.getXPos(), position.getYPos(), Direction.DIR_UP, map, stones, units)) {
+				position.setYPos(position.getYPos() - 1);
+				return true;
+			} else {
+				return false;
+			}
 		case DIR_DOWN:
-			position.setYPos(position.getYPos() - 1);
-			return true;
+			if (isValidMove(position.getXPos(), position.getYPos(), Direction.DIR_DOWN, map, stones, units)) {
+				position.setYPos(position.getYPos() + 1);
+				return true;
+			} else {
+				return false;
+			}
 		case DIR_LEFT:
-			position.setXPos(position.getXPos() - 1);
-			return true;
+			if (isValidMove(position.getXPos(), position.getYPos(), Direction.DIR_LEFT, map, stones, units)) {
+				position.setXPos(position.getXPos() - 1);
+				return true;
+			} else {
+				return false;
+			}
 		case DIR_RIGHT:
-			position.setXPos(position.getXPos() + 1);
-			return true;
-		case DIR_NONE:
-			return false;
-
+			if (isValidMove(position.getXPos(), position.getYPos(), Direction.DIR_RIGHT, map, stones, units)) {
+				position.setXPos(position.getXPos() + 1);
+				return true;
+			} else {
+				return false;
+			}
 		default:
 			return false;
 		}
 	}
 	
-	public void update(Input input, int delta) {
+	public boolean isValidMove(int xPos, int yPos, Direction direction,
+			Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
+		switch (direction) {
+		case DIR_UP:
+			if (map[xPos][yPos - 1] instanceof Wall) {
+				return false;
+			}
+		case DIR_DOWN:
+			if (map[xPos][yPos + 1] instanceof Wall) {
+				return false;
+			}
+		case DIR_LEFT:
+			if (map[xPos - 1][yPos] instanceof Wall) {
+				return false;
+			}
+		case DIR_RIGHT:
+			if (map[xPos + 1][yPos] instanceof Wall) {
+				return false;
+			}
+		default:
+			return true;
+		}
+	}
+	
+	public void update(Input input, int delta, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
 	}
 	
 }

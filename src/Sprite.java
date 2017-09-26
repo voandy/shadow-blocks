@@ -1,7 +1,6 @@
-
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-
+import java.util.ArrayList;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
@@ -23,8 +22,7 @@ public abstract class Sprite {
 		return position;
 	}
 	
-	
-	public void update(Input input, int delta) {
+	public void update(Input input, int delta, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
 	}
 	
 	public void render(Graphics g, float xOffset, float yOffset) {
