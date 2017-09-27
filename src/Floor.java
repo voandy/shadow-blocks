@@ -12,6 +12,7 @@ public class Floor extends MapItem {
 		super(image_src, position);
 	}
 	
-	public void update(Input input, int delta, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
+	public void update(Input input, int delta, LevelProperties properties, Sprite[][] map, Sprite[][] stones, 
+			ArrayList<Unit> units) {
 	}
 }

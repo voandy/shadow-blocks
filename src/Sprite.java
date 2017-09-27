@@ -22,7 +22,8 @@ public abstract class Sprite {
 		return position;
 	}
 	
-	public void update(Input input, int delta, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
+	public void update(Input input, int delta, LevelProperties properties, Sprite[][] map, Sprite[][] stones, 
+			ArrayList<Unit> units) {
 	}
 	
 	public void render(Graphics g, float xOffset, float yOffset) {

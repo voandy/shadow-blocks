@@ -6,10 +6,10 @@ public class Loader {
 	private static final int NO_DIMENSIONS = 2;
 
 	// loads level dimensions from file
-	public static LevelDimensions loadDimensions(String filename) {
+	public static LevelProperties loadProperties(String filename, ArrayList<Sprite> sprites) {
 		int levelWidth = 0;
 		int levelHeight = 0;
-		LevelDimensions dimensions;
+		LevelProperties properties;
 		
 		try (Scanner scanner = new Scanner(new FileReader(filename))) {
 			String[] line = new String[NO_DIMENSIONS];
@@ -22,9 +22,9 @@ public class Loader {
             e.printStackTrace();
         }
 		
-		dimensions = new LevelDimensions(levelWidth, levelHeight);
+		properties = new LevelProperties(sprites, levelWidth, levelHeight);
 		
-		return dimensions;
+		return properties;
 	}
 	
 	// creates a new sprite given the type and position

@@ -7,7 +7,8 @@ public class Player extends Unit{
 	}
 	
 	@Override
-	public void update(Input input, int delta, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
+	public void update(Input input, int delta, LevelProperties properties, Sprite[][] map, Sprite[][] stones, 
+			ArrayList<Unit> units) {
 		if (input.isKeyPressed(Input.KEY_LEFT)) {
 			getPos().setDir(Direction.DIR_LEFT);
 			move(map, stones, units);
