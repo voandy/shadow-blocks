@@ -9,11 +9,6 @@ public abstract class Actor extends Sprite{
 	
 	// moves the Actor one grid length in the direction in which it is currently facing
 	public boolean move(Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
-		Position nextPos = getPos().nextPos();
-		if (isValidMove(nextPos, map, stones, units)) {
-			getPos().setPos(nextPos);
-			return true;
-		}
 		return false;
 	}
 	

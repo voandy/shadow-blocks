@@ -66,7 +66,7 @@ public class App extends BasicGame
         AppGameContainer app = new AppGameContainer(new App());
         // setShowFPS(true), to show frames-per-second.
         app.setShowFPS(true);
-        app.setTargetFrameRate(maxFPS);
+        //app.setTargetFrameRate(maxFPS);
         app.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
         app.start();
     }
