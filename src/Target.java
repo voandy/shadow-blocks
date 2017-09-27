@@ -6,7 +6,7 @@ public class Target extends Floor{
 //	private boolean toggled;
 
 	public Target(Position position) {
-		super("res/target.png", position);
+		super("res/target.png", null, position);
 //		this.toggled = false;
 	}
 	

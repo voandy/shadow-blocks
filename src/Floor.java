@@ -4,12 +4,12 @@ import org.newdawn.slick.Input;
 
 public class Floor extends MapItem {
 	public Floor(Position position) {
-		super("res/floor.png", position);
+		super("res/floor.png", null, position);
 	}
 	
 	// this second constructor allows for subclasses to be instantiated with a different image
-	public Floor(String image_src, Position position) {
-		super(image_src, position);
+	public Floor(String image_src, String sound_src, Position position) {
+		super(image_src, sound_src, position);
 	}
 	
 	public void update(Input input, int delta, LevelProperties properties, Sprite[][] map, Sprite[][] stones, 

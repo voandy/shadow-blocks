@@ -3,14 +3,20 @@ import org.newdawn.slick.SlickException;
 import java.util.ArrayList;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Sound;
+
 
 public abstract class Sprite {	
 	private Image image = null;
+	private Sound sound = null;
 	private Position position;
 	
-	public Sprite(String image_src, Position position) {
+	public Sprite(String image_src, String sound_src, Position position) {
 		try {
 			image = new Image(image_src);
+			if (sound_src != null) {
+				sound = new Sound(sound_src);
+			}
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -20,6 +26,12 @@ public abstract class Sprite {
 	
 	public Position getPos() {
 		return position;
+	}
+	
+	public void makeSound() {
+		if (sound != null) {
+			sound.play();
+		}
 	}
 	
 	public void update(Input input, int delta, LevelProperties properties, Sprite[][] map, Sprite[][] stones, 

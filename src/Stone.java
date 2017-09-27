@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Stone extends Actor {
 	public Stone(Position position) {
-		super("res/stone.png", position);
+		super("res/stone.png", "res/stone.wav", position);
 	}
 	
 	public boolean move(LevelProperties properties, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
@@ -22,6 +22,7 @@ public class Stone extends Actor {
 		stones[nextPos.getXPos()][nextPos.getYPos()] = this;
 		stones[getPos().getXPos()][getPos().getYPos()] = null;
 		getPos().setPos(nextPos);
+		makeSound();
 		
 		return true;
 	}

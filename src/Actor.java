@@ -3,8 +3,8 @@ import org.newdawn.slick.Input;
 
 public abstract class Actor extends Sprite{
 	// actors are dynamic sprites in that they can move
-	public Actor(String image_src, Position position) {
-		super(image_src, position);
+	public Actor(String image_src, String sound_src, Position position) {
+		super(image_src, sound_src, position);
 	}
 	
 	// moves the Actor one grid length in the direction in which it is currently facing

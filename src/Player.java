@@ -3,7 +3,7 @@ import org.newdawn.slick.Input;
 
 public class Player extends Unit{
 	public Player(Position position) {
-		super("res/player_left.png", position);
+		super("res/player_left.png", "res/step.wav" , position);
 	}
 	
 	@Override
@@ -12,18 +12,22 @@ public class Player extends Unit{
 		if (input.isKeyPressed(Input.KEY_LEFT)) {
 			getPos().setDir(Direction.DIR_LEFT);
 			move(properties, map, stones, units);
+			makeSound();
 		}
 		else if (input.isKeyPressed(Input.KEY_RIGHT)) {
 			getPos().setDir(Direction.DIR_RIGHT);
 			move(properties, map, stones, units);
+			makeSound();
 		}
 		else if (input.isKeyPressed(Input.KEY_UP)) {
 			getPos().setDir(Direction.DIR_UP);
 			move(properties, map, stones, units);
+			makeSound();
 		}
 		else if (input.isKeyPressed(Input.KEY_DOWN)) {
 			getPos().setDir(Direction.DIR_DOWN);
 			move(properties, map, stones, units);
+			makeSound();
 		}
 	}
 }

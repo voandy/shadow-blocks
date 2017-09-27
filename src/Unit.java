@@ -3,8 +3,8 @@ import org.newdawn.slick.Input;
 
 public abstract class Unit extends Actor{
 
-	public Unit(String image_src, Position position) {
-		super(image_src, position);
+	public Unit(String image_src, String sound_src, Position position) {
+		super(image_src, sound_src, position);
 	}
 	
 	public void update(Input input, int delta, LevelProperties properties, Sprite[][] map, Sprite[][] stones, 
