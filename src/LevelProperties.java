@@ -32,18 +32,16 @@ public class LevelProperties {
 	public int getLevelWidth() {
 		return levelWidth;
 	}
-	
 	public int getLevelHeight() {
 		return levelHeight;
 	}
-	
 	public float getXOffset() {
 		return xOffset;
 	}
-	
 	public float getYOffset() {
 		return yOffset;
 	}
+	
 	public boolean isCompleted() {
 		return targetsToggled == numTargets;
 	}

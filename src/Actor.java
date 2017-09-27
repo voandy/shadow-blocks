@@ -8,7 +8,7 @@ public abstract class Actor extends Sprite{
 	}
 	
 	// moves the Actor one grid length in the direction in which it is currently facing
-	public boolean move(Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
+	public boolean move(LevelProperties properties, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
 		return false;
 	}
 	

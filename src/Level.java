@@ -45,15 +45,6 @@ public class Level {
 		for (Sprite unit : units) {
 			unit.update(input, delta, properties, map, stones, units);
 		}
-		
-		for (int i = 0; i < properties.getLevelHeight(); i++) {
-			for (int j = 0; j < properties.getLevelWidth(); j++) {
-				if (map[i][j] != null) {
-					map[i][j].update(input, delta, properties, map, stones, units);
-				}
-			}
-		}
-		
 	}
 	
 	public void render(Graphics g) {

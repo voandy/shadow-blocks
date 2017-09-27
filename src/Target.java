@@ -1,6 +1,6 @@
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
-import org.newdawn.slick.Input;
+//import org.newdawn.slick.Input;
 
 public class Target extends Floor{
 //	private boolean toggled;

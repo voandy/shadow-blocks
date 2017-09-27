@@ -12,13 +12,14 @@ public abstract class Unit extends Actor{
 	}
 	
 	// moves the Unit one grid length and pushes a stone if one is present
-	public boolean move(Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
+	public boolean move(LevelProperties properties, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
 		Position nextPos = getPos().nextPos();
 		if (isValidMove(nextPos, map, stones, units)) {
 			// if there is a stone in nextPos we push it
 			if (stones[nextPos.getXPos()][nextPos.getYPos()] != null) {
 				getPos().setPos(nextPos);
-				push((Stone) stones[nextPos.getXPos()][nextPos.getYPos()], getPos().getDir(), map, stones, units);
+				push(properties, (Stone) stones[nextPos.getXPos()][nextPos.getYPos()], getPos().getDir(), 
+						map, stones, units);
 				return true;
 			} else {
 				getPos().setPos(nextPos);
@@ -46,8 +47,9 @@ public abstract class Unit extends Actor{
 		return true;
 	}
 	
-	public void push(Stone stone, Direction direction, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
+	public void push(LevelProperties properties, Stone stone, Direction direction, Sprite[][] map, Sprite[][] stones, 
+			ArrayList<Unit> units) {
 		stone.getPos().setDir(direction);
-		stone.move(map, stones, units);
+		stone.move(properties, map, stones, units);
 	}
 }

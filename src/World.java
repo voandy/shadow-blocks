@@ -7,13 +7,13 @@ public class World {
 	private Level level;
 	
 	public World() throws SlickException {
-		level = new Level("res/levels/test.lvl");
+		level = new Level("res/levels/0.lvl");
 	}
 	
 	public void update(Input input, int delta) {
 		level.update(input, delta);
 		if (level.isCompleted()) {
-			level = new Level("res/levels/test.lvl");
+			level = new Level("res/levels/0.lvl");
 		}
 	}
 	
