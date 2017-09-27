@@ -7,68 +7,23 @@ public abstract class Actor extends Sprite{
 		super(image_src, position);
 	}
 	
-	// moves the director one grid length in the direction which it is currently facing
+	// moves the Actor one grid length in the direction in which it is currently facing
 	public boolean move(Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
-		Position position = getPos();
-		switch (position.getDir()) {
-		case DIR_UP:
-			if (isValidMove(position.getXPos(), position.getYPos(), Direction.DIR_UP, map, stones, units)) {
-				position.setYPos(position.getYPos() - 1);
-				return true;
-			} else {
-				return false;
-			}
-		case DIR_DOWN:
-			if (isValidMove(position.getXPos(), position.getYPos(), Direction.DIR_DOWN, map, stones, units)) {
-				position.setYPos(position.getYPos() + 1);
-				return true;
-			} else {
-				return false;
-			}
-		case DIR_LEFT:
-			if (isValidMove(position.getXPos(), position.getYPos(), Direction.DIR_LEFT, map, stones, units)) {
-				position.setXPos(position.getXPos() - 1);
-				return true;
-			} else {
-				return false;
-			}
-		case DIR_RIGHT:
-			if (isValidMove(position.getXPos(), position.getYPos(), Direction.DIR_RIGHT, map, stones, units)) {
-				position.setXPos(position.getXPos() + 1);
-				return true;
-			} else {
-				return false;
-			}
-		default:
-			return false;
-		}
-	}
-	
-	public boolean isValidMove(int xPos, int yPos, Direction direction,
-			Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
-		switch (direction) {
-		case DIR_UP:
-			if (map[xPos][yPos - 1] instanceof Wall) {
-				return false;
-			}
-		case DIR_DOWN:
-			if (map[xPos][yPos + 1] instanceof Wall) {
-				return false;
-			}
-		case DIR_LEFT:
-			if (map[xPos - 1][yPos] instanceof Wall) {
-				return false;
-			}
-		case DIR_RIGHT:
-			if (map[xPos + 1][yPos] instanceof Wall) {
-				return false;
-			}
-		default:
+		Position nextPos = getPos().nextPos();
+		if (isValidMove(nextPos, map, stones, units)) {
+			getPos().setPos(nextPos);
 			return true;
 		}
+		return false;
+	}
+	
+	public boolean isValidMove(Position destination, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
+		if (map[destination.getXPos()][destination.getYPos()] instanceof Wall) {
+			return false;
+		}
+		return true;
 	}
 	
 	public void update(Input input, int delta, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
 	}
-	
 }
