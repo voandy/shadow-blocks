@@ -11,6 +11,7 @@ public class Level {
 	private Sprite[][] stones;
 	// units are represented by and ArrayList as they may occupy the same grid coordinates
 	private ArrayList<Unit> units;
+	private ArrayList<Effect> effects;
 	
 	public Level(String filename) {
 		sprites = Loader.loadSprites(filename);
@@ -19,6 +20,7 @@ public class Level {
 		map = Loader.populateLevel(sprites, properties.getLevelWidth(), properties.getLevelHeight(), MapItem.class);
 		stones = Loader.populateLevel(sprites, properties.getLevelWidth(), properties.getLevelHeight(), Stone.class);
 		units = Loader.getUnits(sprites);
+		effects = new ArrayList<>();
 	}
 	
 	public boolean isCompleted() {
