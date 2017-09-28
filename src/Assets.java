@@ -9,8 +9,23 @@ public class Assets {
   private ArrayList<Unit> units;
   private ArrayList<Effect> effects;
   
-  public Assets(String filename, ArrayList<Sprite> sprites) {
-    
+  public Assets(String filename, ArrayList<Sprite> sprites, LevelProperties properties) {
+    map = Loader.populateLevel(sprites, properties.getLevelWidth(), properties.getLevelHeight(), MapItem.class);
+    stones = Loader.populateLevel(sprites, properties.getLevelWidth(), properties.getLevelHeight(), Stone.class);
+    units = Loader.getUnits(sprites);
+    effects = new ArrayList<>();
   }
-  
+
+  public Sprite[][] getMap() {
+    return map;
+  }
+  public Sprite[][] getStones() {
+    return stones;
+  }
+  public ArrayList<Unit> getUnits() {
+    return units;
+  }
+  public ArrayList<Effect> getEffects() {
+    return effects;
+  }
 }

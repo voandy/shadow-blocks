@@ -7,12 +7,12 @@ public abstract class Actor extends Sprite{
 	}
 	
 	// moves the Actor one grid length in the direction in which it is currently facing
-	public boolean move(LevelProperties properties, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
+	public boolean move(LevelProperties properties, Assets assets) {
 		return false;
 	}
 	
-	public boolean isValidMove(Position destination, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
-		if (map[destination.getXPos()][destination.getYPos()] instanceof Wall) {
+	public boolean isValidMove(Position destination, Assets assets) {
+		if (assets.getMap()[destination.getXPos()][destination.getYPos()] instanceof Wall) {
 			return false;
 		}
 		return true;

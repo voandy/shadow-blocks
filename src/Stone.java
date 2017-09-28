@@ -10,29 +10,29 @@ public class Stone extends Actor {
 		super(image_src, sound_src, position);
 	}
 
-	public boolean move(LevelProperties properties, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
+	public boolean move(LevelProperties properties, Assets assets) {
 		Position nextPos = getPos().nextPos();
 		
 		// we use this method to update how many targets have been toggled onlu when a stone is moved
 		// previously I did it with the update() method but that was less efficient as the game had to update and count
 		// the number of targets toggled for every single frame
-		if (map[getPos().getXPos()][getPos().getYPos()] instanceof Target) {
+		if (assets.getMap()[getPos().getXPos()][getPos().getYPos()] instanceof Target) {
 			properties.untoggleTarget();
 		}
-		if (map[nextPos.getXPos()][nextPos.getYPos()] instanceof Target) {
+		if (assets.getMap()[nextPos.getXPos()][nextPos.getYPos()] instanceof Target) {
 			properties.toggleTarget();
 		}
 
 		// note that move validation is done in the push() method in the unit class so is unnecessary here
-		stones[nextPos.getXPos()][nextPos.getYPos()] = this;
-		stones[getPos().getXPos()][getPos().getYPos()] = null;
+		assets.getStones()[nextPos.getXPos()][nextPos.getYPos()] = this;
+		assets.getStones()[getPos().getXPos()][getPos().getYPos()] = null;
 		getPos().setPos(nextPos);
 		makeSound();
 		
 		return true;
 	}
 	
-	public boolean isValidMove(Position destination, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
-		return super.isValidMove(destination, map, stones, units);
+	public boolean isValidMove(Position destination, Assets assets) {
+		return super.isValidMove(destination, assets);
 	}
 }

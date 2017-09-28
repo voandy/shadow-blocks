@@ -20,20 +20,19 @@ public class Tnt extends Stone {
 
 	}
 	
-	public void update(Input input, int delta, LevelProperties properties, Sprite[][] map, Sprite[][] stones, 
-			ArrayList<Unit> units, ArrayList<Effect> effects) {
+	public void update(Input input, int delta, LevelProperties properties, Assets assets) {
 		if (exploading) {
 			timeSinceExplosion += delta;
 		}
 		if (timeSinceExplosion > EXPLOSION_DURATION) {
-			effects.remove(explosion);
-			map[getPos().getXPos()][getPos().getYPos()] = new Floor(getPos());
-			stones[getPos().getXPos()][getPos().getYPos()] = null;
+		  assets.getEffects().remove(explosion);
+		  assets.getMap()[getPos().getXPos()][getPos().getYPos()] = new Floor(getPos());
+		  assets.getStones()[getPos().getXPos()][getPos().getYPos()] = null;
 		}
 	}
 	
-	public void detonate(Sprite[][] map, Sprite[][] stones, ArrayList<Effect> effects) {
-		effects.add(explosion);
+	public void detonate(Assets assets) {
+	  assets.getEffects().add(explosion);
 		exploading = true;
 		explosion.makeSound();
 		timeSinceExplosion = 0;

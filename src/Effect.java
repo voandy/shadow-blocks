@@ -24,8 +24,7 @@ public class Effect extends Sprite{
 		animation = new Animation(sheet, duration);
 	}
 	
-	public void update(Input input, int delta, LevelProperties properties, Sprite[][] map, Sprite[][] stones, 
-			ArrayList<Unit> units) {
+	public void update(Input input, int delta, LevelProperties properties, Assets assets) {
 		animation.update(delta);
 	}
 	

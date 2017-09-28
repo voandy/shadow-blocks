@@ -7,15 +7,13 @@ public abstract class Unit extends Actor{
 	}
 	
 	// moves the Unit one grid length and pushes a stone if one is present
-	public boolean move(LevelProperties properties, Sprite[][] map, Sprite[][] stones, 
-			ArrayList<Unit> units, ArrayList<Effect> effects) {
+	public boolean move(LevelProperties properties, Assets assets) {
 		Position nextPos = getPos().nextPos();
-		if (isValidMove(nextPos, map, stones, units)) {
+		if (isValidMove(nextPos, assets)) {
 			// if there is a stone in nextPos we push it
-			if (stones[nextPos.getXPos()][nextPos.getYPos()] != null) {
+			if (assets.getStones()[nextPos.getXPos()][nextPos.getYPos()] != null) {
 				getPos().setPos(nextPos);
-				push(properties, (Stone) stones[nextPos.getXPos()][nextPos.getYPos()], getPos().getDir(), 
-						map, stones, units, effects);
+				push(properties, (Stone) assets.getStones()[nextPos.getXPos()][nextPos.getYPos()], getPos().getDir(), assets);
 				return true;
 			} else {
 				getPos().setPos(nextPos);
@@ -26,40 +24,40 @@ public abstract class Unit extends Actor{
 	}
 	
 	// returns true if the unit can move to the destination
-	public boolean isValidMove(Position destination, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
-		if (!super.isValidMove(destination, map, stones, units)) {
+	public boolean isValidMove(Position destination, Assets assets) {
+		if (!super.isValidMove(destination, assets)) {
 			return false;
 		}
 		
 		// checks if the destination contains a Stone
-		if (stones[destination.getXPos()][destination.getYPos()] != null) {
+		if (assets.getStones()[destination.getXPos()][destination.getYPos()] != null) {
 			// gets the grid position behind the stone
 			Position nextDest = destination.nextPos();
 			// checks if position behind the Stone position contains a Wall
-			if (map[nextDest.getXPos()][nextDest.getYPos()] instanceof Wall) {
+			if (assets.getMap()[nextDest.getXPos()][nextDest.getYPos()] instanceof Wall) {
 				// if the Wall is a CrackedWall and the Stone is Tnt then the move is valid
-				if (stones[destination.getXPos()][destination.getYPos()] instanceof Tnt && 
-						map[nextDest.getXPos()][nextDest.getYPos()] instanceof CrackedWall) {
+				if (assets.getStones()[destination.getXPos()][destination.getYPos()] instanceof Tnt && 
+				    assets.getMap()[nextDest.getXPos()][nextDest.getYPos()] instanceof CrackedWall) {
 					return true;
 				}
 				// otherwise it is invalid
 				return false;
 			} 
 			// if there is another stone behind the stone then the move is invalid
-			else if (stones[nextDest.getXPos()][nextDest.getYPos()] != null) {
+			else if (assets.getStones()[nextDest.getXPos()][nextDest.getYPos()] != null) {
 				return false;
 			}
 		}
 		return true;
 	}
 	
-	public void push(LevelProperties properties, Stone stone, Direction direction, Sprite[][] map, Sprite[][] stones, 
-			ArrayList<Unit> units, ArrayList<Effect> effects) {
+	public void push(LevelProperties properties, Stone stone, Direction direction, Assets assets) {
 		stone.getPos().setDir(direction);
-		stone.move(properties, map, stones, units);
+		stone.move(properties, assets);
 		// if the Stone is Tnt and it is being pushed into a CrackedWall it detonates
-		if (stone instanceof Tnt && map[stone.getPos().getXPos()][stone.getPos().getYPos()] instanceof CrackedWall) {
-			((Tnt) stone).detonate(map, stones, effects);
+		if (stone instanceof Tnt && 
+		    assets.getMap()[stone.getPos().getXPos()][stone.getPos().getYPos()] instanceof CrackedWall) {
+			((Tnt) stone).detonate(assets);
 		}
 		
 		// if the stone is an ice block set sliding to true

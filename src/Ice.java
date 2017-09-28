@@ -14,15 +14,14 @@ public class Ice extends Stone {
 	}
 	
 	// if the ice block is in a sliding state it will continue to move unit it encounters a wall or block
-	public void update(Input input, int delta, LevelProperties properties, Sprite[][] map, Sprite[][] stones, 
-			ArrayList<Unit> units, ArrayList<Effect> effects) {
+	public void update(Input input, int delta, LevelProperties properties, Assets assets) {
 		if (sliding) {
 			
 			timeSinceMove += delta;
 			if (timeSinceMove > MOVE_DELAY) {
 				
-				if (isValidMove(nextPos, map, stones, units)) {
-					move(properties, map, stones, units);
+				if (isValidMove(nextPos, assets)) {
+					move(properties, assets);
 					nextPos = getPos().nextPos();
 					timeSinceMove = 0;
 					
@@ -39,13 +38,13 @@ public class Ice extends Stone {
 	}
 	
 	// returns false if the destination contains a wall or block and true otherwise
-	public boolean isValidMove(Position destination, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
-		if (!super.isValidMove(destination, map, stones, units)) {
+	public boolean isValidMove(Position destination, Assets assets) {
+		if (!super.isValidMove(destination, assets)) {
 			return false;
 		}
 		
 		// checks if destination contains a stone.
-		if (stones[destination.getXPos()][destination.getYPos()] != null) {
+		if (assets.getStones()[destination.getXPos()][destination.getYPos()] != null) {
 			return false;
 		}
 		
