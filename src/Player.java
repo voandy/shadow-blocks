@@ -6,6 +6,10 @@ public class Player extends Unit{
 		super("res/player_left.png", "res/step.wav" , position);
 	}
 	
+	 public Player(String image_src, String sound_src, Position position) {
+	    super(image_src, sound_src, position);
+	  }
+	
 	//@Override
 	public void update(Input input, int delta, LevelProperties properties, Assets assets) {
 		if (input.isKeyPressed(Input.KEY_LEFT)) {
@@ -26,7 +30,7 @@ public class Player extends Unit{
 	}
 	
 	// moves the player, makes a sound and updates history
-	private void playerMove(LevelProperties properties, Assets assets) {
+	public void playerMove(LevelProperties properties, Assets assets) {
 		move(properties, assets);
 		makeSound();
 		properties.incrementMoves();

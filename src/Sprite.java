@@ -32,6 +32,10 @@ public abstract class Sprite {
 		}
 	}
 	
+	public void setImage(Image image) {
+	  this.image = image;
+	}
+	
 	public void update(Input input, int delta, LevelProperties properties, Assets assets) {
 	}
 	

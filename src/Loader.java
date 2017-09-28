@@ -69,6 +69,8 @@ public class Loader {
 				return new Tnt(position);
 			case "player":
 				return new Player(position);
+      case "guile":
+        return new Guile(position);
 			case "skeleton":
 				return new Skeleton(position);
 			case "rogue":

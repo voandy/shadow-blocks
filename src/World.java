@@ -1,9 +1,12 @@
+import java.lang.reflect.Array;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class World {	
 	private Level level;
+	// stores a list of level filenames
 	private String[] levelList;
 	private int currLevel;
 	
@@ -15,8 +18,8 @@ public class World {
 	
 	public void update(Input input, int delta) {
 		level.update(input, delta);
-		// loads the next level when level is complete of skip by pressing space
-		if (level.isCompleted() || input.isKeyPressed(Input.KEY_SPACE)) {
+		// when the level is complete or skipped by pressing space the next level is loaded
+		if ((level.isCompleted() || input.isKeyPressed(Input.KEY_SPACE)) && levelList[currLevel + 1] != null) {
 			currLevel++;
 			level = new Level(levelList[currLevel]);
 		}

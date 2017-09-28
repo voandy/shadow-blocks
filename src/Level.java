@@ -24,13 +24,14 @@ public class Level {
 	private void renderSpriteArray(Graphics g, Sprite[][] spriteArray) {
 		for (int i = 0; i < properties.getLevelWidth(); i++) {
 			for (int j = 0; j < properties.getLevelHeight(); j++) {
-				if (spriteArray[i][j] != null) {
+			  if (spriteArray[i][j] != null) {
 					spriteArray[i][j].render(g, properties.getXOffset(), properties.getYOffset());
 				}
 			}
 		}
 	}
 	
+	// used to render both units and effects
 	public void renderArrayList(Graphics g, ArrayList<? extends Sprite> sprites) {
 		if (sprites != null) {
 			for (Sprite sprite : sprites) {

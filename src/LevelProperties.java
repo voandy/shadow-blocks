@@ -56,11 +56,10 @@ public class LevelProperties {
 	}
 	
 	public boolean isCompleted() {
-		// special case for 5.lvl which has no targets
-		if (numTargets == 0) {
-			return false;
-		}
-		
+	  // special case for 5.lvl which has no Targets
+	  if (numTargets == 0) {
+	    return false;
+	  }
 		return targetsToggled == numTargets;
 	}
 	public void toggleTarget() {
