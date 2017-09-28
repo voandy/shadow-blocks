@@ -41,20 +41,22 @@ public class Level {
 		}
 	}
 	
-	public void renderUnits(Graphics g, ArrayList<Unit> units) {
-		for (Sprite unit : units) {
-			unit.render(g, properties.getXOffset(), properties.getYOffset());
+	public void renderArrayList(Graphics g, ArrayList<? extends Sprite> sprites) {
+		if (sprites != null) {
+			for (Sprite sprite : sprites) {
+				sprite.render(g, properties.getXOffset(), properties.getYOffset());
+			}
 		}
 	}
 	
 	public void update(Input input, int delta) {
 		for (Sprite unit : units) {
-			unit.update(input, delta, properties, map, stones, units);
+			unit.update(input, delta, properties, map, stones, units, effects);
 		}
 		for (int i = 0; i < properties.getLevelWidth(); i++) {
 			for (int j = 0; j < properties.getLevelHeight(); j++) {
 				if (stones[i][j] != null) {
-					stones[i][j].update(input, delta, properties, map, stones, units);
+					stones[i][j].update(input, delta, properties, map, stones, units, effects);
 				}
 			}
 		}
@@ -66,7 +68,9 @@ public class Level {
 		// renders actors
 		renderSpriteArray(g, stones);
 		// renders units
-		renderUnits(g, units);
+		renderArrayList(g, units);
+		// renders effects
+		renderArrayList(g, effects);
 		// shows number of moves made
 		g.drawString("Moves: " + properties.getNoMoves(), 0, 0);
 	}

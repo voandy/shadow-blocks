@@ -7,14 +7,15 @@ public abstract class Unit extends Actor{
 	}
 	
 	// moves the Unit one grid length and pushes a stone if one is present
-	public boolean move(LevelProperties properties, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
+	public boolean move(LevelProperties properties, Sprite[][] map, Sprite[][] stones, 
+			ArrayList<Unit> units, ArrayList<Effect> effects) {
 		Position nextPos = getPos().nextPos();
 		if (isValidMove(nextPos, map, stones, units)) {
 			// if there is a stone in nextPos we push it
 			if (stones[nextPos.getXPos()][nextPos.getYPos()] != null) {
 				getPos().setPos(nextPos);
 				push(properties, (Stone) stones[nextPos.getXPos()][nextPos.getYPos()], getPos().getDir(), 
-						map, stones, units);
+						map, stones, units, effects);
 				return true;
 			} else {
 				getPos().setPos(nextPos);
@@ -53,12 +54,12 @@ public abstract class Unit extends Actor{
 	}
 	
 	public void push(LevelProperties properties, Stone stone, Direction direction, Sprite[][] map, Sprite[][] stones, 
-			ArrayList<Unit> units) {
+			ArrayList<Unit> units, ArrayList<Effect> effects) {
 		stone.getPos().setDir(direction);
 		stone.move(properties, map, stones, units);
 		// if the Stone is Tnt and it is being pushed into a CrackedWall it detonates
 		if (stone instanceof Tnt && map[stone.getPos().getXPos()][stone.getPos().getYPos()] instanceof CrackedWall) {
-			((Tnt) stone).detonate(map, stones);
+			((Tnt) stone).detonate(map, stones, effects);
 		}
 		
 		// if the stone is an ice block set sliding to true

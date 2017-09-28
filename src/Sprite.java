@@ -33,7 +33,7 @@ public abstract class Sprite {
 	}
 	
 	public void update(Input input, int delta, LevelProperties properties, Sprite[][] map, Sprite[][] stones, 
-			ArrayList<Unit> units) {
+			ArrayList<Unit> units, ArrayList<Effect> effects) {
 	}
 	
 	public void render(Graphics g, float xOffset, float yOffset) {
