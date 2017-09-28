@@ -5,6 +5,11 @@ public class Stone extends Actor {
 		super("res/stone.png", "res/stone.wav", position);
 	}
 	
+	// this second constructor allows for subclasses to be instantiated with a different image
+	public Stone(String image_src, String sound_src, Position position) {
+		super(image_src, sound_src, position);
+	}
+
 	public boolean move(LevelProperties properties, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
 		Position nextPos = getPos().nextPos();
 		
@@ -25,5 +30,9 @@ public class Stone extends Actor {
 		makeSound();
 		
 		return true;
+	}
+	
+	public boolean isValidMove(Position destination, Sprite[][] map, Sprite[][] stones, ArrayList<Unit> units) {
+		return super.isValidMove(destination, map, stones, units);
 	}
 }

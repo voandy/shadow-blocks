@@ -24,10 +24,6 @@ public abstract class Sprite {
 		this.position = position;
 	}
 	
-	public Position getPos() {
-		return position;
-	}
-	
 	public void makeSound() {
 		if (sound != null) {
 			sound.play();
@@ -41,4 +37,9 @@ public abstract class Sprite {
 	public void render(Graphics g, float xOffset, float yOffset) {
 		image.draw(position.getXPos() * App.TILE_SIZE + xOffset, position.getYPos() * App.TILE_SIZE + yOffset);
 	}
+
+	public Position getPos() {
+		return position;
+	}
+
 }

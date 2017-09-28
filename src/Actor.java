@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import org.newdawn.slick.Input;
 
 public abstract class Actor extends Sprite{
 	// actors are dynamic sprites in that they can move
@@ -17,9 +16,5 @@ public abstract class Actor extends Sprite{
 			return false;
 		}
 		return true;
-	}
-	
-	public void update(Input input, int delta, LevelProperties properties, Sprite[][] map, Sprite[][] stones, 
-			ArrayList<Unit> units) {
 	}
 }

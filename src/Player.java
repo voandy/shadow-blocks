@@ -11,23 +11,26 @@ public class Player extends Unit{
 			ArrayList<Unit> units) {
 		if (input.isKeyPressed(Input.KEY_LEFT)) {
 			getPos().setDir(Direction.DIR_LEFT);
-			move(properties, map, stones, units);
-			makeSound();
-		}
-		else if (input.isKeyPressed(Input.KEY_RIGHT)) {
+			playerMove(properties, map, stones, units);
+		} else if (input.isKeyPressed(Input.KEY_RIGHT)) {
 			getPos().setDir(Direction.DIR_RIGHT);
-			move(properties, map, stones, units);
-			makeSound();
-		}
-		else if (input.isKeyPressed(Input.KEY_UP)) {
+			playerMove(properties, map, stones, units);
+
+		} else if (input.isKeyPressed(Input.KEY_UP)) {
 			getPos().setDir(Direction.DIR_UP);
-			move(properties, map, stones, units);
-			makeSound();
-		}
-		else if (input.isKeyPressed(Input.KEY_DOWN)) {
+			playerMove(properties, map, stones, units);
+
+		} else if (input.isKeyPressed(Input.KEY_DOWN)) {
 			getPos().setDir(Direction.DIR_DOWN);
-			move(properties, map, stones, units);
-			makeSound();
+			playerMove(properties, map, stones, units);
 		}
+	}
+	
+	// moves the player, makes a sound and updates history
+	private void playerMove(LevelProperties properties, Sprite[][] map, Sprite[][] stones, 
+			ArrayList<Unit> units) {
+		move(properties, map, stones, units);
+		makeSound();
+		properties.incrementMoves();
 	}
 }

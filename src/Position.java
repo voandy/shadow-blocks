@@ -17,6 +17,13 @@ public class Position{
 		this.direction = Direction.DIR_NONE;
 	}
 	
+	// copies a position into this
+	public Position(Position another) {
+		this.xPos = another.xPos;
+		this.yPos = another.yPos;
+		this.direction = another.direction;
+	}
+	
 	// returns a Position adjacent to the current position (in the the direction this Position is facing)
 	public Position nextPos() {
 		int nextX = this.xPos;

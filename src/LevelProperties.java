@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 
 public class LevelProperties {
+	private String filename;
+	
 	private int levelWidth;
 	private int levelHeight;
 	private float xOffset;
@@ -8,8 +10,13 @@ public class LevelProperties {
 	
 	private int numTargets;
 	private int targetsToggled;
+	private int noMoves;
 	
-	public LevelProperties(ArrayList<Sprite> sprites, int levelWidth, int levelHeight) {
+	private boolean restartStatus;
+	
+	public LevelProperties(String filename, ArrayList<Sprite> sprites, int levelWidth, int levelHeight) {
+		this.filename = filename;
+		
 		this.levelWidth = levelWidth;
 		this.levelHeight = levelHeight;
 		xOffset = (App.SCREEN_WIDTH - (levelWidth * App.TILE_SIZE)) / 2;
@@ -17,6 +24,9 @@ public class LevelProperties {
 		
 		numTargets = countTargets(sprites);
 		targetsToggled = 0;
+		noMoves = 0;
+		
+		restartStatus = false;
 	}
 	
 	private int countTargets(ArrayList<Sprite> sprites) {
@@ -27,6 +37,9 @@ public class LevelProperties {
 			}
 		}
 		return numTargets;
+	}
+	public String getFilename() {
+		return filename;
 	}
 	
 	public int getLevelWidth() {
@@ -43,6 +56,11 @@ public class LevelProperties {
 	}
 	
 	public boolean isCompleted() {
+		// special case for 5.lvl which has no targets
+		if (numTargets == 0) {
+			return false;
+		}
+		
 		return targetsToggled == numTargets;
 	}
 	public void toggleTarget() {
@@ -50,6 +68,20 @@ public class LevelProperties {
 	}
 	public void untoggleTarget() {
 		targetsToggled--;
+	}
+	
+	public int getNoMoves() {
+		return noMoves;
+	}
+	public void incrementMoves() {
+		noMoves++;
+	}
+	public void decrementsMoves() {
+		noMoves--;
+	}
+	
+	public boolean getRestartStatus() {
+		return restartStatus;
 	}
 }
 

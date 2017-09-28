@@ -12,12 +12,12 @@ public class Level {
 	// units are represented by and ArrayList as they may occupy the same grid coordinates
 	private ArrayList<Unit> units;
 	
-	public Level(String levelName) {
-		sprites = Loader.loadSprites(levelName);
-		properties = Loader.loadProperties(levelName, sprites);
+	public Level(String filename) {
+		sprites = Loader.loadSprites(filename);
+		properties = Loader.loadProperties(filename, sprites);
 		
-		map = Loader.populateLevel(sprites, properties.getLevelHeight(), properties.getLevelWidth(), MapItem.class);
-		stones = Loader.populateLevel(sprites, properties.getLevelHeight(), properties.getLevelWidth(), Stone.class);
+		map = Loader.populateLevel(sprites, properties.getLevelWidth(), properties.getLevelHeight(), MapItem.class);
+		stones = Loader.populateLevel(sprites, properties.getLevelWidth(), properties.getLevelHeight(), Stone.class);
 		units = Loader.getUnits(sprites);
 	}
 	
@@ -25,9 +25,13 @@ public class Level {
 		return properties.isCompleted();
 	}
 	
+	public boolean getRestartStatus() {
+		return properties.getRestartStatus();
+	}
+	
 	private void renderSpriteArray(Graphics g, Sprite[][] spriteArray) {
-		for (int i = 0; i < properties.getLevelHeight(); i++) {
-			for (int j = 0; j < properties.getLevelWidth(); j++) {
+		for (int i = 0; i < properties.getLevelWidth(); i++) {
+			for (int j = 0; j < properties.getLevelHeight(); j++) {
 				if (spriteArray[i][j] != null) {
 					spriteArray[i][j].render(g, properties.getXOffset(), properties.getYOffset());
 				}
@@ -45,6 +49,13 @@ public class Level {
 		for (Sprite unit : units) {
 			unit.update(input, delta, properties, map, stones, units);
 		}
+		for (int i = 0; i < properties.getLevelWidth(); i++) {
+			for (int j = 0; j < properties.getLevelHeight(); j++) {
+				if (stones[i][j] != null) {
+					stones[i][j].update(input, delta, properties, map, stones, units);
+				}
+			}
+		}
 	}
 	
 	public void render(Graphics g) {
@@ -54,5 +65,7 @@ public class Level {
 		renderSpriteArray(g, stones);
 		// renders units
 		renderUnits(g, units);
+		// shows number of moves made
+		g.drawString("Moves: " + properties.getNoMoves(), 0, 0);
 	}
 }

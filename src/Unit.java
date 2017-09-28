@@ -1,14 +1,9 @@
 import java.util.ArrayList;
-import org.newdawn.slick.Input;
 
 public abstract class Unit extends Actor{
 
 	public Unit(String image_src, String sound_src, Position position) {
 		super(image_src, sound_src, position);
-	}
-	
-	public void update(Input input, int delta, LevelProperties properties, Sprite[][] map, Sprite[][] stones, 
-			ArrayList<Unit> units) {
 	}
 	
 	// moves the Unit one grid length and pushes a stone if one is present
@@ -34,13 +29,25 @@ public abstract class Unit extends Actor{
 			return false;
 		}
 		
-		// checks if the destination contains a stone
+		// checks if the destination contains a Stone
 		if (stones[destination.getXPos()][destination.getYPos()] != null) {
-			// gets the grid position behind the stone and checks if it's a wall or another stone
+			// gets the grid position behind the stone
 			Position nextDest = destination.nextPos();
+			
+			// checks if this position contains a Wall
 			if (map[nextDest.getXPos()][nextDest.getYPos()] instanceof Wall) {
+				
+				// if the Wall is a CrackedWall and the Stone is Tne then the move is valid
+				if (stones[destination.getXPos()][destination.getYPos()] instanceof Tnt && 
+						map[nextDest.getXPos()][nextDest.getYPos()] instanceof CrackedWall) {
+					return true;
+				}
+				
+				// otherwise it is invalid
 				return false;
-			} else if (stones[nextDest.getXPos()][nextDest.getYPos()] != null) {
+			} 
+			// if there is another stone behind the stone then the move is invalid
+			else if (stones[nextDest.getXPos()][nextDest.getYPos()] != null) {
 				return false;
 			}
 		}
@@ -51,5 +58,10 @@ public abstract class Unit extends Actor{
 			ArrayList<Unit> units) {
 		stone.getPos().setDir(direction);
 		stone.move(properties, map, stones, units);
+		
+		// if the stone is an ice block set sliding to true
+		if (stone instanceof Ice) {
+			((Ice) stone).makeSlide();
+		}
 	}
 }

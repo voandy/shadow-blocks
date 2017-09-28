@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Loader {	
 	private static final int NO_DIMENSIONS = 2;
+	private static final int MAX_LEVELS = 10;
 
 	// loads level dimensions from file
 	public static LevelProperties loadProperties(String filename, ArrayList<Sprite> sprites) {
@@ -22,9 +23,27 @@ public class Loader {
             e.printStackTrace();
         }
 		
-		properties = new LevelProperties(sprites, levelWidth, levelHeight);
+		properties = new LevelProperties(filename, sprites, levelWidth, levelHeight);
 		
 		return properties;
+	}
+	
+	// loads an array of levels in the game
+	public static String[] loadLevelList(String filename) {
+		String[] levelList = new String[MAX_LEVELS];
+		
+		try (Scanner scanner = new Scanner(new FileReader(filename))) {
+        	int i = 0;
+            while (scanner.hasNextLine()) {
+            	levelList[i] = "res/levels/" + scanner.nextLine();
+            	i++;
+            }
+		} 
+		catch (Exception e) {
+            e.printStackTrace();
+        }
+		
+		return levelList;
 	}
 	
 	// creates a new sprite given the type and position
@@ -32,14 +51,30 @@ public class Loader {
 		switch (type) {
 			case "wall":
 				return new Wall(position);
+			case "cracked":
+				return new CrackedWall(position);
+			case "door":
+				return new Door(position);
 			case "floor":
 				return new Floor(position);
-			case "stone":
-				return new Stone(position);
 			case "target":
 				return new Target(position);
+			case "switch":
+				return new Switch(position);
+			case "stone":
+				return new Stone(position);
+			case "ice":
+				return new Ice(position);
+			case "tnt":
+				return new Tnt(position);
 			case "player":
 				return new Player(position);
+			case "skeleton":
+				return new Skeleton(position);
+			case "rogue":
+				return new Rogue(position);
+			case "mage":
+				return new Mage(position);
 		}
 		return null;
 	}
@@ -99,5 +134,17 @@ public class Loader {
 			}
 		}
 		return units;
+	}
+	
+	// finds the player in the units ArrayList
+	private static Unit findPlayer(ArrayList<Unit> units) {
+		Unit player = null;
+		for (Unit unit: units) {
+			if (unit instanceof Player) {
+				player = unit;
+				break;
+			}
+		}
+		return player;
 	}
 }
