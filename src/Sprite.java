@@ -13,7 +13,9 @@ public abstract class Sprite {
 	
 	public Sprite(String image_src, String sound_src, Position position) {
 		try {
-			image = new Image(image_src);
+			if (image_src != null) {
+				image = new Image(image_src);
+			}
 			if (sound_src != null) {
 				sound = new Sound(sound_src);
 			}
