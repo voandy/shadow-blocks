@@ -24,6 +24,13 @@ public class Position{
 		this.direction = another.direction;
 	}
 	
+	// creates and empty position
+	public Position() {
+	  this.xPos = 0;
+	  this.yPos = 0;
+	  this.direction = Direction.DIR_NONE;
+	}
+	
 	// tests if two positions are equal, note this method is not dependent on direction
 	public boolean equals(Position another) {
 	  if (this == another) {

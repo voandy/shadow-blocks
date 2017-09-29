@@ -54,6 +54,7 @@ public class Level {
 				}
 			}
 		}
+		assets.getGameEffects().update(delta);
 	}
 	
 	public void render(Graphics g) {
@@ -64,7 +65,7 @@ public class Level {
 		// renders units
 		renderArrayList(g, assets.getUnits());
 		// renders effects
-		renderArrayList(g, assets.getEffects());
+		renderArrayList(g, assets.getGameEffects().getEffects());
 		// shows number of moves made
 		g.drawString("Moves: " + properties.getNoMoves(), 0, 0);
 	}

@@ -138,6 +138,19 @@ public class Loader {
 		return units;
 	}
 	
+	// given an ArrayList of sprites returns an ArrayList of all sprites that are instances of subClass
+	// credit: Tamas Rev https://stackoverflow.com/questions/46480748/
+	@SuppressWarnings("unchecked")
+  public static <T> ArrayList<T> getSubset(ArrayList<? super T> sprites, Class<T> subClass) {
+	  ArrayList<T> subSet = new ArrayList<>();
+	  for (Object object : sprites) {
+	    if (subClass.isInstance(object)) {
+	      subSet.add((T) object);
+	    }
+	  }
+	  return subSet;
+	}
+	
 	// finds the player in the units ArrayList
 	public static Player findPlayer(ArrayList<Sprite> sprites) {
 		Player player = null;
