@@ -139,11 +139,11 @@ public class Loader {
 	}
 	
 	// finds the player in the units ArrayList
-	private static Unit findPlayer(ArrayList<Unit> units) {
-		Unit player = null;
-		for (Unit unit: units) {
-			if (unit instanceof Player) {
-				player = unit;
+	public static Player findPlayer(ArrayList<Sprite> sprites) {
+		Player player = null;
+		for (Sprite sprite: sprites) {
+			if (sprite instanceof Player) {
+				player = (Player) sprite;
 				break;
 			}
 		}

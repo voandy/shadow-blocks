@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class LevelProperties {
 	private String filename;
-	
-	private int levelWidth;
+
+  private int levelWidth;
 	private int levelHeight;
 	private float xOffset;
 	private float yOffset;
@@ -11,6 +11,8 @@ public class LevelProperties {
 	private int numTargets;
 	private int targetsToggled;
 	private int noMoves;
+	
+	private Position playerPos;
 	
 	private boolean restartStatus;
 	
@@ -27,6 +29,12 @@ public class LevelProperties {
 		noMoves = 0;
 		
 		restartStatus = false;
+		
+		// finds the player and loads its position if it is present
+		Player player = Loader.findPlayer(sprites);
+		if (player != null) {
+		  playerPos = player.getPos();
+		}
 	}
 	
 	private int countTargets(ArrayList<Sprite> sprites) {
@@ -81,6 +89,17 @@ public class LevelProperties {
 	
 	public boolean getRestartStatus() {
 		return restartStatus;
+	}
+	public void setRestartStatus(boolean restartStatus) {
+	  this.restartStatus = restartStatus;
+	}
+	
+	public Position getPlayerPos() {
+	  return playerPos;
+	}
+
+	public void setPlayerPos(Position playerPos) {
+	  this.playerPos = playerPos;
 	}
 }
 

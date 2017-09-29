@@ -24,6 +24,17 @@ public class Position{
 		this.direction = another.direction;
 	}
 	
+	// tests if two positions are equal, note this method is not dependent on direction
+	public boolean equals(Position another) {
+	  if (this == another) {
+	    return true;
+	  }
+	  if (another == null) {
+	    return false;
+	  }
+	  return (this.xPos == another.xPos && this.yPos == another.yPos);
+	}
+	
 	// returns a Position adjacent to the current position (in the the direction this Position is facing)
 	public Position nextPos() {
 		int nextX = this.xPos;

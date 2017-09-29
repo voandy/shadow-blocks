@@ -22,6 +22,7 @@ public class Effect extends Sprite{
 		}
 		
 		animation = new Animation(sheet, duration);
+		animation.setLooping(false);
 	}
 	
 	public void update(Input input, int delta, LevelProperties properties, Assets assets) {

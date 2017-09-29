@@ -35,16 +35,31 @@ public abstract class Sprite {
 	public void setImage(Image image) {
 	  this.image = image;
 	}
+	public Image getImage() {
+	  return image;
+	}
 	
-	public void update(Input input, int delta, LevelProperties properties, Assets assets) {
+	public Sound getSound() {
+    return sound;
+  }
+  public void setSound(Sound sound) {
+    this.sound = sound;
+  }
+
+  public Position getPos() {
+    return position;
+  }
+  public void setPos(Position position) {
+    this.position = position;
+  }
+
+  public void update(Input input, int delta, LevelProperties properties, Assets assets) {
 	}
 	
 	public void render(Graphics g, float xOffset, float yOffset) {
-		image.draw(position.getXPos() * App.TILE_SIZE + xOffset, position.getYPos() * App.TILE_SIZE + yOffset);
-	}
-
-	public Position getPos() {
-		return position;
+	  if (image != null) {
+	    image.draw(position.getXPos() * App.TILE_SIZE + xOffset, position.getYPos() * App.TILE_SIZE + yOffset);
+	  }
 	}
 
 }

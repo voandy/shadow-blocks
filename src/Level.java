@@ -43,6 +43,9 @@ public class Level {
 	public void update(Input input, int delta) {
 		for (Sprite unit : assets.getUnits()) {
 			unit.update(input, delta, properties, assets);
+	     if (unit instanceof Npc && unit.getPos().equals(properties.getPlayerPos())) {
+	        properties.setRestartStatus(true);
+	      }
 		}
 		for (int i = 0; i < properties.getLevelWidth(); i++) {
 			for (int j = 0; j < properties.getLevelHeight(); j++) {
