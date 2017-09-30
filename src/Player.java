@@ -2,8 +2,12 @@ import java.util.ArrayList;
 import org.newdawn.slick.Input;
 
 public class Player extends Unit{
+  // used to freeze player while message is being displayed
+  private boolean frozen;
+  
 	public Player(Position position) {
 		super("res/player_left.png", "res/step.wav" , position);
+		frozen = false;
 	}
 	
 	 public Player(String image_src, String sound_src, Position position) {
@@ -11,28 +15,36 @@ public class Player extends Unit{
 	  }
 	
 	//@Override
-	public void update(Input input, int delta, LevelProperties properties, Assets assets) {
-		if (input.isKeyPressed(Input.KEY_LEFT)) {
-			getPos().setDir(Direction.DIR_LEFT);
-			playerMove(properties, assets);
-		} else if (input.isKeyPressed(Input.KEY_RIGHT)) {
-			getPos().setDir(Direction.DIR_RIGHT);
-      playerMove(properties, assets);
-
-		} else if (input.isKeyPressed(Input.KEY_UP)) {
-			getPos().setDir(Direction.DIR_UP);
-      playerMove(properties, assets);
-
-		} else if (input.isKeyPressed(Input.KEY_DOWN)) {
-			getPos().setDir(Direction.DIR_DOWN);
-      playerMove(properties, assets);
-		}
+	public void update(Input input, int delta, Properties properties, Assets assets) {
+	  if (!frozen) {
+	    if (input.isKeyPressed(Input.KEY_LEFT)) {
+	      getPos().setDir(Direction.DIR_LEFT);
+	      playerMove(properties, assets);
+	    } else if (input.isKeyPressed(Input.KEY_RIGHT)) {
+	      getPos().setDir(Direction.DIR_RIGHT);
+	      playerMove(properties, assets);
+	    } else if (input.isKeyPressed(Input.KEY_UP)) {
+	      getPos().setDir(Direction.DIR_UP);
+	      playerMove(properties, assets);
+	    } else if (input.isKeyPressed(Input.KEY_DOWN)) {
+	      getPos().setDir(Direction.DIR_DOWN);
+	      playerMove(properties, assets);
+	    }
+	  }
 	}
 	
 	// moves the player, makes a sound and updates history
-	public void playerMove(LevelProperties properties, Assets assets) {
+	public void playerMove(Properties properties, Assets assets) {
 		move(properties, assets);
 		makeSound();
 		properties.incrementMoves();
+	}
+	
+	public void freeze() {
+	  frozen = true;
+	}
+	
+	public boolean isFrozen() {
+	  return frozen;
 	}
 }

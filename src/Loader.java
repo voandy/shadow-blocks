@@ -7,10 +7,10 @@ public class Loader {
 	private static final int MAX_LEVELS = 10;
 
 	// loads level dimensions from file
-	public static LevelProperties loadProperties(String filename, ArrayList<Sprite> sprites) {
+	public static Properties loadProperties(String filename, ArrayList<Sprite> sprites) {
 		int levelWidth = 0;
 		int levelHeight = 0;
-		LevelProperties properties;
+		Properties properties;
 		
 		try (Scanner scanner = new Scanner(new FileReader(filename))) {
 			String[] line = new String[NO_DIMENSIONS];
@@ -23,7 +23,7 @@ public class Loader {
             e.printStackTrace();
         }
 		
-		properties = new LevelProperties(filename, sprites, levelWidth, levelHeight);
+		properties = new Properties(filename, sprites, levelWidth, levelHeight);
 		
 		return properties;
 	}
@@ -125,17 +125,6 @@ public class Loader {
 		}
 		
 		return entities;
-	}
-	
-	// given an ArrayList of sprites returns an ArrayList of all sprites of type Unit
-	public static ArrayList<Unit> getUnits(ArrayList<Sprite> sprites){
-		ArrayList<Unit> units = new ArrayList<>();
-		for (Sprite sprite : sprites) {
-			if (sprite instanceof Unit) {
-				units.add((Unit) sprite);
-			}
-		}
-		return units;
 	}
 	
 	// given an ArrayList of sprites returns an ArrayList of all sprites that are instances of subClass

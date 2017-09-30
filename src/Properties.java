@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class LevelProperties {
+public class Properties {
 	private String filename;
 
   private int levelWidth;
@@ -8,15 +8,12 @@ public class LevelProperties {
 	private float xOffset;
 	private float yOffset;
 	
-	private int numTargets;
-	private int targetsToggled;
 	private int noMoves;
 	
 	private Position playerPos;
+
 	
-	private boolean restartStatus;
-	
-	public LevelProperties(String filename, ArrayList<Sprite> sprites, int levelWidth, int levelHeight) {
+	public Properties(String filename, ArrayList<Sprite> sprites, int levelWidth, int levelHeight) {
 		this.filename = filename;
 		
 		this.levelWidth = levelWidth;
@@ -24,11 +21,7 @@ public class LevelProperties {
 		xOffset = (App.SCREEN_WIDTH - (levelWidth * App.TILE_SIZE)) / 2;
 		yOffset = (App.SCREEN_HEIGHT - (levelHeight * App.TILE_SIZE)) / 2;
 		
-		numTargets = countTargets(sprites);
-		targetsToggled = 0;
 		noMoves = 0;
-		
-		restartStatus = false;
 		
 		// finds the player and loads its position if it is present
 		Player player = Loader.findPlayer(sprites);
@@ -36,20 +29,10 @@ public class LevelProperties {
 		  playerPos = player.getPos();
 		}
 	}
-	
-	private int countTargets(ArrayList<Sprite> sprites) {
-		int numTargets = 0;
-		for (Sprite sprite : sprites) {
-			if (sprite instanceof Target) {
-				numTargets++;
-			}
-		}
-		return numTargets;
-	}
+
 	public String getFilename() {
 		return filename;
 	}
-	
 	public int getLevelWidth() {
 		return levelWidth;
 	}
@@ -62,21 +45,6 @@ public class LevelProperties {
 	public float getYOffset() {
 		return yOffset;
 	}
-	
-	public boolean isCompleted() {
-	  // special case for 5.lvl which has no Targets
-	  if (numTargets == 0) {
-	    return false;
-	  }
-		return targetsToggled == numTargets;
-	}
-	public void toggleTarget() {
-		targetsToggled++;
-	}
-	public void untoggleTarget() {
-		targetsToggled--;
-	}
-	
 	public int getNoMoves() {
 		return noMoves;
 	}
@@ -86,20 +54,11 @@ public class LevelProperties {
 	public void decrementsMoves() {
 		noMoves--;
 	}
-	
-	public boolean getRestartStatus() {
-		return restartStatus;
-	}
-	public void setRestartStatus(boolean restartStatus) {
-	  this.restartStatus = restartStatus;
-	}
-	
-	public Position getPlayerPos() {
+  public Position getPlayerPos() {
 	  return playerPos;
 	}
-
 	public void setPlayerPos(Position playerPos) {
 	  this.playerPos = playerPos;
-	}
+	}	
 }
 

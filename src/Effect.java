@@ -4,6 +4,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 public class Effect extends Sprite{
+  private final float QUARTER = (float) 0.25;
+  
 	private SpriteSheet sheet;
 	private Animation animation;
 	
@@ -34,8 +36,8 @@ public class Effect extends Sprite{
 	
 	// offsets Effect render position as animations don't have a drawCentered like images method for some reason
 	public void render(Graphics g, float xOffset, float yOffset) {
-		xDrawPos = (getPos().getXPos() * App.TILE_SIZE) + xOffset - (animation.getWidth() / 4);;
-		yDrawPos = (getPos().getYPos() * App.TILE_SIZE) + yOffset - (animation.getHeight() / 4);
+		xDrawPos = (getPos().getXPos() * App.TILE_SIZE) + xOffset - (animation.getWidth() * QUARTER);;
+		yDrawPos = (getPos().getYPos() * App.TILE_SIZE) + yOffset - (animation.getHeight() * QUARTER);
 		animation.draw(xDrawPos, yDrawPos);
 	}	
 	

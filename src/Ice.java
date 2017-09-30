@@ -14,7 +14,7 @@ public class Ice extends Stone {
 	}
 	
 	// if the ice block is in a sliding state it will continue to move unit it encounters a wall or block
-	public void update(Input input, int delta, LevelProperties properties, Assets assets) {
+	public void update(Input input, int delta, Properties properties, Assets assets) {
 		if (sliding) {
 			
 			timeSinceMove += delta;

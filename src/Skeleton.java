@@ -12,7 +12,7 @@ public class Skeleton extends Npc {
 		nextPos = getPos().nextPos();
 	}
 	
-  public void update(Input input, int delta, LevelProperties properties, Assets assets) {
+  public void update(Input input, int delta, Properties properties, Assets assets) {
     timeSinceMove += delta;
     if (timeSinceMove > MOVE_DELAY) {
       

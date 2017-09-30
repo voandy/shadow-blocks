@@ -7,7 +7,7 @@ public abstract class Unit extends Actor{
 	}
 	
 	// moves the Unit one grid length and pushes a stone if one is present
-	public boolean move(LevelProperties properties, Assets assets) {
+	public boolean move(Properties properties, Assets assets) {
 		Position nextPos = getPos().nextPos();
 		if (isValidMove(nextPos, assets)) {
 			// if there is a stone in nextPos we push it
@@ -51,7 +51,7 @@ public abstract class Unit extends Actor{
 		return true;
 	}
 	
-	public void push(LevelProperties properties, Stone stone, Direction direction, Assets assets) {
+	public void push(Properties properties, Stone stone, Direction direction, Assets assets) {
 		stone.getPos().setDir(direction);
 		stone.move(properties, assets);
 		// if the Stone is Tnt and it is being pushed into a CrackedWall it detonates

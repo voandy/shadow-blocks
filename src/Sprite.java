@@ -53,7 +53,7 @@ public abstract class Sprite {
     this.position = position;
   }
 
-  public void update(Input input, int delta, LevelProperties properties, Assets assets) {
+  public void update(Input input, int delta, Properties properties, Assets assets) {
 	}
 	
 	public void render(Graphics g, float xOffset, float yOffset) {

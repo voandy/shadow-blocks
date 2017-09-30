@@ -10,18 +10,8 @@ public class Stone extends Actor {
 		super(image_src, sound_src, position);
 	}
 
-	public boolean move(LevelProperties properties, Assets assets) {
+	public boolean move(Properties properties, Assets assets) {
 		Position nextPos = getPos().nextPos();
-		
-		// we use this method to update how many targets have been toggled onlu when a stone is moved
-		// previously I did it with the update() method but that was less efficient as the game had to update and count
-		// the number of targets toggled for every single frame
-		if (assets.getMap()[getPos().getXPos()][getPos().getYPos()] instanceof Target) {
-			properties.untoggleTarget();
-		}
-		if (assets.getMap()[nextPos.getXPos()][nextPos.getYPos()] instanceof Target) {
-			properties.toggleTarget();
-		}
 
 		// note that move validation is done in the push() method in the unit class so is unnecessary here
 		assets.getStones()[nextPos.getXPos()][nextPos.getYPos()] = this;

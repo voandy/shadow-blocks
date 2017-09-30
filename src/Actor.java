@@ -7,7 +7,7 @@ public abstract class Actor extends Sprite{
 	}
 	
 	// moves the Actor one grid length in the direction in which it is currently facing
-	public boolean move(LevelProperties properties, Assets assets) {
+	public boolean move(Properties properties, Assets assets) {
 		return false;
 	}
 	

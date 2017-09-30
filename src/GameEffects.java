@@ -16,6 +16,16 @@ public class GameEffects {
     effect.makeSound();
   }
   
+  public void showExplosion(Position position) {
+    Explosion explosion = new Explosion();
+    showEffect(explosion, position);
+  }
+  
+  public void showPoof(Position position) {
+    Poof poof = new Poof();
+    showEffect(poof, position);
+  }
+  
   // removes effects that have finished playing from effects
   public void update(int delta) {
     if (effects != null) {
