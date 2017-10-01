@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import org.newdawn.slick.Input;
 
 public class Ice extends Stone {

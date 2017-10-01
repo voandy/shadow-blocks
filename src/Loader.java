@@ -112,28 +112,37 @@ public class Loader {
 		return sprites;
 	}
 	
-	// returns a 2d array of sprites which are an instance of "type"
-	// primarily intended to create a 2d maps of map items and stones
-	// note that the returned array only references the sprites and does not copy them
-	public static Sprite[][] populateLevel(ArrayList<Sprite> sprites, int levelWidth, int levelHeight, Class<?> type) {
-		Sprite[][] entities = new Sprite[levelWidth][levelHeight];
-		
-		for (Sprite sprite : sprites) {
-			if (type.isInstance(sprite)) {
-				entities[sprite.getPos().getXPos()][sprite.getPos().getYPos()] = sprite;
-			}
-		}
-		
-		return entities;
-	}
+	// returns a 2d array of MapItems filtered from sprites
+  public static MapItem[][] loadMap(ArrayList<Sprite> sprites, int levelWidth, int levelHeight) {
+    MapItem[][] map = new MapItem[levelWidth][levelHeight];
+    
+    for (Sprite sprite : sprites) {
+      if (sprite instanceof MapItem) {
+        map[sprite.getPos().getXPos()][sprite.getPos().getYPos()] = (MapItem) sprite;
+      }
+    }
+    return map;
+  }
+  
+  // returns a 2d array of Stones filtered from sprites
+  public static Stone[][] loadStones(ArrayList<Sprite> sprites, int levelWidth, int levelHeight) {
+    Stone[][] stones = new Stone[levelWidth][levelHeight];
+    
+    for (Sprite sprite : sprites) {
+      if (sprite instanceof Stone) {
+        stones[sprite.getPos().getXPos()][sprite.getPos().getYPos()] = (Stone) sprite;
+      }
+    }
+    return stones;
+  }
 	
 	// given an ArrayList of sprites returns an ArrayList of all sprites that are instances of subClass
 	// credit: Tamas Rev https://stackoverflow.com/questions/46480748/
 	@SuppressWarnings("unchecked")
-  public static <T> ArrayList<T> getSubset(ArrayList<? super T> sprites, Class<T> subClass) {
+  public static <T> ArrayList<T> getSubset(ArrayList<? super T> sprites, Class<T> type) {
 	  ArrayList<T> subSet = new ArrayList<>();
 	  for (Object object : sprites) {
-	    if (subClass.isInstance(object)) {
+	    if (type.isInstance(object)) {
 	      subSet.add((T) object);
 	    }
 	  }
@@ -141,7 +150,7 @@ public class Loader {
 	}
 	
 	// finds the player in the units ArrayList
-	public static Player findPlayer(ArrayList<Sprite> sprites) {
+	public static Player findPlayer(ArrayList<? extends Sprite> sprites) {
 		Player player = null;
 		for (Sprite sprite: sprites) {
 			if (sprite instanceof Player) {
@@ -150,5 +159,16 @@ public class Loader {
 			}
 		}
 		return player;
+	}
+	
+	public static Door findDoor(ArrayList<Sprite> sprites) {
+	  Door door = null;
+	   for (Sprite sprite: sprites) {
+	      if (sprite instanceof Door) {
+	        door = (Door) sprite;
+	        break;
+	      }
+	   }
+	   return door;
 	}
 }

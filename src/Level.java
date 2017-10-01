@@ -6,14 +6,17 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
 public class Level {
-	private ArrayList<Sprite> sprites;
+  // properties stores level dimensions and the number of moves
 	private Properties properties;
+  // assets stores everything in the level including the map, units, stones and effects
 	private Assets assets;
 	
+	// message, image and sound to be displayed upon completion of level/death
 	private Image message;
   private int messageTimer;
   private final int MESSAGE_TIME = 5000;
-  
+  private final String WASTED_SRC = "res/wasted.png";
+  private final String WIN_SRC = "res/win.png";
 	private Sound gameOverSound;
 	private Sound victorySound;
 	
@@ -26,7 +29,8 @@ public class Level {
   private boolean finished;
 
 	public Level(String filename) {
-		sprites = Loader.loadSprites(filename);
+	  ArrayList<Sprite> sprites = Loader.loadSprites(filename);
+	  
 		properties = Loader.loadProperties(filename, sprites);
 		assets = new Assets(filename, sprites, properties);		
 		
@@ -45,24 +49,9 @@ public class Level {
 	}
 	
 	public void update(Input input, int delta) {
-	  // updates units with input and delta
-		for (Unit unit : assets.getUnits()) {
-			unit.update(input, delta, properties, assets);
-			// if the player is in the same position as an Npc the player dies
-	    if (unit instanceof Npc && unit.getPos().equals(properties.getPlayerPos())) {
-	      gameOver();
-	    }
-		}
-		
-		// updates stones with input and delta
-		for (int i = 0; i < properties.getLevelWidth(); i++) {
-			for (int j = 0; j < properties.getLevelHeight(); j++) {
-				if (assets.getStones()[i][j] != null) {
-				  assets.getStones()[i][j].update(input, delta, properties, assets);
-				}
-			}
-		}
-		
+		updateUnits(input, delta);
+		updateArrays(input, delta);
+
 		// updates effects with delta
 		assets.getGameEffects().update(delta);
 		
@@ -80,6 +69,31 @@ public class Level {
 		}
 		
 		assets.update();
+	}
+	
+  // updates units with input and delta
+	public void updateUnits(Input input, int delta) {
+    for (Unit unit : assets.getUnits()) {
+      unit.update(input, delta, properties, assets);
+      // if the player is in the same position as an Npc the player dies
+      if (unit instanceof Npc && unit.getPos().equals(assets.getPlayerPos())) {
+        gameOver();
+      }
+    }
+	}
+	
+  // updates MapItems and Stones with input and delta
+	public void updateArrays(Input input, int delta) {
+    for (int i = 0; i < properties.getLevelWidth(); i++) {
+      for (int j = 0; j < properties.getLevelHeight(); j++) {
+        if (assets.getStones()[i][j] != null) {
+          assets.getStones()[i][j].update(input, delta, properties, assets);
+        }
+        if (assets.getMap()[i][j] != null) {
+          assets.getMap()[i][j].update(input, delta, properties, assets);
+        }
+      }
+    }
 	}
 
   public void render(Graphics g) {
@@ -125,42 +139,46 @@ public class Level {
       return false;
     }
     
+    // if any target does not have a stone on it return false
     for (Target target : assets.getTargets()) {
-      // if any target does not have a stone on it return false
       if (assets.getStones()[target.getPos().getXPos()][target.getPos().getYPos()] == null) {
         return false;
       }
     }
-    // if all targets have stones on them return true
+    // all targets have stones on them
     return true;
   }
 	
 	// removes player and shows game over message
   public void gameOver() {
-    Player player = Loader.findPlayer(sprites);
+    Player player = Loader.findPlayer(assets.getUnits());
     assets.getGameEffects().showPoof(player.getPos());
     assets.killUnit(player);
     // setting playerPos to null ensures that this method is only called once
-    properties.setPlayerPos(null);
+    assets.setPlayerPos(null);
+    
     try {
-      message = new Image("res/wasted.png");
+      message = new Image(WASTED_SRC);
     } catch (SlickException e) {
       e.printStackTrace();
     }
     gameOverSound.play();
+    
     won = false;
     finished = true;
   }
   
   public void levelWon() {
-    Player player = Loader.findPlayer(sprites);
+    Player player = Loader.findPlayer(assets.getUnits());
     player.freeze();
+    
     try {
-      message = new Image("res/win.png");
+      message = new Image(WIN_SRC);
     } catch (SlickException e) {
       e.printStackTrace();
     }
     victorySound.play();
+    
     won = true;
     finished = true;
   }

@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import org.newdawn.slick.Input;
 
 public class Player extends Unit{
@@ -35,8 +34,8 @@ public class Player extends Unit{
 	
 	// moves the player, makes a sound and updates history
 	public void playerMove(Properties properties, Assets assets) {
-    moveNpcs(properties, assets);
     move(properties, assets);
+    moveNpcs(properties, assets);
 		makeSound();
 		properties.incrementMoves();
 	}
@@ -45,7 +44,10 @@ public class Player extends Unit{
 	public void moveNpcs(Properties properties, Assets assets) {
 	  for(Unit unit : assets.getUnits()) {
 	    if (unit instanceof Rogue || unit instanceof Mage) {
-	      unit.move(properties, assets);
+	      // this conditional prevents the player from switching positions with the Npc by walking into it
+	      if (!getPos().equals(unit.getPos())) {
+	        unit.move(properties, assets);
+	      }
 	    }
 	  }
 	}

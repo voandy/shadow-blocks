@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public abstract class Actor extends Sprite{
 	// actors are dynamic sprites in that they can move
 	public Actor(String image_src, String sound_src, Position position) {
@@ -12,7 +10,7 @@ public abstract class Actor extends Sprite{
 	}
 	
 	public boolean isValidMove(Position destination, Assets assets) {
-		if (assets.getMap()[destination.getXPos()][destination.getYPos()] instanceof Wall) {
+		if (assets.getMap()[destination.getXPos()][destination.getYPos()].isBlocked()) {
 			return false;
 		}
 		return true;

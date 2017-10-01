@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public abstract class Unit extends Actor{
 
 	public Unit(String image_src, String sound_src, Position position) {
@@ -33,8 +31,7 @@ public abstract class Unit extends Actor{
 		if (assets.getStones()[destination.getXPos()][destination.getYPos()] != null) {
 			// gets the grid position behind the stone
 			Position nextDest = destination.nextPos();
-			// checks if position behind the Stone position contains a Wall
-			if (assets.getMap()[nextDest.getXPos()][nextDest.getYPos()] instanceof Wall) {
+			if (assets.getMap()[nextDest.getXPos()][nextDest.getYPos()].isBlocked()) {
 				// if the Wall is a CrackedWall and the Stone is Tnt then the move is valid
 				if (assets.getStones()[destination.getXPos()][destination.getYPos()] instanceof Tnt && 
 				    assets.getMap()[nextDest.getXPos()][nextDest.getYPos()] instanceof CrackedWall) {

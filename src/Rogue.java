@@ -12,6 +12,8 @@ public class Rogue extends Npc{
 	    } else {
 	      getPos().setDir(Direction.DIR_LEFT);
 	    }
+	    // the rogue doesn't move after changing directions
+	    return false;
 	  }
 	  return super.move(properties, assets);
 	}

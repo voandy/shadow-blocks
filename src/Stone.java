@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Stone extends Actor {
 	public Stone(Position position) {
 		super("res/stone.png", "res/stone.wav", position);

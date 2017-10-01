@@ -10,9 +10,6 @@ public class Properties {
 	
 	private int noMoves;
 	
-	private Position playerPos;
-
-	
 	public Properties(String filename, ArrayList<Sprite> sprites, int levelWidth, int levelHeight) {
 		this.filename = filename;
 		
@@ -22,12 +19,6 @@ public class Properties {
 		yOffset = (App.SCREEN_HEIGHT - (levelHeight * App.TILE_SIZE)) / 2;
 		
 		noMoves = 0;
-		
-		// finds the player and loads its position if it is present
-		Player player = Loader.findPlayer(sprites);
-		if (player != null) {
-		  playerPos = player.getPos();
-		}
 	}
 
 	public String getFilename() {
@@ -54,11 +45,5 @@ public class Properties {
 	public void decrementsMoves() {
 		noMoves--;
 	}
-  public Position getPlayerPos() {
-	  return playerPos;
-	}
-	public void setPlayerPos(Position playerPos) {
-	  this.playerPos = playerPos;
-	}	
 }
 
