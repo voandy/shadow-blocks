@@ -8,11 +8,12 @@ public class Mage extends Npc {
 		distY = 0;
 	}
 	
+  // moves toward the player on the X and Y axis whichever is greater
 	public boolean move(Properties properties, Assets assets) {
 	  distX = Math.abs(assets.getPlayerPos().getXPos() - getPos().getXPos());
 	  distY = Math.abs(assets.getPlayerPos().getYPos() - getPos().getYPos());
 	  
-	  // moves toward the player on the X and Y axis whichever is greater
+	  // sets the mages directions based on distance to the player
 	  if (distX > distY) {
 	    if (getPos().getXPos() > assets.getPlayerPos().getXPos()) {
 	      getPos().setDir(Direction.DIR_LEFT);
@@ -27,6 +28,7 @@ public class Mage extends Npc {
 	    }
 	  }
 	  
+	  // moves the mage
 	  if (isValidMove(getPos().nextPos(), assets)) {
 	    getPos().setPos(getPos().nextPos());
 	    return true;

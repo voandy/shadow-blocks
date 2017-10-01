@@ -3,59 +3,58 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
-public class Guile extends Player{
-  private Image guile_left;
-  private Image guile_right;
-  private Image guile_up;
-  private Image guile_down;
-  private Sound theme_song;
+// Giles is a unique creation and does not infringe on any international copyrights
+public class Giles extends Player{
+  private Image giles_left;
+  private Image giles_right;
+  private Image giles_up;
+  private Image giles_down;
   
-  public Guile(Position position) {
-    super("res/guile/guile_down.png", "res/step.wav" , position);
+  public Giles(Position position) {
+    super("res/giles/giles_down.png", "res/step.wav" , position);
     try {
-      guile_left = new Image("res/guile/guile_left.png");
-      guile_right = new Image("res/guile/guile_right.png");
-      guile_up = new Image("res/guile/guile_up.png");
-      guile_down = new Image("res/guile/guile_down.png");
-      theme_song = new Sound("res/guile/theme.wav");
+      giles_left = new Image("res/giles/giles_left.png");
+      giles_right = new Image("res/giles/giles_right.png");
+      giles_up = new Image("res/giles/giles_up.png");
+      giles_down = new Image("res/giles/giles_down.png");
     } catch (SlickException e) {
       e.printStackTrace();
     }
-    
-    theme_song.loop();
   }
 
   public void update(Input input, int delta, Properties properties, Assets assets) {
     if (!isFrozen()) {
       if (input.isKeyPressed(Input.KEY_LEFT)) {
-        setImage(guile_left);
+        setImage(giles_left);
         getPos().setDir(Direction.DIR_LEFT);
         playerMove(properties, assets);
       } else if (input.isKeyPressed(Input.KEY_RIGHT)) {
-        setImage(guile_right);
+        setImage(giles_right);
         getPos().setDir(Direction.DIR_RIGHT);
         playerMove(properties, assets);
       } else if (input.isKeyPressed(Input.KEY_UP)) {
-        setImage(guile_up);
+        setImage(giles_up);
         getPos().setDir(Direction.DIR_UP);
         playerMove(properties, assets);
       } else if (input.isKeyPressed(Input.KEY_DOWN)) {
-        setImage(guile_down);
+        setImage(giles_down);
         getPos().setDir(Direction.DIR_DOWN);
         playerMove(properties, assets);
-        // point guile without moving hum using WASD
+        // point giles without moving hum using WASD
       } else if (input.isKeyPressed(Input.KEY_A)) {
-        setImage(guile_left);
+        setImage(giles_left);
         getPos().setDir(Direction.DIR_LEFT);
       } else if (input.isKeyPressed(Input.KEY_D)) {
-        setImage(guile_right);
+        setImage(giles_right);
         getPos().setDir(Direction.DIR_RIGHT);
       } else if (input.isKeyPressed(Input.KEY_W)) {
-        setImage(guile_up);
+        setImage(giles_up);
         getPos().setDir(Direction.DIR_UP);
       } else if (input.isKeyPressed(Input.KEY_S)) {
-        setImage(guile_down);
+        setImage(giles_down);
         getPos().setDir(Direction.DIR_DOWN);
+      } else if (input.isKeyPressed(Input.KEY_F)) {
+        assets.getGameEffects().throwSonicBoom(getPos().nextPos());
       }
     }
     

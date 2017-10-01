@@ -40,7 +40,7 @@ public class Player extends Unit{
 		properties.incrementMoves();
 	}
 	
-	// moves rogues and mages
+	// rogues and mages move with the player
 	public void moveNpcs(Properties properties, Assets assets) {
 	  for(Unit unit : assets.getUnits()) {
 	    if (unit instanceof Rogue || unit instanceof Mage) {

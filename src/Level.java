@@ -53,14 +53,14 @@ public class Level {
 		updateArrays(input, delta);
 
 		// updates effects with delta
-		assets.getGameEffects().update(delta);
+		assets.getGameEffects().update(input, delta, properties, assets);;
 		
-		// !properties.isFinished() ensures that the image and sound are only shown/played once
+		// !isFinished() ensures that the image and sound are only shown/played once
 		if (isCompleted() && !finished) {
 		  levelWon();
 		}
 		
-		// if the player is dead there is a count down before the level is reset to show the message
+		// if the player is dead there is a delay before the level is reset to show the message
 		if (finished) {
 		  messageTimer += delta;
 		}
@@ -71,7 +71,7 @@ public class Level {
 		assets.update();
 	}
 	
-  // updates units with input and delta
+  // updates units
 	public void updateUnits(Input input, int delta) {
     for (Unit unit : assets.getUnits()) {
       unit.update(input, delta, properties, assets);
@@ -82,7 +82,7 @@ public class Level {
     }
 	}
 	
-  // updates MapItems and Stones with input and delta
+  // updates MapItems and Stones
 	public void updateArrays(Input input, int delta) {
     for (int i = 0; i < properties.getLevelWidth(); i++) {
       for (int j = 0; j < properties.getLevelHeight(); j++) {
@@ -105,6 +105,8 @@ public class Level {
 		renderArrayList(g, assets.getUnits());
 		// renders effects
 		renderArrayList(g, assets.getGameEffects().getEffects());
+		// Renders sonicBooms
+		renderArrayList(g, assets.getGameEffects().getSonicBooms());
 		// shows number of moves made
 		g.drawString("Moves: " + properties.getNoMoves(), 0, 0);
 		// show message if present, game over or level complete
@@ -138,7 +140,6 @@ public class Level {
     if (assets.getTargets().isEmpty()) {
       return false;
     }
-    
     // if any target does not have a stone on it return false
     for (Target target : assets.getTargets()) {
       if (assets.getStones()[target.getPos().getXPos()][target.getPos().getYPos()] == null) {

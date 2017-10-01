@@ -70,7 +70,7 @@ public class Loader {
 			case "player":
 				return new Player(position);
       case "guile":
-        return new Guile(position);
+        return new Giles(position);
 			case "skeleton":
 				return new Skeleton(position);
 			case "rogue":

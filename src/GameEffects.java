@@ -1,12 +1,22 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.newdawn.slick.Input;
+
 // stores and renders game effects and animations such as Explosion
 public class GameEffects {
   private ArrayList<Effect> effects;
+  private ArrayList<Effect> effectToRemove;
+  
+  private ArrayList<SonicBoom> sonicBooms;
+  private ArrayList<SonicBoom> sonicToRemove;
 
   public GameEffects() {
     effects = new ArrayList<>();
+    effectToRemove = new ArrayList<>();
+    
+    sonicBooms = new ArrayList<>();
+    sonicToRemove = new ArrayList<>();
   }
   
   // adds the given effect to effects to be rendered
@@ -26,25 +36,40 @@ public class GameEffects {
     showEffect(poof, position);
   }
   
+  public void throwSonicBoom(Position position) {
+    SonicBoom sonicBoom = new SonicBoom(position);
+    sonicBooms.add(sonicBoom);
+    sonicBoom.makeSound();
+  }
+  
   // removes effects that have finished playing from effects
-  public void update(int delta) {
+  public void update(Input input, int delta, Properties properties, Assets assets) {
     if (effects != null) {
-      Iterator<Effect> iter = effects.iterator();
-      
-      while (iter.hasNext()) {
-        Effect effect = iter.next();
-        effect.setTimeSinceShown(effect.getTimeSinceShown() + delta);
-        
-        if (effect.getTimeSinceShown() > effect.getTimeToShow()) {
-          effect.setFinished(true);
-          iter.remove();
+      for (Effect effect : effects) {
+        effect.update(input, delta, properties, assets);
+        if (effect.isFinished()) {
+          effectToRemove.add(effect);
         }
       }
     }
+    effects.removeAll(effectToRemove);
+    
+    if (sonicBooms != null) {
+      for (SonicBoom sonicBoom : sonicBooms) {
+        sonicBoom.update(input, delta, properties, assets);
+        if (sonicBoom.isFinished()) {
+          sonicToRemove.add(sonicBoom);
+        }
+      }
+    }
+    sonicBooms.removeAll(sonicToRemove);
   }
   
   public ArrayList<Effect> getEffects() {
     return effects;
+  }
+  public ArrayList<SonicBoom> getSonicBooms() {
+    return sonicBooms;
   }
 
 }

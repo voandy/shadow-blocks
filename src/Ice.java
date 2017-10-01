@@ -1,7 +1,7 @@
 import org.newdawn.slick.Input;
 
 public class Ice extends Stone {
-	private static final int MOVE_DELAY = 250;
+	private final int MOVE_DELAY = 250;
 	private boolean sliding;
 	private int timeSinceMove;
 	private Position nextPos;

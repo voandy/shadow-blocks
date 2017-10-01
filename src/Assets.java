@@ -35,14 +35,13 @@ public class Assets {
     
     door = Loader.findDoor(sprites);
   }
-  
-  public void update(){
-    units.removeAll(toRemove);
-  }
 
   // removes a unit from the game, this method avoid a concurrent modification exception
   public void killUnit(Unit unit) {
     toRemove.add(unit);
+  }
+  public void update(){
+    units.removeAll(toRemove);
   }
 
   public MapItem[][] getMap() {

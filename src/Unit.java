@@ -31,6 +31,7 @@ public abstract class Unit extends Actor{
 		if (assets.getStones()[destination.getXPos()][destination.getYPos()] != null) {
 			// gets the grid position behind the stone
 			Position nextDest = destination.nextPos();
+			// checks if there is a wall behind the stone
 			if (assets.getMap()[nextDest.getXPos()][nextDest.getYPos()].isBlocked()) {
 				// if the Wall is a CrackedWall and the Stone is Tnt then the move is valid
 				if (assets.getStones()[destination.getXPos()][destination.getYPos()] instanceof Tnt && 
