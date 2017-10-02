@@ -9,9 +9,13 @@ public abstract class Unit extends Actor{
 		Position nextPos = getPos().nextPos();
 		if (isValidMove(nextPos, assets)) {
 			// if there is a stone in nextPos we push it
-			if (assets.getStones()[nextPos.getXPos()][nextPos.getYPos()] != null) {
-				getPos().setPos(nextPos);
+		  Stone stone = assets.getStones()[nextPos.getXPos()][nextPos.getYPos()];
+			if (stone != null) {
 				push(properties, (Stone) assets.getStones()[nextPos.getXPos()][nextPos.getYPos()], getPos().getDir(), assets);
+				// the player doesn't move when pushing Ice, this makes for a smoother animation
+				if (!(stone instanceof Ice)) {
+	        getPos().setPos(nextPos);
+				}
 				return true;
 			} else {
 				getPos().setPos(nextPos);

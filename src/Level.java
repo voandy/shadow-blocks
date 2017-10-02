@@ -46,6 +46,8 @@ public class Level {
     readyToGo = false;
     won = false;
     finished = false;
+    
+    assets.music.playMusic();
 	}
 	
 	public void update(Input input, int delta) {
@@ -155,6 +157,7 @@ public class Level {
     assets.killUnit(player);
     // setting playerPos to null ensures that this method is only called once
     assets.setPlayerPos(null);
+    assets.music.stopMusic();
     
     try {
       message = new Image(WASTED_SRC);
@@ -170,6 +173,7 @@ public class Level {
   public void levelWon() {
     Player player = Loader.findPlayer(assets.getUnits());
     player.freeze();
+    assets.music.stopMusic();
     
     try {
       message = new Image(WIN_SRC);
@@ -188,5 +192,9 @@ public class Level {
   
   public boolean isWon() {
     return won;
+  }
+  
+  public void stopMusic() {
+    assets.music.stopMusic();
   }
 }

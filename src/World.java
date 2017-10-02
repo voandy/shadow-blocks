@@ -17,12 +17,14 @@ public class World {
 	public void update(Input input, int delta) {
 		level.update(input, delta);
 		// when the level is complete or skipped by pressing space the next level is loaded
-		if (input.isKeyPressed(Input.KEY_SPACE) && levelList[currLevel + 1] != null) {
+		if (input.isKeyPressed(Input.KEY_P) && levelList[currLevel + 1] != null) {
+		  level.stopMusic();
 			currLevel++;
 			level = new Level(levelList[currLevel]);
 		}
 		// restarts the current level if the r key is pressed or if the player has died
 		if (input.isKeyPressed(Input.KEY_R)) {
+		  level.stopMusic();
 		  level = new Level(levelList[currLevel]);
 		}
 		

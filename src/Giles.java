@@ -1,7 +1,6 @@
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 
 // Giles is a unique creation and does not infringe on any international copyrights
 public class Giles extends Player{

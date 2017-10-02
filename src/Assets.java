@@ -17,6 +17,8 @@ public class Assets {
   
   private Position playerPos;
   private Door door;
+  
+  Music music;
 
   
   public Assets(String filename, ArrayList<Sprite> sprites, Properties properties) {
@@ -26,14 +28,25 @@ public class Assets {
     targets = Loader.getSubset(sprites, Target.class);
     gameEffects = new GameEffects();
     toRemove = new ArrayList<>();
+    music = new Music();
     
     // finds the player and loads its position if it is present
     Player player = Loader.findPlayer(sprites);
     if (player != null) {
       playerPos = player.getPos();
+      
+      // play music depending on who the player character is
+      if (player instanceof Giles) {
+        music.switchGiles();
+      } 
+    } else {
+      // if the level has no player then it is a win screen
+      music.youWin();
     }
     
     door = Loader.findDoor(sprites);
+    
+
   }
 
   // removes a unit from the game, this method avoid a concurrent modification exception

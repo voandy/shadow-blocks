@@ -67,7 +67,7 @@ public class Ice extends Stone {
 					
 				} else {
 					sliding = false;
-					slide.stop();
+			    slide.stop();
 			    renderOffsetX = 0;
 			    renderOffsetY = 0;
 				}
@@ -76,6 +76,9 @@ public class Ice extends Stone {
 	}
 	
 	public void makeSlide() {
+	  // prevents sound from continuously looping if pushed multiple times before it stops
+	  slide.stop();
+	  
 		sliding = true;
     slide.loop();
     timeSinceMove = 0;
