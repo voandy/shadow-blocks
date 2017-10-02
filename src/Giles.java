@@ -40,6 +40,7 @@ public class Giles extends Player{
         setImage(giles_down);
         getPos().setDir(Direction.DIR_DOWN);
         playerMove(properties, assets);
+        
         // point giles without moving hum using WASD
       } else if (input.isKeyPressed(Input.KEY_A)) {
         setImage(giles_left);
@@ -53,8 +54,15 @@ public class Giles extends Player{
       } else if (input.isKeyPressed(Input.KEY_S)) {
         setImage(giles_down);
         getPos().setDir(Direction.DIR_DOWN);
+        
+        //throws SonicBoom
       } else if (input.isKeyPressed(Input.KEY_F)) {
-        assets.getGameEffects().throwSonicBoom(getPos().nextPos());
+        // prevents SonicBoom from being thrown inside a wall
+        if (!(assets.getMap()[getPos().nextPos().getXPos()][getPos().nextPos().getYPos()] instanceof Wall)) {
+          assets.getGameEffects().throwSonicBoom(getPos().nextPos());
+        } else {
+          assets.getGameEffects().showPop(getPos().nextPos());
+        }
       }
     }
     

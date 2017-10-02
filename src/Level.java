@@ -105,8 +105,6 @@ public class Level {
 		renderArrayList(g, assets.getUnits());
 		// renders effects
 		renderArrayList(g, assets.getGameEffects().getEffects());
-		// Renders sonicBooms
-		renderArrayList(g, assets.getGameEffects().getSonicBooms());
 		// shows number of moves made
 		g.drawString("Moves: " + properties.getNoMoves(), 0, 0);
 		// show message if present, game over or level complete

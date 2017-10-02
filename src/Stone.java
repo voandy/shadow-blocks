@@ -15,7 +15,9 @@ public class Stone extends Actor {
 		assets.getStones()[nextPos.getXPos()][nextPos.getYPos()] = this;
 		assets.getStones()[getPos().getXPos()][getPos().getYPos()] = null;
 		getPos().setPos(nextPos);
-		makeSound();
+		if (getSound() != null) {
+	    makeSound();
+		}
 		
 		return true;
 	}

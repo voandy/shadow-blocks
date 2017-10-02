@@ -10,26 +10,84 @@ public class SonicBoom extends Effect {
   private final static int DURATION = 40;
   
   private int timeSinceMove;
-  private final int MOVE_DELAY = 150;
+  private final static int MOVE_DELAY = 150;
+  // Offset that changes with delta to allow animation to move smoothly
+  private float renderOffsetX;
+  private float renderOffsetY;
+  private final static float SPEED = (float) App.TILE_SIZE / MOVE_DELAY;
+  
   private Position nextPos;
   
   public SonicBoom(Position position) {
     super(ANIMATION_SRC, SOUND_SRC, WIDTH, HEIGHT, DURATION, 0);
-    
+     
     getAnimation().setLooping(true);
     
     setPos(position);
     nextPos = getPos().nextPos();
+    
+    renderOffsetX = 0;
+    renderOffsetY = 0;
+    resetRenderOffset();
   }
 
   public void update(Input input, int delta, Properties properties, Assets assets) {
+    // kills any Npcs the SonicBoom encounters
+    for (Unit unit : assets.getUnits()) {
+      if (unit.getPos().equals(getPos()) && unit instanceof Npc) {
+        assets.killUnit(unit);
+        assets.getGameEffects().showPoof(getPos());
+        setFinished(true);
+      }
+    }
+    
     timeSinceMove += delta;
+    
+    switch(getPos().getDir()) {
+    case DIR_LEFT:
+      renderOffsetX = timeSinceMove * -SPEED;
+      break;
+    case DIR_RIGHT:
+      renderOffsetX = timeSinceMove * SPEED;
+      break;
+    case DIR_UP:
+      renderOffsetY = timeSinceMove * -SPEED;
+      break;
+    case DIR_DOWN:
+      renderOffsetY = timeSinceMove * SPEED;
+      break;
+    case DIR_NONE:
+      break;
+    }
+    
     if (timeSinceMove > MOVE_DELAY) {
       if (move(properties, assets)) {  
         timeSinceMove = 0;
+        resetRenderOffset();
       } else {
         setFinished(true);
+        assets.getGameEffects().showPop(getPos().nextPos());
       }
+    }
+  }
+  
+  // resets render offsets after each move
+  private void resetRenderOffset() {
+    switch(getPos().getDir()) {
+    case DIR_LEFT:
+      renderOffsetX = App.TILE_SIZE / 2;
+      break;
+    case DIR_RIGHT:
+      renderOffsetX = -(App.TILE_SIZE / 2);
+      break;
+    case DIR_UP:
+      renderOffsetY = App.TILE_SIZE / 2;
+      break;
+    case DIR_DOWN:
+      renderOffsetY = -(App.TILE_SIZE / 2);
+      break;
+    case DIR_NONE:
+      break;
     }
   }
   
@@ -43,7 +101,8 @@ public class SonicBoom extends Effect {
   }
   
   public void render(Graphics g, float xOffset, float yOffset) {
-    getAnimation().draw(getPos().getXPos() * App.TILE_SIZE + xOffset, getPos().getYPos() * App.TILE_SIZE + yOffset);
+    getAnimation().draw(getPos().getXPos() * App.TILE_SIZE + xOffset + renderOffsetX, 
+                        getPos().getYPos() * App.TILE_SIZE + yOffset + renderOffsetY);
   }
   
   // returns false if the destination contains a wall or block and true otherwise
