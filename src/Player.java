@@ -55,7 +55,9 @@ public class Player extends Unit{
 	public void freeze() {
 	  frozen = true;
 	}
-	
+	public void unFreeze() {
+	  frozen = false;
+	}
 	public boolean isFrozen() {
 	  return frozen;
 	}

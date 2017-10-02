@@ -8,6 +8,10 @@ public class Giles extends Player{
   private Image giles_right;
   private Image giles_up;
   private Image giles_down;
+  private Image giles_kick;
+  
+  private boolean kicking;
+  private int kickTime;
   
   public Giles(Position position) {
     super("res/giles/giles_down.png", "res/step.wav" , position);
@@ -16,9 +20,16 @@ public class Giles extends Player{
       giles_right = new Image("res/giles/giles_right.png");
       giles_up = new Image("res/giles/giles_up.png");
       giles_down = new Image("res/giles/giles_down.png");
+      giles_kick = new Image("res/giles/giles_kick.png");
     } catch (SlickException e) {
       e.printStackTrace();
     }
+    
+    kicking = false;
+    kickTime = 0;
+    
+    // set Giles' Direction to prevent him from throwing a SonicBoom with DIR_NONE
+    getPos().setDir(Direction.DIR_DOWN);
   }
 
   public void update(Input input, int delta, Properties properties, Assets assets) {
@@ -62,9 +73,43 @@ public class Giles extends Player{
         } else {
           assets.getGameEffects().showPop(getPos().nextPos());
         }
+        //throws Kick
+      } else if (input.isKeyPressed(Input.KEY_SPACE)){
+        assets.getGameEffects().throwKick(getPos());
+        setImage(giles_kick);
+        freeze();
+        kicking = true;
       }
     }
     
-
+    if (kicking) {
+      kickTime += delta;
+    }
+    if (kickTime > Kick.TIME) {
+      kicking = false;
+      kickTime = 0;
+      setImageDir();
+      unFreeze();
+    }
+  }
+  
+  // resets image to direction after kick
+  private void setImageDir() {
+    switch(getPos().getDir()) {
+    case DIR_LEFT:
+      setImage(giles_left);
+      break;
+    case DIR_RIGHT:
+      setImage(giles_right);
+      break;
+    case DIR_UP:
+      setImage(giles_up);
+      break;
+    case DIR_DOWN:
+      setImage(giles_down);
+      break;
+    default:
+      break;
+    }
   }
 }

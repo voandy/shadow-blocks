@@ -5,13 +5,13 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 public class Effect extends Sprite{
-  private final float QUARTER = (float) 0.25;
-  
-	private SpriteSheet sheet;
+private SpriteSheet sheet;
 	private Animation animation;
 	
 	private float xDrawPos;
   private float yDrawPos;
+  private float xRenderOffset;
+  private float yRenderOffset;
 	
   private int timeSinceShown;
   private int timeToShow;
@@ -31,6 +31,10 @@ public class Effect extends Sprite{
 		animation = new Animation(sheet, duration);
 		animation.setLooping(false);
 		
+	  // offsets Effect render position as animations don't have a drawCentered like images method for some reason
+		xRenderOffset = (animation.getWidth() - App.TILE_SIZE) / (float) 2;
+		yRenderOffset = (animation.getHeight() - App.TILE_SIZE) / (float) 2;
+		
 		timeSinceShown = 0;
 		this.timeToShow = timeToShow;
 		
@@ -45,10 +49,10 @@ public class Effect extends Sprite{
 	  
 	}
 	
-	// offsets Effect render position as animations don't have a drawCentered like images method for some reason
+
 	public void render(Graphics g, float xOffset, float yOffset) {
-		xDrawPos = (getPos().getXPos() * App.TILE_SIZE) + xOffset - (animation.getWidth() * QUARTER);;
-		yDrawPos = (getPos().getYPos() * App.TILE_SIZE) + yOffset - (animation.getHeight() * QUARTER);
+		xDrawPos = (getPos().getXPos() * App.TILE_SIZE) + xOffset - xRenderOffset;
+		yDrawPos = (getPos().getYPos() * App.TILE_SIZE) + yOffset - yRenderOffset;
 		animation.draw(xDrawPos, yDrawPos);
 	}
 	

@@ -12,8 +12,8 @@ public class SonicBoom extends Effect {
   private int timeSinceMove;
   private final static int MOVE_DELAY = 150;
   // Offset that changes with delta to allow animation to move smoothly
-  private float renderOffsetX;
-  private float renderOffsetY;
+  private float xRenderOffset;
+  private float yRenderOffset;
   private final static float SPEED = (float) App.TILE_SIZE / MOVE_DELAY;
   
   private Position nextPos;
@@ -26,8 +26,8 @@ public class SonicBoom extends Effect {
     setPos(position);
     nextPos = getPos().nextPos();
     
-    renderOffsetX = 0;
-    renderOffsetY = 0;
+    xRenderOffset = 0;
+    yRenderOffset = 0;
     resetRenderOffset();
   }
 
@@ -45,16 +45,16 @@ public class SonicBoom extends Effect {
     
     switch(getPos().getDir()) {
     case DIR_LEFT:
-      renderOffsetX = timeSinceMove * -SPEED;
+      xRenderOffset = timeSinceMove * -SPEED;
       break;
     case DIR_RIGHT:
-      renderOffsetX = timeSinceMove * SPEED;
+      xRenderOffset = timeSinceMove * SPEED;
       break;
     case DIR_UP:
-      renderOffsetY = timeSinceMove * -SPEED;
+      yRenderOffset = timeSinceMove * -SPEED;
       break;
     case DIR_DOWN:
-      renderOffsetY = timeSinceMove * SPEED;
+      yRenderOffset = timeSinceMove * SPEED;
       break;
     case DIR_NONE:
       break;
@@ -75,16 +75,16 @@ public class SonicBoom extends Effect {
   private void resetRenderOffset() {
     switch(getPos().getDir()) {
     case DIR_LEFT:
-      renderOffsetX = App.TILE_SIZE / 2;
+      xRenderOffset = App.TILE_SIZE / 2;
       break;
     case DIR_RIGHT:
-      renderOffsetX = -(App.TILE_SIZE / 2);
+      xRenderOffset = -(App.TILE_SIZE / 2);
       break;
     case DIR_UP:
-      renderOffsetY = App.TILE_SIZE / 2;
+      yRenderOffset = App.TILE_SIZE / 2;
       break;
     case DIR_DOWN:
-      renderOffsetY = -(App.TILE_SIZE / 2);
+      yRenderOffset = -(App.TILE_SIZE / 2);
       break;
     case DIR_NONE:
       break;
@@ -101,8 +101,8 @@ public class SonicBoom extends Effect {
   }
   
   public void render(Graphics g, float xOffset, float yOffset) {
-    getAnimation().draw(getPos().getXPos() * App.TILE_SIZE + xOffset + renderOffsetX, 
-                        getPos().getYPos() * App.TILE_SIZE + yOffset + renderOffsetY);
+    getAnimation().draw(getPos().getXPos() * App.TILE_SIZE + xOffset + xRenderOffset, 
+                        getPos().getYPos() * App.TILE_SIZE + yOffset + yRenderOffset);
   }
   
   // returns false if the destination contains a wall or block and true otherwise

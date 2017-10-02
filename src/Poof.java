@@ -1,11 +1,10 @@
 public class Poof extends Effect{
-  private static final int POOF_WIDTH = 64;
-  private static final int POOF_HEIGHT = 64;
+  private static final int WIDTH = 64;
+  private static final int HEIGHT = 64;
   private static final int NO_FRAMES = 10;
-  public static final int POOF_TIME = 300;
+  public static final int TIME = 300;
   
   public Poof() {
-    super("res/smoke.png", "res/smoke.wav", POOF_WIDTH, POOF_HEIGHT, 
-        POOF_TIME / NO_FRAMES, POOF_TIME);
+    super("res/smoke.png", "res/smoke.wav", WIDTH, HEIGHT, TIME / NO_FRAMES, TIME);
   }
 }

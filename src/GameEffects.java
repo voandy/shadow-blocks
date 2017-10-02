@@ -40,6 +40,11 @@ public class GameEffects {
     sonicBoom.makeSound();
   }
   
+  public void throwKick(Position position) {
+    Kick kick = new Kick();
+    showEffect(kick, position);
+  }
+  
   // adds new effects from queue, updates current effects and removes effects that have finished playing from effects
   public void update(Input input, int delta, Properties properties, Assets assets) {
     if (!effectsToAdd.isEmpty()) {
