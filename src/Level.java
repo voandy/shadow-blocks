@@ -153,7 +153,6 @@ public class Level {
 	// removes player and shows game over message
   public void gameOver() {
     Player player = Loader.findPlayer(assets.getUnits());
-    assets.getGameEffects().showPoof(player.getPos());
     assets.killUnit(player);
     // setting playerPos to null ensures that this method is only called once
     assets.setPlayerPos(null);

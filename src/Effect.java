@@ -19,8 +19,9 @@ private SpriteSheet sheet;
   private boolean finished;
 	
   // not that effects are created without a position. one must be set before they are rendered in GameEffects
-	public Effect(String animation_src, String sound_src, int width, int height, int duration, int timeToShow) {
-		super(animation_src, sound_src, null);
+	public Effect(String animation_src, String sound_src, Position position, 
+	    int width, int height, int duration, int timeToShow) {
+		super(animation_src, sound_src, position);
 		
 		try {
 			sheet = new SpriteSheet(animation_src, width, height);
@@ -40,15 +41,14 @@ private SpriteSheet sheet;
 		
 		finished = false;
 	}
-	
-	public void update(Input input, int delta, Properties properties, Assets assets) {
+
+  public void update(Input input, int delta, Properties properties, Assets assets) {
 	  timeSinceShown += delta;
 	  if (timeSinceShown > timeToShow) {
 	    finished = true;
 	  }
 	  
 	}
-	
 
 	public void render(Graphics g, float xOffset, float yOffset) {
 		xDrawPos = (getPos().getXPos() * App.TILE_SIZE) + xOffset - xRenderOffset;
@@ -64,5 +64,12 @@ private SpriteSheet sheet;
   }
   public void setFinished(boolean finished) {
     this.finished = finished;
+  }
+  
+  public int getTimeSinceShown() {
+    return timeSinceShown;
+  }
+  public int getTimeToShow() {
+    return timeToShow;
   }
 }

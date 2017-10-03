@@ -49,8 +49,9 @@ public class Assets {
 
   }
 
-  // removes a unit from the game, this method avoid a concurrent modification exception
+  // removes a unit from the game and shows a Poof, this method avoid a concurrent modification exception
   public void killUnit(Unit unit) {
+    gameEffects.showPoof(unit.getPos());
     toRemove.add(unit);
   }
   public void update(){

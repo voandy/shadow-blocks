@@ -19,11 +19,10 @@ public class SonicBoom extends Effect {
   private Position nextPos;
   
   public SonicBoom(Position position) {
-    super(ANIMATION_SRC, SOUND_SRC, WIDTH, HEIGHT, DURATION, 0);
+    super(ANIMATION_SRC, SOUND_SRC, position, WIDTH, HEIGHT, DURATION, 0);
      
     getAnimation().setLooping(true);
-    
-    setPos(position);
+
     nextPos = getPos().nextPos();
     
     xRenderOffset = 0;
@@ -36,7 +35,6 @@ public class SonicBoom extends Effect {
     for (Unit unit : assets.getUnits()) {
       if (unit.getPos().equals(getPos()) && unit instanceof Npc) {
         assets.killUnit(unit);
-        assets.getGameEffects().showPoof(getPos());
         setFinished(true);
       }
     }

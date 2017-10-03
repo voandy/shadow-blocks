@@ -15,22 +15,21 @@ public class GameEffects {
   
   // adds the given effect to effects to be rendered
   public void showEffect(Effect effect, Position position) {
-    effect.setPos(position);
     effectsToAdd.add(effect);
     effect.makeSound();
   }
   public void showPop(Position position) {
-    Pop pop = new Pop();
+    Pop pop = new Pop(position);
     showEffect(pop, position);
   }
   
   public void showExplosion(Position position) {
-    Explosion explosion = new Explosion();
+    Explosion explosion = new Explosion(position);
     showEffect(explosion, position);
   }
   
   public void showPoof(Position position) {
-    Poof poof = new Poof();
+    Poof poof = new Poof(position);
     showEffect(poof, position);
   }
   
@@ -41,7 +40,7 @@ public class GameEffects {
   }
   
   public void throwKick(Position position) {
-    Kick kick = new Kick();
+    Kick kick = new Kick(position);
     showEffect(kick, position);
   }
   
