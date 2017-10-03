@@ -55,7 +55,7 @@ public class Level {
     won = false;
     finished = false;
     
-    assets.music.playMusic();
+    assets.getMusic().playMusic();
 	}
 	
 	public void update(Input input, int delta) {
@@ -79,6 +79,10 @@ public class Level {
 		}
 		
 		assets.update();
+		
+		if (input.isKeyPressed(Input.KEY_Z)) {
+		  undo();
+		}
 	}
 	
   // updates units
@@ -164,7 +168,7 @@ public class Level {
     assets.killUnit(player);
     // setting playerPos to null ensures that this method is only called once
     assets.setPlayerPos(null);
-    assets.music.stopMusic();
+    assets.getMusic().stopMusic();
     
     try {
       message = new Image(WASTED_SRC);
@@ -180,7 +184,7 @@ public class Level {
   public void levelWon() {
     Player player = Loader.findPlayer(assets.getUnits());
     player.freeze();
-    assets.music.stopMusic();
+    assets.getMusic().stopMusic();
     
     try {
       message = new Image(WIN_SRC);
@@ -193,6 +197,13 @@ public class Level {
     finished = true;
   }
   
+  private void undo() {
+    Player player = Loader.findPlayer(assets.getUnits());
+    if (assets.getHistory().undo(player, properties, assets)) {
+      assets.getGameEffects().showLightning(player.getPos());
+    }
+  }
+  
   public boolean isReadyToGo() {
     return readyToGo;
   }
@@ -202,6 +213,6 @@ public class Level {
   }
   
   public void stopMusic() {
-    assets.music.stopMusic();
+    assets.getMusic().stopMusic();
   }
 }

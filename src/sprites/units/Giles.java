@@ -77,7 +77,8 @@ public class Giles extends Player{
         //throws SonicBoom
       } else if (input.isKeyPressed(Input.KEY_F)) {
         // prevents SonicBoom from being thrown inside a wall
-        if (!(assets.getMap()[getPos().nextPos().getXPos()][getPos().nextPos().getYPos()] instanceof Wall)) {
+        if (!(assets.getMap()[getPos().nextPos().getXPos()][getPos().nextPos().getYPos()] instanceof Wall) &&
+            !(assets.getStones()[getPos().nextPos().getXPos()][getPos().nextPos().getYPos()] != null)) {
           assets.getGameEffects().throwSonicBoom(getPos().nextPos());
         } else {
           assets.getGameEffects().showPop(getPos().nextPos());

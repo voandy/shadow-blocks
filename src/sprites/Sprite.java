@@ -31,6 +31,14 @@ public abstract class Sprite {
 		this.position = position;
 	}
 	
+	public Sprite(Sprite another) {
+	  // note that this copy constructor only references the Image and Sound as they are not supposed to change for stones
+	  // remember to look here if this creates a bug in the future
+	  this.image = another.image;
+	  this.sound = another.sound;
+	  this.position = new Position(another.position);
+	}
+	
 	public void makeSound() {
 		if (sound != null) {
 			sound.play();

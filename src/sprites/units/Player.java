@@ -41,9 +41,10 @@ public class Player extends Unit{
 	
 	// moves the player, makes a sound and updates history
 	public void playerMove(Properties properties, Assets assets) {
+	  assets.getHistory().addStep(getPos(), properties, assets);
+	  
     move(properties, assets);
     moveNpcs(properties, assets);
-		makeSound();
 		properties.incrementMoves();
 	}
 	

@@ -40,6 +40,30 @@ public class Ice extends Stone {
     renderOffsetY = 0;
 	}
 	
+	public Ice(Ice another) {
+	  super(another);
+	    this.slide = another.slide;
+	  
+	    this.sliding = another.sliding;
+	    this.timeSinceMove = another.timeSinceMove;
+	    
+	    if (another.nextPos != null) {
+	      this.nextPos = new Position(another.nextPos);
+	    }
+
+	    this.renderOffsetX = another.renderOffsetX;
+	    this.renderOffsetY = another.renderOffsetY;
+	}
+	
+	public boolean move(Properties properties, Assets assets) {
+	  if (super.move(properties, assets)) {
+	    if (!sliding) {
+	      makeSlide();
+	    }
+	  }
+	  return false;
+	}
+	
 	// if the ice block is in a sliding state it will continue to move unit it encounters a wall or block
 	public void update(Input input, int delta, Properties properties, Assets assets) {
 		if (sliding) {
@@ -80,6 +104,7 @@ public class Ice extends Stone {
 			}
 		}
 	}
+	
 	
 	public void makeSlide() {
 	  // prevents sound from continuously looping if pushed multiple times before it stops

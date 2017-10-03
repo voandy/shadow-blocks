@@ -14,6 +14,8 @@ Martian: https://freesound.org/people/martian/sounds/19312/
 Tuudurt: https://freesound.org/people/Tuudurt/sounds/258142/
 Planman: https://freesound.org/people/Planman/sounds/208111/
 SwagMuffinPlus: https://freesound.org/people/SwagMuffinPlus/sounds/176146/
+Anton: https://freesound.org/people/Anton/sounds/1256/
+Mikodrak: https://opengameart.org/content/2d-spell-effects
 FranzPlays: https://www.youtube.com/watch?v=2yxloBGRY5c
 
 Thanks to MrBulbamike for the awesome Guile Theme remix:

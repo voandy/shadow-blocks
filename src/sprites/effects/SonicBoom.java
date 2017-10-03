@@ -118,8 +118,7 @@ public class SonicBoom extends Effect {
     if (assets.getStones()[destination.getXPos()][destination.getYPos()] != null ||
         assets.getMap()[destination.getXPos()][destination.getYPos()].isBlocked()) {
       return false;
-    }
-    
+    }    
     return true;
   }
 }

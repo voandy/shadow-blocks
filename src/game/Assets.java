@@ -28,10 +28,10 @@ public class Assets {
   
   private Position playerPos;
   private Door door;
+  private Music music;
   
-  Music music;
+  private History history;
 
-  
   public Assets(String filename, ArrayList<Sprite> sprites, Properties properties) {
     map = Loader.loadMap(sprites, properties.getLevelWidth(), properties.getLevelHeight());
     stones = Loader.loadStones(sprites, properties.getLevelWidth(), properties.getLevelHeight());
@@ -39,7 +39,9 @@ public class Assets {
     targets = Loader.getSubset(sprites, Target.class);
     gameEffects = new GameEffects();
     toRemove = new ArrayList<>();
+    door = Loader.findDoor(sprites);
     music = new Music();
+    history = new History();
     
     // finds the player and loads its position if it is present
     Player player = Loader.findPlayer(sprites);
@@ -54,10 +56,6 @@ public class Assets {
       // if the level has no player then it is a win screen
       music.youWin();
     }
-    
-    door = Loader.findDoor(sprites);
-    
-
   }
 
   // removes a unit from the game and shows a Poof, this method avoid a concurrent modification exception
@@ -74,6 +72,9 @@ public class Assets {
   }
   public Stone[][] getStones() {
     return stones;
+  }
+  public void setInStone(Stone[][] stones) {
+    this.stones = stones;
   }
   public ArrayList<Unit> getUnits() {
     return units;
@@ -92,5 +93,11 @@ public class Assets {
   } 
   public Door getDoor() {
     return door;
+  }
+  public Music getMusic() {
+    return music;
+  }
+  public History getHistory() {
+    return history;
   }
 }

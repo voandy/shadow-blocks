@@ -7,6 +7,7 @@ import sprites.Position;
 import sprites.effects.Effect;
 import sprites.effects.Explosion;
 import sprites.effects.Kick;
+import sprites.effects.Lightning;
 import sprites.effects.Poof;
 import sprites.effects.Pop;
 import sprites.effects.SonicBoom;
@@ -41,6 +42,11 @@ public class GameEffects {
   public void showPoof(Position position) {
     Poof poof = new Poof(position);
     showEffect(poof, position);
+  }
+  
+  public void showLightning(Position position) {
+    Lightning lightning = new Lightning(position);
+    showEffect(lightning, position);
   }
   
   public void throwSonicBoom(Position position) {

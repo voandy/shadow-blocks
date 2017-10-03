@@ -15,23 +15,28 @@ public class Stone extends Sprite implements Movable{
 	public Stone(String image_src, String sound_src, Position position) {
 		super(image_src, sound_src, position);
 	}
-	
-//	public Stone copy() {
-//	  
-//	}
 
-	public boolean move(Properties properties, Assets assets) {
+	public Stone(Stone another) {
+	  super(another);
+  }
+
+  public boolean move(Properties properties, Assets assets) {	  
 		Position nextPos = getPos().nextPos();
 
-		// note that move validation is done in the push() method in the unit class so is unnecessary here
-		assets.getStones()[nextPos.getXPos()][nextPos.getYPos()] = this;
-		assets.getStones()[getPos().getXPos()][getPos().getYPos()] = null;
-		getPos().setPos(nextPos);
-		if (getSound() != null) {
-	    makeSound();
+		if (isValidMove(nextPos, assets)) {
+		  shift(getPos(), assets);
+	    return true;
 		}
-		
-		return true;
+		return false;
+	}
+	
+	private void shift(Position position, Assets assets) {
+    assets.getStones()[position.nextPos().getXPos()][position.nextPos().getYPos()] = this;
+    assets.getStones()[position.getXPos()][position.getYPos()] = null;
+    position.setPos(position.nextPos());
+    if (getSound() != null) {
+      makeSound();
+    }
 	}
 	
   // returns false if the destination contains a wall or block and true otherwise
@@ -39,7 +44,6 @@ public class Stone extends Sprite implements Movable{
     if (assets.getMap()[destination.getXPos()][destination.getYPos()].isBlocked()) {
       return false;
     }
-    // checks if destination contains a stone.
     if (assets.getStones()[destination.getXPos()][destination.getYPos()] != null) {
       return false;
     }
