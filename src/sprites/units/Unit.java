@@ -2,15 +2,16 @@ package sprites.units;
 
 import game.Assets;
 import game.Properties;
-import sprites.Actor;
 import sprites.Direction;
+import sprites.Movable;
 import sprites.Position;
+import sprites.Sprite;
 import sprites.map.CrackedWall;
 import sprites.stones.Ice;
 import sprites.stones.Stone;
 import sprites.stones.Tnt;
 
-public abstract class Unit extends Actor{
+public abstract class Unit extends Sprite implements Movable{
 
 	public Unit(String image_src, String sound_src, Position position) {
 		super(image_src, sound_src, position);
@@ -20,15 +21,18 @@ public abstract class Unit extends Actor{
 	public boolean move(Properties properties, Assets assets) {
 		Position nextPos = getPos().nextPos();
 		if (isValidMove(nextPos, assets)) {
-			// if there is a stone in nextPos we push it
+		  
 		  Stone stone = assets.getStones()[nextPos.getXPos()][nextPos.getYPos()];
 			if (stone != null) {
+		     // if there is a stone in nextPos we push it
 				push(properties, (Stone) assets.getStones()[nextPos.getXPos()][nextPos.getYPos()], getPos().getDir(), assets);
-				// the player doesn't move when pushing Ice, this makes for a smoother animation
+				
+				// the player doesn't move when pushing Ice, this makes for a smoother animation				
 				if (!(stone instanceof Ice)) {
 	        getPos().setPos(nextPos);
 				}
 				return true;
+				
 			} else {
 				getPos().setPos(nextPos);
 				return true;
@@ -39,9 +43,10 @@ public abstract class Unit extends Actor{
 	
 	// returns true if the unit can move to the destination
 	public boolean isValidMove(Position destination, Assets assets) {
-		if (!super.isValidMove(destination, assets)) {
-			return false;
-		}
+	  // if the destination is a wall return false
+    if (assets.getMap()[destination.getXPos()][destination.getYPos()].isBlocked()) {
+      return false;
+    }
 		
 		// checks if the destination contains a Stone
 		if (assets.getStones()[destination.getXPos()][destination.getYPos()] != null) {

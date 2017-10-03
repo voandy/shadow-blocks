@@ -29,7 +29,6 @@ public class Ice extends Stone {
 		try {
       slide = new Sound("res/ice.wav");
     } catch (SlickException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
 		
@@ -96,18 +95,4 @@ public class Ice extends Stone {
     getImage().draw(getPos().getXPos() * App.TILE_SIZE + xOffset + renderOffsetX, 
                     getPos().getYPos() * App.TILE_SIZE + yOffset + renderOffsetY);
   }
-	
-	// returns false if the destination contains a wall or block and true otherwise
-	public boolean isValidMove(Position destination, Assets assets) {
-		if (!super.isValidMove(destination, assets)) {
-			return false;
-		}
-		
-		// checks if destination contains a stone.
-		if (assets.getStones()[destination.getXPos()][destination.getYPos()] != null) {
-			return false;
-		}
-		
-		return true;
-	}
 }
