@@ -1,4 +1,4 @@
-package game.assets.sprites.stones;
+package game.assets.sprites.blocks;
 
 import game.Properties;
 import game.assets.Assets;
@@ -6,10 +6,10 @@ import game.assets.sprites.Position;
 import game.assets.sprites.map.CrackedWall;
 import game.assets.sprites.map.Floor;
 
-public class Tnt extends Stone {
+public class Tnt extends Block {
 	
 	public Tnt(Position position) {
-		super("res/tnt.png", "res/stone.wav", position);
+		super("res/tnt.png", "res/block.wav", position);
 	}
 	
 	public Tnt(Tnt another) {
@@ -22,7 +22,7 @@ public class Tnt extends Stone {
 	  
 	  // removes Tnt and replaces CrackedWall with Floor
     assets.getMap()[getPos().getXPos()][getPos().getYPos()] = new Floor(getPos());
-    assets.getStones()[getPos().getXPos()][getPos().getYPos()] = null;
+    assets.getBlocks()[getPos().getXPos()][getPos().getYPos()] = null;
     
     // clears history and detonation cannot be undone
     assets.getHistory().clearHistory();

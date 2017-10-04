@@ -6,6 +6,9 @@ import java.util.Scanner;
 import game.Properties;
 import game.assets.sprites.Position;
 import game.assets.sprites.Sprite;
+import game.assets.sprites.blocks.Block;
+import game.assets.sprites.blocks.Ice;
+import game.assets.sprites.blocks.Tnt;
 import game.assets.sprites.map.CrackedWall;
 import game.assets.sprites.map.Door;
 import game.assets.sprites.map.Floor;
@@ -13,20 +16,18 @@ import game.assets.sprites.map.MapItem;
 import game.assets.sprites.map.Switch;
 import game.assets.sprites.map.Target;
 import game.assets.sprites.map.Wall;
-import game.assets.sprites.stones.Ice;
-import game.assets.sprites.stones.Stone;
-import game.assets.sprites.stones.Tnt;
 import game.assets.sprites.units.Giles;
 import game.assets.sprites.units.Mage;
 import game.assets.sprites.units.Player;
 import game.assets.sprites.units.Rogue;
+import game.assets.sprites.units.Shadow;
 import game.assets.sprites.units.Skeleton;
 
 import java.util.ArrayList;
 
 public class Loader {	
 	private static final int NO_DIMENSIONS = 2;
-	private static final int MAX_LEVELS = 10;
+	private static final int MAX_LEVELS = 20;
 
 	// loads level dimensions from file
 	public static Properties loadProperties(String filename, ArrayList<Sprite> sprites) {
@@ -84,7 +85,7 @@ public class Loader {
 			case "switch":
 				return new Switch(position);
 			case "stone":
-				return new Stone(position);
+				return new Block(position);
 			case "ice":
 				return new Ice(position);
 			case "tnt":
@@ -99,6 +100,8 @@ public class Loader {
 				return new Rogue(position);
 			case "mage":
 				return new Mage(position);
+			case "shadow":
+			  return new Shadow(position);
 		}
 		return null;
 	}
@@ -147,12 +150,12 @@ public class Loader {
   }
   
   // returns a 2d array of Stones filtered from sprites
-  public static Stone[][] loadStones(ArrayList<Sprite> sprites, int levelWidth, int levelHeight) {
-    Stone[][] stones = new Stone[levelWidth][levelHeight];
+  public static Block[][] loadBlocks(ArrayList<Sprite> sprites, int levelWidth, int levelHeight) {
+    Block[][] stones = new Block[levelWidth][levelHeight];
     
     for (Sprite sprite : sprites) {
-      if (sprite instanceof Stone) {
-        stones[sprite.getPos().getXPos()][sprite.getPos().getYPos()] = (Stone) sprite;
+      if (sprite instanceof Block) {
+        stones[sprite.getPos().getXPos()][sprite.getPos().getYPos()] = (Block) sprite;
       }
     }
     return stones;

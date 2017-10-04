@@ -8,6 +8,7 @@ import org.newdawn.slick.Sound;
 
 import game.App;
 import game.assets.sprites.units.Player;
+import game.assets.sprites.units.Unit;
 import game.methods.Loader;
 
 public class EndScreen {
@@ -86,8 +87,11 @@ public class EndScreen {
   }
   
   public void levelWon(Assets assets) {
-    Player player = Loader.findPlayer(assets.getUnits());
-    player.freeze();
+    // freezes all units
+    for (Unit unit : assets.getUnits()) {
+      unit.freeze();
+    }
+    
     assets.getMusic().stopMusic();
     
     try {

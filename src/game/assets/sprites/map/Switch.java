@@ -14,7 +14,7 @@ public class Switch extends Floor{
   public void update(Input input, int delta, Properties properties, Assets assets) {
     if (assets.getDoor() != null) {
       // the player can activate the switch too
-      if (assets.getStones()[getPos().getXPos()][getPos().getYPos()] != null ||
+      if (assets.getBlocks()[getPos().getXPos()][getPos().getYPos()] != null ||
           getPos().equals(assets.getPlayerPos())) {
         
         assets.getDoor().open();

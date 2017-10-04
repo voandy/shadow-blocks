@@ -24,8 +24,8 @@ public class Update {
   public static void updateArrays(Input input, int delta, Assets assets, Properties properties) {
     for (int i = 0; i < properties.getLevelWidth(); i++) {
       for (int j = 0; j < properties.getLevelHeight(); j++) {
-        if (assets.getStones()[i][j] != null) {
-          assets.getStones()[i][j].update(input, delta, properties, assets);
+        if (assets.getBlocks()[i][j] != null) {
+          assets.getBlocks()[i][j].update(input, delta, properties, assets);
         }
         if (assets.getMap()[i][j] != null) {
           assets.getMap()[i][j].update(input, delta, properties, assets);

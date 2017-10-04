@@ -6,7 +6,7 @@ import game.Properties;
 import game.assets.Assets;
 import game.assets.sprites.Direction;
 import game.assets.sprites.Position;
-import game.assets.sprites.stones.Stone;
+import game.assets.sprites.blocks.Block;
 
 public class Skeleton extends Npc {
   private static final int MOVE_DELAY = 1000;
@@ -24,7 +24,7 @@ public class Skeleton extends Npc {
     timeSinceMove += delta;
     if (timeSinceMove > MOVE_DELAY) {
       
-      if (isValidMove(nextPos, assets)) {
+      if (!isFrozen() && isValidMove(nextPos, assets)) {
         getPos().setPos(nextPos);
         nextPos = getPos().nextPos();
         makeSound();
@@ -48,7 +48,7 @@ public class Skeleton extends Npc {
   // Override isValidMove as the Skeleton cannot push blocks
   public boolean isValidMove(Position destination, Assets assets) {
     if (assets.getMap()[destination.getXPos()][destination.getYPos()].isBlocked() ||
-        assets.getStones()[destination.getXPos()][destination.getYPos()] instanceof Stone) {
+        assets.getBlocks()[destination.getXPos()][destination.getYPos()] instanceof Block) {
       return false;
     }
     return true;

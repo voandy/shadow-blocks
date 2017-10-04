@@ -5,6 +5,7 @@ import org.newdawn.slick.Input;
 import game.Properties;
 import game.assets.Assets;
 import game.assets.sprites.Position;
+import game.assets.sprites.units.Npc;
 import game.assets.sprites.units.Unit;
 
 public class Kick extends Effect{
@@ -43,7 +44,7 @@ public class Kick extends Effect{
   public void attack(Position[] kickRange, Assets assets) {
     for (int i = 0; i < KICK_RANGE; i++) {
       for (Unit unit : assets.getUnits()) {
-        if (kickRange[i].equals(unit.getPos())) {
+        if (kickRange[i].equals(unit.getPos()) && unit instanceof Npc) {
           assets.killUnit(unit);
         }
       }

@@ -1,17 +1,11 @@
-package game.assets;
+package game.assets.sprites.effects;
 
 import java.util.ArrayList;
 import org.newdawn.slick.Input;
 
 import game.Properties;
+import game.assets.Assets;
 import game.assets.sprites.Position;
-import game.assets.sprites.effects.Effect;
-import game.assets.sprites.effects.Explosion;
-import game.assets.sprites.effects.Kick;
-import game.assets.sprites.effects.Splash;
-import game.assets.sprites.effects.Poof;
-import game.assets.sprites.effects.Pop;
-import game.assets.sprites.effects.SonicBoom;
 
 // stores and renders game effects and animations such as Explosion
 public class GameEffects {
@@ -45,7 +39,7 @@ public class GameEffects {
     showEffect(poof, position);
   }
   
-  public void showLightning(Position position) {
+  public void showSplash(Position position) {
     Splash splash = new Splash(position);
     showEffect(splash, position);
   }

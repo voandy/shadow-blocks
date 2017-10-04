@@ -1,4 +1,4 @@
-package game.assets.sprites.stones;
+package game.assets.sprites.blocks;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -10,7 +10,7 @@ import game.Properties;
 import game.assets.Assets;
 import game.assets.sprites.Position;
 
-public class Ice extends Stone {
+public class Ice extends Block {
   private Sound slide;
   
 	private final static int MOVE_DELAY = 250;

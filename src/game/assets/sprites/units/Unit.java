@@ -1,31 +1,37 @@
 package game.assets.sprites.units;
 
+import org.newdawn.slick.Graphics;
+
+import game.App;
 import game.Properties;
 import game.assets.Assets;
 import game.assets.sprites.Movable;
 import game.assets.sprites.Position;
 import game.assets.sprites.Sprite;
-import game.assets.sprites.stones.Ice;
-import game.assets.sprites.stones.Stone;
+import game.assets.sprites.blocks.Block;
+import game.assets.sprites.blocks.Ice;
 
 public abstract class Unit extends Sprite implements Movable{
+  // used to freeze unit while message is being displayed
+  private boolean frozen;
 
 	public Unit(String image_src, String sound_src, Position position) {
 		super(image_src, sound_src, position);
+    frozen = false;
 	}
 	
 	// moves the Unit one grid length and pushes a stone if one is present
 	public boolean move(Properties properties, Assets assets) {
 		Position nextPos = getPos().nextPos();
-		if (isValidMove(nextPos, assets)) {
+		if (!frozen && isValidMove(nextPos, assets)) {
 		  
-		  Stone stone = assets.getStones()[nextPos.getXPos()][nextPos.getYPos()];
-			if (stone != null) {
+		  Block block = assets.getBlocks()[nextPos.getXPos()][nextPos.getYPos()];
+			if (block != null) {
 		    // if there is a stone in nextPos we try to push it
-			  stone.getPos().setDir(getPos().getDir());
-			  if (stone.move(properties, assets)) {
+			  block.getPos().setDir(getPos().getDir());
+			  if (block.move(properties, assets)) {
 		       // the player doesn't move when pushing Ice, this makes for a smoother animation        
-	        if (!(stone instanceof Ice)) {
+	        if (!(block instanceof Ice)) {
 	          shift();
 	          return true;
 	        }
@@ -57,4 +63,18 @@ public abstract class Unit extends Sprite implements Movable{
     }
     return true;
 	}
+	
+  public void freeze() {
+    frozen = true;
+  }
+  public void unFreeze() {
+    frozen = false;
+  }
+  public boolean isFrozen() {
+    return frozen;
+  }
+  
+  public void render(Graphics g, float xOffset, float yOffset) {
+    super.render(g, xOffset, yOffset);
+  }
 }

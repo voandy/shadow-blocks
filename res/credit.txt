@@ -1,5 +1,7 @@
 Painhurt: http://painhurt.deviantart.com/art/RPG-Maker-VX-ModernRTP-TileA5-206956033
-Vellidragon: https://opengameart.org/content/stone-blocks
+tamashihoshi: EntropyPhi: Vellidragon: https://opengameart.org/content/stone-blocks
+https://opengameart.org/content/jump-and-run-tileset-24x24
+https://opengameart.org/content/32x32-blocks-and-more
 Zack Alvarado: https://opengameart.org/content/blocky
 Square Pug Games: https://opengameart.org/content/wooden-boxes-crates
 J-Robot: https://opengameart.org/content/pixel-explosion-12-frames
@@ -15,6 +17,7 @@ Tuudurt: https://freesound.org/people/Tuudurt/sounds/258142/
 Planman: https://freesound.org/people/Planman/sounds/208111/
 SwagMuffinPlus: https://freesound.org/people/SwagMuffinPlus/sounds/176146/
 Anton: https://freesound.org/people/Anton/sounds/1256/
+wilhellboy: https://freesound.org/people/wilhellboy/sounds/351369/
 FranzPlays: https://www.youtube.com/watch?v=2yxloBGRY5c
 
 Thanks to MrBulbamike for the awesome Guile Theme remix:

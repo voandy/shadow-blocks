@@ -115,7 +115,7 @@ public class SonicBoom extends Effect {
   // returns false if the destination contains a wall or block and true otherwise
   public boolean isValidMove(Position destination, Assets assets) {
     // checks if destination contains a stone.
-    if (assets.getStones()[destination.getXPos()][destination.getYPos()] != null ||
+    if (assets.getBlocks()[destination.getXPos()][destination.getYPos()] != null ||
         assets.getMap()[destination.getXPos()][destination.getYPos()].isBlocked()) {
       return false;
     }    

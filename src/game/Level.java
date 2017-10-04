@@ -42,7 +42,7 @@ public class Level {
 		
 		endScreen.update(input, delta);
 		
-		if (input.isKeyPressed(Input.KEY_Z)) {
+		if (input.isKeyPressed(Input.KEY_Z) && !endScreen.isFinished()) {
 		  undo();
 		}
 		
@@ -56,7 +56,7 @@ public class Level {
 		// renders map items
 		Render.renderSpriteArray(g, properties, assets.getMap());
 		// renders actors
-		Render.renderSpriteArray(g, properties, assets.getStones());
+		Render.renderSpriteArray(g, properties, assets.getBlocks());
 		// renders units
 		Render.renderArrayList(g, properties, assets.getUnits());
 		// renders effects
@@ -75,7 +75,7 @@ public class Level {
     }
     // if any target does not have a stone on it return false
     for (Target target : assets.getTargets()) {
-      if (assets.getStones()[target.getPos().getXPos()][target.getPos().getYPos()] == null) {
+      if (assets.getBlocks()[target.getPos().getXPos()][target.getPos().getYPos()] == null) {
         return false;
       }
     }
@@ -86,7 +86,7 @@ public class Level {
   private void undo() {
     Player player = Loader.findPlayer(assets.getUnits());
     if (assets.getHistory().undo(player, properties, assets)) {
-      assets.getGameEffects().showLightning(player.getPos());
+      assets.getGameEffects().showSplash(player.getPos());
     }
   }
   

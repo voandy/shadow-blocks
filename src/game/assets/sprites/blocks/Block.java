@@ -1,22 +1,23 @@
-package game.assets.sprites.stones;
+package game.assets.sprites.blocks;
 
 import game.Properties;
 import game.assets.Assets;
 import game.assets.sprites.Movable;
 import game.assets.sprites.Position;
 import game.assets.sprites.Sprite;
+import game.assets.sprites.units.Unit;
 
-public class Stone extends Sprite implements Movable{
-	public Stone(Position position) {
-		super("res/stone.png", "res/stone.wav", position);
+public class Block extends Sprite implements Movable{
+	public Block(Position position) {
+		super("res/block.png", "res/block.wav", position);
 	}
 	
 	// this second constructor allows for subclasses to be instantiated with a different image
-	public Stone(String image_src, String sound_src, Position position) {
+	public Block(String image_src, String sound_src, Position position) {
 		super(image_src, sound_src, position);
 	}
 
-	public Stone(Stone another) {
+	public Block(Block another) {
 	  super(another);
   }
 
@@ -31,21 +32,26 @@ public class Stone extends Sprite implements Movable{
 	}
 	
 	private void shift(Position position, Assets assets) {
-    assets.getStones()[position.nextPos().getXPos()][position.nextPos().getYPos()] = this;
-    assets.getStones()[position.getXPos()][position.getYPos()] = null;
+    assets.getBlocks()[position.nextPos().getXPos()][position.nextPos().getYPos()] = this;
+    assets.getBlocks()[position.getXPos()][position.getYPos()] = null;
     position.setPos(position.nextPos());
     if (getSound() != null) {
       makeSound();
     }
 	}
 	
-  // returns false if the destination contains a wall or block and true otherwise
+  // returns false if the destination contains a wall, block or unit and true otherwise
 	public boolean isValidMove(Position destination, Assets assets) {
     if (assets.getMap()[destination.getXPos()][destination.getYPos()].isBlocked()) {
       return false;
     }
-    if (assets.getStones()[destination.getXPos()][destination.getYPos()] != null) {
+    if (assets.getBlocks()[destination.getXPos()][destination.getYPos()] != null) {
       return false;
+    }
+    for (Unit unit : assets.getUnits()) {
+      if(destination.equals(unit.getPos())) {
+        return false;
+      }
     }
     return true;
 	}
