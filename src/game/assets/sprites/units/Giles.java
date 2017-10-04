@@ -90,7 +90,6 @@ public class Giles extends Player{
       freeze();
       kicking = true;
     }
-
     
     if (kicking) {
       kickTime += delta;

@@ -75,6 +75,11 @@ public class EndScreen {
     assets.setPlayerPos(null);
     assets.getMusic().stopMusic();
     
+    // freezes all units
+    for (Unit unit : assets.getUnits()) {
+      unit.freeze();
+    }
+    
     try {
       message = new Image(WASTED_SRC);
     } catch (SlickException e) {

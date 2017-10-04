@@ -2,7 +2,6 @@ package game.assets.sprites.units;
 
 import org.newdawn.slick.Graphics;
 
-import game.App;
 import game.Properties;
 import game.assets.Assets;
 import game.assets.sprites.Movable;
