@@ -2,7 +2,7 @@ package game;
 
 import java.util.ArrayList;
 
-import sprites.Sprite;
+import game.assets.sprites.Sprite;
 
 public class Properties {
 	private String filename;

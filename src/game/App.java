@@ -19,8 +19,6 @@ public class App extends BasicGame
     public static final int SCREEN_HEIGHT = 768;
     /** size of the tiles, in pixels */
     public static final int TILE_SIZE = 32;
-    /** target fps */
-    public static final int maxFPS = 60;
     
     private World world;
 
@@ -68,7 +66,6 @@ public class App extends BasicGame
         AppGameContainer app = new AppGameContainer(new App());
         // setShowFPS(true), to show frames-per-second.
         app.setShowFPS(true);
-        //app.setTargetFrameRate(maxFPS);
         app.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
         app.start();
     }

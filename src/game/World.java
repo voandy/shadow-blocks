@@ -4,6 +4,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import game.methods.Loader;
+
 public class World {	
 	private Level level;
 	// stores a list of level filenames
