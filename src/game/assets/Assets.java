@@ -18,7 +18,8 @@ import game.methods.Loader;
 
 public class Assets {
   
-  // map items and stone are represented by a 2d array as they will never occupy the same grid coordinates
+  // map items and blocks are represented by a 2d array as they will never occupy the same grid coordinates
+  // this makes them more efficient to find as we do not have to traverse a linked list
   private MapItem[][] map;
   private Block[][] blocks;
   
@@ -32,6 +33,8 @@ public class Assets {
   private GameEffects gameEffects;
   
   private Position playerPos;
+  // true if player is dead, used so that Mage doesn't freak out when there is no player present and the endScreen
+  // is being displayed
   private boolean playerDead;
   
   private Door door;
@@ -42,12 +45,17 @@ public class Assets {
   public Assets(String filename, ArrayList<Sprite> sprites, Properties properties) {
     map = Loader.loadMap(sprites, properties.getLevelWidth(), properties.getLevelHeight());
     blocks = Loader.loadBlocks(sprites, properties.getLevelWidth(), properties.getLevelHeight());
+    
     units = Loader.getSubset(sprites, Unit.class);
-    targets = Loader.getSubset(sprites, Target.class);
-    gameEffects = new GameEffects();
     toRemove = new ArrayList<>();
+    
+    targets = Loader.getSubset(sprites, Target.class);
+    
+    gameEffects = new GameEffects();
+    
     door = Loader.findDoor(sprites);
     music = new Music();
+    
     history = new History();
     
     // finds the player and loads its position if it is present
@@ -65,7 +73,7 @@ public class Assets {
     }
   }
 
-  // removes a unit from the game and shows a Poof, this method avoid a concurrent modification exception
+  // removes a unit from the game and shows a Poof, this method avoids a concurrent modification exception
   public void killUnit(Unit unit) {
     if (unit instanceof Player) {
       playerDead = true;
@@ -74,16 +82,18 @@ public class Assets {
     // new Position so that the effect remains in place after the creating entity is altered
     gameEffects.showPoof(new Position(unit.getPos()));
     
-    // the Shadow cannot be permanently killed
+    // the Shadow cannot be permanently killed so we call its own kill method instead
     if (unit instanceof Shadow) {
       ((Shadow) unit).kill();
     } else {
       toRemove.add(unit);
     }
   }
+  
   public void update(){
     units.removeAll(toRemove);
   }
+  
   public MapItem[][] getMap() {
     return map;
   }

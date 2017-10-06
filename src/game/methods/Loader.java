@@ -46,12 +46,12 @@ public class Loader {
             e.printStackTrace();
         }
 		
-		properties = new Properties(filename, sprites, levelWidth, levelHeight);
+		properties = new Properties(sprites, levelWidth, levelHeight);
 		
 		return properties;
 	}
 	
-	// loads an array of levels in the game
+	// loads the list of levels, this is represents as an array of String indicating the filename of the levels
 	public static String[] loadLevelList(String filename) {
 		String[] levelList = new String[MAX_LEVELS];
 		
@@ -92,7 +92,7 @@ public class Loader {
 				return new Tnt(position);
 			case "player":
 				return new Player(position);
-      case "guile":
+      case "giles":
         return new Giles(position);
 			case "skeleton":
 				return new Skeleton(position);
@@ -106,7 +106,7 @@ public class Loader {
 		return null;
 	}
 	
-	// loads all the level data into an array list
+	// loads all the level data into an array list of sprites
 	public static ArrayList<Sprite> loadSprites(String filename) {
 		ArrayList<Sprite> sprites = new ArrayList<>();
 		
@@ -149,7 +149,7 @@ public class Loader {
     return map;
   }
   
-  // returns a 2d array of Stones filtered from sprites
+  // returns a 2d array of Blocks filtered from sprites
   public static Block[][] loadBlocks(ArrayList<Sprite> sprites, int levelWidth, int levelHeight) {
     Block[][] stones = new Block[levelWidth][levelHeight];
     
@@ -161,7 +161,7 @@ public class Loader {
     return stones;
   }
 	
-	// given an ArrayList of sprites returns an ArrayList of all sprites that are instances of subClass
+	// given an ArrayList of sprites returns an ArrayList of objects that are instances of type
 	// credit: Tamas Rev https://stackoverflow.com/questions/46480748/
 	@SuppressWarnings("unchecked")
   public static <T> ArrayList<T> getSubset(ArrayList<? super T> sprites, Class<T> type) {
@@ -174,7 +174,6 @@ public class Loader {
 	  return subSet;
 	}
 	
-	// finds the player in the units ArrayList
 	public static Player findPlayer(ArrayList<? extends Sprite> sprites) {
 		Player player = null;
 		for (Sprite sprite: sprites) {

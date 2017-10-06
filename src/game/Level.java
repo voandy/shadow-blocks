@@ -32,16 +32,17 @@ public class Level {
 	}
 	
 	public void update(Input input, int delta) {
+	  // updates all objects in the units Arraylist in assets
 		Update.updateUnits(input, delta, assets, properties, endScreen);
+		// updates all objects in the map[][] and block[][] arrays in assets
 		Update.updateArrays(input, delta, assets, properties);
-
-		// updates effects with delta
+		// updates effects
 		assets.getGameEffects().update(input, delta, properties, assets);
 		
 		assets.update();
-		
 		endScreen.update(input, delta);
 		
+		// undo a move when Z is pressed, can't undo death
 		if (input.isKeyPressed(Input.KEY_Z) && !endScreen.isFinished()) {
 		  undo();
 		}
@@ -53,14 +54,11 @@ public class Level {
 	}
 
   public void render(Graphics g) {
-		// renders map items
 		Render.renderSpriteArray(g, properties, assets.getMap());
-		// renders actors
 		Render.renderSpriteArray(g, properties, assets.getBlocks());
-		// renders units
 		Render.renderArrayList(g, properties, assets.getUnits());
-		// renders effects
 		Render.renderArrayList(g, properties, assets.getGameEffects().getEffects());
+		
     // show EndScreen message if present
     endScreen.render(g);
 		// shows number of moves made
@@ -93,7 +91,6 @@ public class Level {
   public boolean isReadyToGo() {
     return endScreen.isReadyToGo();
   }
-  
   public boolean isWon() {
     return endScreen.isWon();
   }

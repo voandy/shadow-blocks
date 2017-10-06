@@ -23,23 +23,23 @@ public class EndScreen {
   private Sound gameOverSound;
   private Sound victorySound;
   
-  // indicates to World that the win/lose message has finished playing and we are ready to either load the next level
-  // or restart the current level
-  private boolean readyToGo;
+  // true if the level is finished win or lose, we should now display a message
+  private boolean finished;
   
    // true if all the targets have been covered
   private boolean won;
   
-  // true if the level is finished win or lose, we should now display a message
-  private boolean finished;
+  // indicates to World that the win/lose message has finished playing and we are ready to either load the next level
+  // or restart the current level
+  private boolean readyToGo;
   
   public EndScreen() {
     message = null;
     messageTimer = 0;
-    
-    readyToGo = false;
-    won = false;
+
     finished = false;
+    won = false;
+    readyToGo = false;
     
     try {
       gameOverSound = new Sound("res/wasted.wav");
@@ -51,7 +51,7 @@ public class EndScreen {
   
   public void update(Input input, int delta) {
 
-    // if the player is dead there is a delay before the level is reset to show the message
+    // if the level is won or player dead there is a delay before the level is reset to show the message
     if (finished) {
       messageTimer += delta;
     }
@@ -113,11 +113,9 @@ public class EndScreen {
   public boolean isReadyToGo() {
     return readyToGo;
   }
-
   public boolean isWon() {
     return won;
   }
-  
   public boolean isFinished() {
     return finished;
   }

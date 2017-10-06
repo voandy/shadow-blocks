@@ -21,6 +21,7 @@ public class Block extends Sprite implements Movable{
 	  super(another);
   }
 
+	// moves the block one grid position if possible
   public boolean move(Properties properties, Assets assets) {	  
 		Position nextPos = getPos().nextPos();
 
@@ -31,6 +32,7 @@ public class Block extends Sprite implements Movable{
 		return false;
 	}
 	
+  // updates the Blocks positions as well as the Block[][] array in Assets to reflect this
 	private void shift(Position position, Assets assets) {
     assets.getBlocks()[position.nextPos().getXPos()][position.nextPos().getYPos()] = this;
     assets.getBlocks()[position.getXPos()][position.getYPos()] = null;

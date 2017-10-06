@@ -7,7 +7,7 @@ import game.Properties;
 import game.assets.sprites.Sprite;
 
 public class Render {
-  // used to render either Block array or MapItem array
+  // used to render either Block[][] array or MapItem[][] array
   public static void renderSpriteArray(Graphics g, Properties properties, Sprite[][] spriteArray) {
     for (int i = 0; i < properties.getLevelWidth(); i++) {
       for (int j = 0; j < properties.getLevelHeight(); j++) {
@@ -18,7 +18,7 @@ public class Render {
     }
   }
   
-  // used to render both units and effects
+  // used to render Sprites stored in ArrayLists i.e. units and effects
   public static void renderArrayList(Graphics g, Properties properties, ArrayList<? extends Sprite> sprites) {
     if (sprites != null) {
       for (Sprite sprite : sprites) {

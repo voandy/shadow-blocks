@@ -1,3 +1,11 @@
+/**
+ * Programmer: Andy Vo
+ * https://github.com/voandy
+ * 
+ * Project skeleton for SWEN20003: Object Oriented Software Development 2017
+ * by Eleanor McMurtry
+ */
+
 package game;
 
 import org.newdawn.slick.AppGameContainer;
@@ -19,6 +27,8 @@ public class App extends BasicGame
     public static final int SCREEN_HEIGHT = 768;
     /** size of the tiles, in pixels */
     public static final int TILE_SIZE = 32;
+    /** sets target framerate */
+    public static final int MAX_FRAMERATE = 60;
     
     private World world;
 
@@ -66,6 +76,8 @@ public class App extends BasicGame
         AppGameContainer app = new AppGameContainer(new App());
         // setShowFPS(true), to show frames-per-second.
         app.setShowFPS(true);
+        app.setVSync(true);
+        app.setTargetFrameRate(MAX_FRAMERATE);
         app.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
         app.start();
     }

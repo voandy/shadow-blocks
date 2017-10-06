@@ -45,13 +45,21 @@ public abstract class Sprite {
 		}
 	}
 	
+  public void update(Input input, int delta, Properties properties, Assets assets) {
+  }
+  
+  public void render(Graphics g, float xOffset, float yOffset) {
+    if (image != null) {
+      image.draw(position.getXPos() * App.TILE_SIZE + xOffset, position.getYPos() * App.TILE_SIZE + yOffset);
+    }
+  }
+	
 	public void setImage(Image image) {
 	  this.image = image;
 	}
 	public Image getImage() {
 	  return image;
 	}
-	
 	public Sound getSound() {
     return sound;
   }
@@ -65,14 +73,4 @@ public abstract class Sprite {
   public void setPos(Position position) {
     this.position = position;
   }
-
-  public void update(Input input, int delta, Properties properties, Assets assets) {
-	}
-	
-	public void render(Graphics g, float xOffset, float yOffset) {
-	  if (image != null) {
-	    image.draw(position.getXPos() * App.TILE_SIZE + xOffset, position.getYPos() * App.TILE_SIZE + yOffset);
-	  }
-	}
-
 }

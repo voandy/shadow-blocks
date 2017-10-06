@@ -20,18 +20,20 @@ public class World {
 	
 	public void update(Input input, int delta) {
 		level.update(input, delta);
-		// when the level is complete or skipped by pressing space the next level is loaded
+		// loads next level when the P key is pressed
 		if (input.isKeyPressed(Input.KEY_P) && levelList[currLevel + 1] != null) {
 		  level.stopMusic();
 			currLevel++;
 			level = new Level(levelList[currLevel]);
 		}
-		// restarts the current level if the r key is pressed or if the player has died
+		// restarts the current level when the R key is pressed
 		if (input.isKeyPressed(Input.KEY_R)) {
 		  level.stopMusic();
 		  level = new Level(levelList[currLevel]);
 		}
 		
+		// if the level is finished and the player has won then load next level after message is finished displaying
+		// if the player had died then reset the current level instead
 		if (level.isReadyToGo()) {
 		  if (level.isWon() && levelList[currLevel + 1] != null) {
 	      currLevel++;

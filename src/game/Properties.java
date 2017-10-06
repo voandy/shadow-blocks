@@ -5,29 +5,26 @@ import java.util.ArrayList;
 import game.assets.sprites.Sprite;
 
 public class Properties {
-	private String filename;
-
   private int levelWidth;
 	private int levelHeight;
+	
+	// offsets used for rendering the level in the center of the screen
 	private float xOffset;
 	private float yOffset;
 	
 	private int noMoves;
 	
-	public Properties(String filename, ArrayList<Sprite> sprites, int levelWidth, int levelHeight) {
-		this.filename = filename;
+	public Properties(ArrayList<Sprite> sprites, int levelWidth, int levelHeight) {
 		
 		this.levelWidth = levelWidth;
 		this.levelHeight = levelHeight;
+		
 		xOffset = (App.SCREEN_WIDTH - (levelWidth * App.TILE_SIZE)) / 2;
 		yOffset = (App.SCREEN_HEIGHT - (levelHeight * App.TILE_SIZE)) / 2;
 		
 		noMoves = 0;
 	}
 
-	public String getFilename() {
-		return filename;
-	}
 	public int getLevelWidth() {
 		return levelWidth;
 	}

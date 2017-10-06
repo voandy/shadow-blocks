@@ -16,9 +16,11 @@ public class Kick extends Effect{
   
   // the duration, as a ratio of timeToShow that Giles' kick is attacking above him
   private static final float HIGH_KICK_TIME = (float) 0.5;
+  
   // number of grid squares affects by each portion of the kick
   private static final int KICK_RANGE = 4;
-  // the positions affected by the upper and lower parts of the kick
+  
+  // arrays of the the positions affected by the upper and lower parts of the kick
   private Position[] highKickRange;
   private Position[] lowKickRange;
   
@@ -27,7 +29,6 @@ public class Kick extends Effect{
     
     int xPos = getPos().getXPos();
     int yPos = getPos().getYPos();
-    
     highKickRange = getHighKickRange(xPos, yPos);
     lowKickRange = getLowKickRange(xPos, yPos);
   }
@@ -41,6 +42,7 @@ public class Kick extends Effect{
     }
   }
   
+  // kills any Npc in the kickRange
   public void attack(Position[] kickRange, Assets assets) {
     for (int i = 0; i < KICK_RANGE; i++) {
       for (Unit unit : assets.getUnits()) {

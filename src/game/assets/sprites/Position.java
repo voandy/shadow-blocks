@@ -26,7 +26,7 @@ public class Position{
 		this.direction = another.direction;
 	}
 	
-	// creates and empty position
+	// creates an empty Position
 	public Position() {
 	  this.xPos = 0;
 	  this.yPos = 0;
@@ -46,6 +46,10 @@ public class Position{
 	
 	// returns a Position adjacent to the current position (in the the direction this Position is facing)
 	public Position nextPos() {
+	  if(direction == Direction.DIR_NONE) {
+	    return this;
+	  }
+	  
 		int nextX = this.xPos;
 		int nextY = this.yPos;
 		
@@ -89,7 +93,6 @@ public class Position{
 	public int getYPos() {
 		return yPos;
 	}
-	
 	public void setDir(Direction direction) {
 		this.direction = direction;
 	}

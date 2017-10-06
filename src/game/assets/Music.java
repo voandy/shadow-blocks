@@ -4,10 +4,13 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
 public class Music {
+  private final float MUSIC_VOL = (float) 0.7;
+  
   private Sound adventure;
   private Sound giles_theme;
-  private Sound youWin;
   private Sound music;
+  
+  private Sound youWin;
   
   public Music() {
     try {
@@ -23,7 +26,7 @@ public class Music {
   
   public void playMusic() {
     if (music != null) {
-      music.loop();
+      music.loop(1, MUSIC_VOL);
     }
   }
   public void stopMusic() {

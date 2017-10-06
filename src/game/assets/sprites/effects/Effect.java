@@ -16,19 +16,16 @@ public class Effect extends Sprite{
 private SpriteSheet sheet;
 	private Animation animation;
 	
-	private float xDrawPos;
-  private float yDrawPos;
   private float xRenderOffset;
   private float yRenderOffset;
 	
   private int timeSinceShown;
   private int timeToShow;
   
+  // true when the animation has completed, GameEffects now knows to remove it
   private boolean finished;
 	
-  // not that effects are created without a position. one must be set before they are rendered in GameEffects
-	public Effect(String animation_src, String sound_src, Position position, 
-	    int width, int height, int duration, int timeToShow) {
+	public Effect(String animation_src, String sound_src, Position position, int width, int height, int duration, int timeToShow) {
 		super(animation_src, sound_src, position);
 		
 		try {
@@ -37,10 +34,11 @@ private SpriteSheet sheet;
 			e.printStackTrace();
 		}
 		
+		// animations are created from SpriteSheets
 		animation = new Animation(sheet, duration);
 		animation.setLooping(false);
 		
-	  // offsets Effect render position as animations don't have a drawCentered like images method for some reason
+	  // offsets Effect render position as animations don't have a drawCentered method like Images method for some reason
 		xRenderOffset = (animation.getWidth() - App.TILE_SIZE) / (float) 2;
 		yRenderOffset = (animation.getHeight() - App.TILE_SIZE) / (float) 2;
 		
@@ -59,9 +57,8 @@ private SpriteSheet sheet;
 	}
 
 	public void render(Graphics g, float xOffset, float yOffset) {
-		xDrawPos = (getPos().getXPos() * App.TILE_SIZE) + xOffset - xRenderOffset;
-		yDrawPos = (getPos().getYPos() * App.TILE_SIZE) + yOffset - yRenderOffset;
-		animation.draw(xDrawPos, yDrawPos);
+		animation.draw((getPos().getXPos() * App.TILE_SIZE) + xOffset - xRenderOffset, 
+		               (getPos().getYPos() * App.TILE_SIZE) + yOffset - yRenderOffset);
 	}
 	
   public Animation getAnimation() {
@@ -73,7 +70,6 @@ private SpriteSheet sheet;
   public void setFinished(boolean finished) {
     this.finished = finished;
   }
-  
   public int getTimeSinceShown() {
     return timeSinceShown;
   }

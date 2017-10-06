@@ -9,8 +9,11 @@ import game.assets.sprites.Position;
 
 // stores and renders game effects and animations such as Explosion
 public class GameEffects {
+  // effects currently playing
   private ArrayList<Effect> effects;
+  // effects queued to be added
   private ArrayList<Effect> effectsToAdd;
+  // effects queued to be removed
   private ArrayList<Effect> effectsToRemove;
 
   public GameEffects() {

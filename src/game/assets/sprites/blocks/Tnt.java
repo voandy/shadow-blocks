@@ -24,7 +24,7 @@ public class Tnt extends Block {
     assets.getMap()[getPos().getXPos()][getPos().getYPos()] = new Floor(getPos());
     assets.getBlocks()[getPos().getXPos()][getPos().getYPos()] = null;
     
-    // clears history and detonation cannot be undone
+    // clears history as detonation cannot be undone
     assets.getHistory().clearHistory();
 	}
 	
@@ -37,7 +37,7 @@ public class Tnt extends Block {
 	  return moved;
 	}
 	
-	// as well as being able to do anying a stone can do Tnt can move into CrackedWalls
+	// as well as being able to do anything a block can do Tnt can move into CrackedWalls
 	public boolean isValidMove(Position destination, Assets assets) {
 	   if (super.isValidMove(destination, assets)) {
 	     return true;

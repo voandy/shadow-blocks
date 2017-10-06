@@ -16,7 +16,13 @@ public class Ice extends Block {
 	private final static int MOVE_DELAY = 250;
 	private boolean sliding;
 	private int timeSinceMove;
+	// squares moved since pushed
+	private int squaresMoved;
+	
 	private Position nextPos;
+	// the initial position of the ice block when it is pushed, used for rendering smoothly
+	private Position pushPos;
+	
 	
   // Offset that changes with delta to allow animation to move smoothly
   private float renderOffsetX;
@@ -34,19 +40,25 @@ public class Ice extends Block {
 		
 		sliding = false;
 		timeSinceMove = 0;
+		squaresMoved = 0;
+		
 		nextPos = null;
+		pushPos = getPos();
 		
     renderOffsetX = 0;
     renderOffsetY = 0;
 	}
 	
+	// copies an Ice block's properties
 	public Ice(Ice another) {
 	  super(another);
 	    this.slide = another.slide;
+	    slide.stop();
 	  
 	    this.sliding = another.sliding;
 	    this.timeSinceMove = another.timeSinceMove;
 	    
+	    this.pushPos = new Position(another.pushPos);
 	    if (another.nextPos != null) {
 	      this.nextPos = new Position(another.nextPos);
 	    }
@@ -56,6 +68,7 @@ public class Ice extends Block {
 	}
 	
 	public boolean move(Properties properties, Assets assets) {
+	  // when an Ice block is moved we make it slide if it isn't already sliding
 	  if (super.move(properties, assets)) {
 	    if (!sliding) {
 	      makeSlide();
@@ -64,42 +77,46 @@ public class Ice extends Block {
 	  return false;
 	}
 	
-	// if the ice block is in a sliding state it will continue to move unit it encounters a wall or block
+	// if the ice block is in a sliding state it will continue to move unit it encounters a wall, block or unit
 	public void update(Input input, int delta, Properties properties, Assets assets) {
 		if (sliding) {
 			timeSinceMove += delta;
 			
+			// moves the Image's render position smoothly based on direction
 	    switch(getPos().getDir()) {
 	    case DIR_LEFT:
-	      renderOffsetX = timeSinceMove * -SPEED + App.TILE_SIZE;
+	      renderOffsetX = -squaresMoved * App.TILE_SIZE + timeSinceMove * -SPEED + App.TILE_SIZE;
 	      break;
 	    case DIR_RIGHT:
-	      renderOffsetX = timeSinceMove * SPEED - App.TILE_SIZE;
+	      renderOffsetX = squaresMoved * App.TILE_SIZE + timeSinceMove * SPEED - App.TILE_SIZE;
 	      break;
 	    case DIR_UP:
-	      renderOffsetY = timeSinceMove * -SPEED + App.TILE_SIZE;
+	      renderOffsetY = -squaresMoved * App.TILE_SIZE + timeSinceMove * -SPEED + App.TILE_SIZE;
 	      break;
 	    case DIR_DOWN:
-	      renderOffsetY = timeSinceMove * SPEED - App.TILE_SIZE;
+	      renderOffsetY = squaresMoved * App.TILE_SIZE + timeSinceMove * SPEED - App.TILE_SIZE;
 	      break;
 	    case DIR_NONE:
 	      break;
 	    }
 	    
+	    
+	    // moves the actual block invisibly
+	    // though the animations is smooth the actual block is only ever in a single grid at any one time
 			if (timeSinceMove > MOVE_DELAY) {
-				
 				if (isValidMove(nextPos, assets)) {
 					move(properties, assets);
 					nextPos = getPos().nextPos();
 					timeSinceMove = 0;
-	        renderOffsetX = 0;
-	        renderOffsetY = 0;
+					squaresMoved++;
 					
 				} else {
 					sliding = false;
 			    slide.stop();
 			    renderOffsetX = 0;
 			    renderOffsetY = 0;
+			    squaresMoved = 0;
+			    pushPos = getPos();
 				}
 			}
 		}
@@ -110,6 +127,7 @@ public class Ice extends Block {
 	  // prevents sound from continuously looping if pushed multiple times before it stops
 	  slide.stop();
 	  
+	  pushPos = new Position(getPos());
 		sliding = true;
     slide.loop();
     timeSinceMove = 0;
@@ -117,7 +135,7 @@ public class Ice extends Block {
 	}
   
   public void render(Graphics g, float xOffset, float yOffset) {
-    getImage().draw(getPos().getXPos() * App.TILE_SIZE + xOffset + renderOffsetX, 
-                    getPos().getYPos() * App.TILE_SIZE + yOffset + renderOffsetY);
+    getImage().draw(pushPos.getXPos() * App.TILE_SIZE + xOffset + renderOffsetX, 
+                    pushPos.getYPos() * App.TILE_SIZE + yOffset + renderOffsetY);
   }
 }

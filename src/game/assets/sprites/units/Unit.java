@@ -11,7 +11,7 @@ import game.assets.sprites.blocks.Block;
 import game.assets.sprites.blocks.Ice;
 
 public abstract class Unit extends Sprite implements Movable{
-  // used to freeze unit while message is being displayed
+  // used to freeze unit, primarily while message is being displayed
   private boolean frozen;
 
 	public Unit(String image_src, String sound_src, Position position) {
@@ -63,6 +63,10 @@ public abstract class Unit extends Sprite implements Movable{
     return true;
 	}
 	
+  public void render(Graphics g, float xOffset, float yOffset) {
+    super.render(g, xOffset, yOffset);
+  }
+	
   public void freeze() {
     frozen = true;
   }
@@ -71,9 +75,5 @@ public abstract class Unit extends Sprite implements Movable{
   }
   public boolean isFrozen() {
     return frozen;
-  }
-  
-  public void render(Graphics g, float xOffset, float yOffset) {
-    super.render(g, xOffset, yOffset);
   }
 }
