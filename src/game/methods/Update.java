@@ -19,7 +19,7 @@ public class Update {
       }
     }
   }
-  
+
   /** updates both the MapItem[][] and Block[][] array in assets */
   public static void updateArrays(Input input, int delta, Assets assets, Properties properties) {
     for (int i = 0; i < properties.getLevelWidth(); i++) {

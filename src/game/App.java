@@ -1,7 +1,7 @@
 /**
  * @author Andy Vo
  * https://github.com/voandy
- * 
+ *
  * SWEN20003: Object Oriented Software Development 2017
  * Base game design and project skeleton by Eleanor McMurtry
  */
@@ -21,65 +21,61 @@ import org.newdawn.slick.Input;
  */
 public class App extends BasicGame
 {
- 	  /** screen width, in pixels */
-    public static final int SCREEN_WIDTH = 1024;
-    /** screen height, in pixels */
-    public static final int SCREEN_HEIGHT = 768;
-    /** size of the tiles, in pixels */
-    public static final int TILE_SIZE = 32;
-    /** sets target framerate */
-    public static final int MAX_FRAMERATE = 60;
-    
-    private World world;
+  /** screen width, in pixels */
+  public static final int SCREEN_WIDTH = 1024;
+  /** screen height, in pixels */
+  public static final int SCREEN_HEIGHT = 768;
+  /** size of the tiles, in pixels */
+  public static final int TILE_SIZE = 32;
+  /** sets target framerate */
+  public static final int MAX_FRAMERATE = 60;
 
-    public App()
-    {    	
-        super("Shadow Blocks");
-    }
+  private World world;
 
-    @Override
-    public void init(GameContainer gc)
-    throws SlickException
-    {
-    	world = new World();
-    }
+  public App()
+  {
+    super("Shadow Blocks");
+  }
 
-    /** Update the game state for a frame.
-     * @param gc The Slick game container object.
-     * @param delta Time passed since last frame (milliseconds).
-     */
-    @Override
-    public void update(GameContainer gc, int delta)
-    throws SlickException
-    {
-        // Get data about the current input (keyboard state).
-        Input input = gc.getInput();
-        world.update(input, delta);
-    }
+  @Override
+  public void init(GameContainer gc) throws SlickException
+  {
+    world = new World();
+  }
 
-    /** Render the entire screen, so it reflects the current game state.
-     * @param gc The Slick game container object.
-     * @param g The Slick graphics object, used for drawing.
-     */
-    public void render(GameContainer gc, Graphics g)
-    throws SlickException
-    {
-    	world.render(g);
-    }
+  /** Update the game state for a frame.
+   * @param gc The Slick game container object.
+   * @param delta Time passed since last frame (milliseconds).
+   */
+  @Override
+  public void update(GameContainer gc, int delta) throws SlickException
+  {
+    // Get data about the current input (keyboard state).
+    Input input = gc.getInput();
+    world.update(input, delta);
+  }
 
-    /** Start-up method. Creates the game and runs it.
-     * @param args Command-line arguments (ignored).
-     */
-    public static void main(String[] args)
-    throws SlickException
-    {
-        AppGameContainer app = new AppGameContainer(new App());
-        // setShowFPS(true), to show frames-per-second.
-        app.setShowFPS(true);
-        app.setVSync(true);
-        app.setTargetFrameRate(MAX_FRAMERATE);
-        app.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
-        app.start();
-    }
+  /** Render the entire screen, so it reflects the current game state.
+   * @param gc The Slick game container object.
+   * @param g The Slick graphics object, used for drawing.
+   */
+  public void render(GameContainer gc, Graphics g) throws SlickException
+  {
+    world.render(g);
+  }
+
+  /** Start-up method. Creates the game and runs it.
+   * @param args Command-line arguments (ignored).
+   */
+  public static void main(String[] args) throws SlickException
+  {
+    AppGameContainer app = new AppGameContainer(new App());
+    // setShowFPS(true), to show frames-per-second.
+    app.setShowFPS(true);
+    app.setVSync(true);
+    app.setTargetFrameRate(MAX_FRAMERATE);
+    app.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
+    app.start();
+  }
 
 }

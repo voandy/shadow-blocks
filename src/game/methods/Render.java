@@ -17,7 +17,7 @@ public class Render {
       }
     }
   }
-  
+
   /** used to render Sprites stored in ArrayLists i.e. units and effects */
   public static void renderArrayList(Graphics g, Properties properties, ArrayList<? extends Sprite> sprites) {
     if (sprites != null) {

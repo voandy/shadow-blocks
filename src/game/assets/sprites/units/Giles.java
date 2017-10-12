@@ -18,10 +18,10 @@ public class Giles extends Player{
   private Image giles_up;
   private Image giles_down;
   private Image giles_kick;
-  
+
   private boolean kicking;
   private int kickTime;
-  
+
   public Giles(Position position) {
     super("res/giles/giles_down.png", "res/step.wav" , position);
     try {
@@ -33,17 +33,17 @@ public class Giles extends Player{
     } catch (SlickException e) {
       e.printStackTrace();
     }
-    
+
     kicking = false;
     kickTime = 0;
-    
+
     // set Giles' Direction to prevent him from throwing a SonicBoom with DIR_NONE at the start of the level
     getPos().setDir(Direction.DIR_DOWN);
   }
 
   public void update(Input input, int delta, Properties properties, Assets assets) {
     if (!isFrozen()) {
-      
+
       if (input.isKeyPressed(Input.KEY_LEFT)) {
         setImage(giles_left);
         getPos().setDir(Direction.DIR_LEFT);
@@ -60,7 +60,7 @@ public class Giles extends Player{
         setImage(giles_down);
         getPos().setDir(Direction.DIR_DOWN);
         playerMove(properties, assets);
-        
+
         // point giles without moving hum using WASD
       } else if (input.isKeyPressed(Input.KEY_A)) {
         setImage(giles_left);
@@ -74,7 +74,7 @@ public class Giles extends Player{
       } else if (input.isKeyPressed(Input.KEY_S)) {
         setImage(giles_down);
         getPos().setDir(Direction.DIR_DOWN);
-        
+
         //throws SonicBoom
       } else if (input.isKeyPressed(Input.KEY_F)) {
         // prevents SonicBoom from being thrown inside a wall or block
@@ -84,16 +84,16 @@ public class Giles extends Player{
         } else {
           assets.getGameEffects().showPop(getPos().nextPos());
         }
-        
+
         //throws Kick
       } else if (input.isKeyPressed(Input.KEY_SPACE)){
         assets.getGameEffects().throwKick(getPos());
         setImage(giles_kick);
         freeze();
         kicking = true;
-      } 
+      }
     }
-    
+
     if (kicking) {
       kickTime += delta;
     }
@@ -104,7 +104,7 @@ public class Giles extends Player{
       unFreeze();
     }
   }
-  
+
   /** resets image to direction after kick */
   public void setImageDir() {
     switch(getPos().getDir()) {

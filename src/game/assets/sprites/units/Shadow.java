@@ -13,19 +13,19 @@ import game.assets.sprites.Position;
 public class Shadow extends Mage{
   /** it's just a flesh wound */
   private Sound wound;
-  
+
   private static final int MOVE_DELAY = 1000;
   private int timeSinceMove;
   private static final int RESPAWN_TIME = 4000;
   private int timeSinceKilled;
-  
+
   private boolean dead;
-  
+
   private Position initialPos;
-  
+
   public Shadow(Position position) {
     super("res/shadow.png", "res/shadow.wav", position);
-    
+
     try {
       wound = new Sound("res/wound.wav");
     } catch (SlickException e) {
@@ -36,7 +36,7 @@ public class Shadow extends Mage{
     dead = false;
     initialPos = new Position(getPos());
   }
-  
+
   public void update(Input input, int delta, Properties properties, Assets assets) {
     if (!dead) {
       timeSinceMove += delta;
@@ -47,8 +47,8 @@ public class Shadow extends Mage{
         timeSinceMove = 0;
       }
     }
-    
-    
+
+
     // comes back a short time after being maimed
     if (dead) {
       timeSinceKilled += delta;
@@ -61,13 +61,13 @@ public class Shadow extends Mage{
       }
     }
   }
-  
+
   public void kill() {
     dead = true;
     getPos().setPos(new Position());
     timeSinceMove = 0;
   }
-  
+
   /** shadow is only rendered if it is alive */
   public void render(Graphics g, float xOffset, float yOffset) {
     if (!dead) {

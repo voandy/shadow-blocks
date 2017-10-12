@@ -16,24 +16,24 @@ public class EndScreen {
   private Image message;
   private int messageTimer;
   private final int MESSAGE_TIME = 5000;
-  
+
   private final String WASTED_SRC = "res/wasted.png";
   private final String WIN_SRC = "res/win.png";
-  
+
   private Sound gameOverSound;
   private Sound victorySound;
-  
+
   /** true if the level is finished win or lose, we should now display a message */
   private boolean finished;
-  
+
   /** true if all the targets have been covered */
   private boolean won;
-  
+
   /** indicates to World that the win/lose message has finished playing and we are ready to either load the next level
-   * or restart the current level 
+   * or restart the current level
    */
   private boolean readyToGo;
-  
+
   public EndScreen() {
     message = null;
     messageTimer = 0;
@@ -41,7 +41,7 @@ public class EndScreen {
     finished = false;
     won = false;
     readyToGo = false;
-    
+
     try {
       gameOverSound = new Sound("res/wasted.wav");
       victorySound = new Sound("res/win.wav");
@@ -49,7 +49,7 @@ public class EndScreen {
       e.printStackTrace();
     }
   }
-  
+
   public void update(Input input, int delta) {
 
     // if the level is won or player dead there is a delay before the level is reset to show the message
@@ -75,48 +75,50 @@ public class EndScreen {
     // setting playerPos to null ensures that this method is only called once
     assets.setPlayerPos(null);
     assets.getMusic().stopMusic();
-    
+
     // freezes all units
     for (Unit unit : assets.getUnits()) {
       unit.freeze();
     }
-    
+
     try {
       message = new Image(WASTED_SRC);
     } catch (SlickException e) {
       e.printStackTrace();
     }
     gameOverSound.play();
-    
+
     won = false;
     finished = true;
   }
-  
+
   public void levelWon(Assets assets) {
     // freezes all units
     for (Unit unit : assets.getUnits()) {
       unit.freeze();
     }
-    
+
     assets.getMusic().stopMusic();
-    
+
     try {
       message = new Image(WIN_SRC);
     } catch (SlickException e) {
       e.printStackTrace();
     }
     victorySound.play();
-    
+
     won = true;
     finished = true;
   }
-  
+
   public boolean isReadyToGo() {
     return readyToGo;
   }
+
   public boolean isWon() {
     return won;
   }
+
   public boolean isFinished() {
     return finished;
   }
