@@ -18,23 +18,26 @@ import game.methods.Loader;
 
 public class Assets {
   
-  // map items and blocks are represented by a 2d array as they will never occupy the same grid coordinates
-  // this makes them more efficient to find as we do not have to traverse a linked list
+  /** map items and blocks are represented by a 2d array as they will never occupy the same grid coordinates
+   * this makes them more efficient to find as we do not have to traverse a linked list 
+   */
   private MapItem[][] map;
   private Block[][] blocks;
   
-  // units are represented by and ArrayList as they may occupy the same grid coordinates
+  /** units are represented by and ArrayList as they may occupy the same grid coordinates */
   private ArrayList<Unit> units;
   private ArrayList<Unit> toRemove;
   
-  // stores a list of targets to check which ones have been activated by a stone
+  /** stores a list of targets to check which ones have been activated by a stone */
   private ArrayList<Target> targets;
   
   private GameEffects gameEffects;
   
   private Position playerPos;
-  // true if player is dead, used so that Mage doesn't freak out when there is no player present and the endScreen
-  // is being displayed
+  
+  /** true if player is dead, used so that Mage doesn't freak out when there is no player present and the endScreen
+   * is being displayed 
+   */
   private boolean playerDead;
   
   private Door door;
@@ -58,7 +61,7 @@ public class Assets {
     
     history = new History();
     
-    // finds the player and loads its position if it is present
+    /** finds the player and loads its position if it is present */
     Player player = Loader.findPlayer(sprites);
     if (player != null) {
       playerPos = player.getPos();
@@ -73,7 +76,7 @@ public class Assets {
     }
   }
 
-  // removes a unit from the game and shows a Poof, this method avoids a concurrent modification exception
+  /** removes a unit from the game and shows a Poof, this method avoids a concurrent modification exception */
   public void killUnit(Unit unit) {
     if (unit instanceof Player) {
       playerDead = true;

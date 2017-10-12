@@ -51,3 +51,6 @@ local.properties
 
 # Gimp files
 *.xcf
+
+# Javadoc
+doc/

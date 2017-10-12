@@ -12,7 +12,7 @@ import game.assets.sprites.units.Unit;
 import game.methods.Loader;
 
 public class EndScreen {
-  // message, image and sound to be displayed upon completion of level/death
+  /** message, image and sound to be displayed upon completion of level/death */
   private Image message;
   private int messageTimer;
   private final int MESSAGE_TIME = 5000;
@@ -23,14 +23,15 @@ public class EndScreen {
   private Sound gameOverSound;
   private Sound victorySound;
   
-  // true if the level is finished win or lose, we should now display a message
+  /** true if the level is finished win or lose, we should now display a message */
   private boolean finished;
   
-   // true if all the targets have been covered
+  /** true if all the targets have been covered */
   private boolean won;
   
-  // indicates to World that the win/lose message has finished playing and we are ready to either load the next level
-  // or restart the current level
+  /** indicates to World that the win/lose message has finished playing and we are ready to either load the next level
+   * or restart the current level 
+   */
   private boolean readyToGo;
   
   public EndScreen() {
@@ -67,7 +68,7 @@ public class EndScreen {
     }
   }
 
-  // removes player and shows game over message
+  /** removes player and shows game over message */
   public void gameOver(Assets assets) {
     Player player = Loader.findPlayer(assets.getUnits());
     assets.killUnit(player);

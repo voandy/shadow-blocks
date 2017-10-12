@@ -16,15 +16,15 @@ public class Ice extends Block {
 	private final static int MOVE_DELAY = 250;
 	private boolean sliding;
 	private int timeSinceMove;
-	// squares moved since pushed
+	/** squares moved since pushed */
 	private int squaresMoved;
 	
 	private Position nextPos;
-	// the initial position of the ice block when it is pushed, used for rendering smoothly
+	/** the initial position of the ice block when it is pushed, used for rendering smoothly */
 	private Position pushPos;
 	
 	
-  // Offset that changes with delta to allow animation to move smoothly
+  /** Offset that changes with delta to allow animation to move smoothly */
   private float renderOffsetX;
   private float renderOffsetY;
   private final static float SPEED = (float) App.TILE_SIZE / MOVE_DELAY;
@@ -49,7 +49,7 @@ public class Ice extends Block {
     renderOffsetY = 0;
 	}
 	
-	// copies an Ice block's properties
+	/** copies an Ice block's properties */
 	public Ice(Ice another) {
 	  super(another);
 	    this.slide = another.slide;
@@ -77,7 +77,7 @@ public class Ice extends Block {
 	  return false;
 	}
 	
-	// if the ice block is in a sliding state it will continue to move unit it encounters a wall, block or unit
+	/** if the ice block is in a sliding state it will continue to move unit it encounters a wall, block or unit */
 	public void update(Input input, int delta, Properties properties, Assets assets) {
 		if (sliding) {
 			timeSinceMove += delta;
@@ -101,8 +101,9 @@ public class Ice extends Block {
 	    }
 	    
 	    
-	    // moves the actual block invisibly
-	    // though the animations is smooth the actual block is only ever in a single grid at any one time
+	    /** moves the actual block invisibly
+	     * though the animations is smooth the actual block is only ever in a single grid at any one time 
+	     */
 			if (timeSinceMove > MOVE_DELAY) {
 				if (isValidMove(nextPos, assets)) {
 					move(properties, assets);

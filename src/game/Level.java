@@ -14,11 +14,11 @@ import game.methods.Render;
 import game.methods.Update;
 
 public class Level {
-  // properties stores level dimensions and the number of moves
+  /** properties stores level dimensions and the number of moves */
 	private Properties properties;
-  // assets stores everything in the level including the map, units, stones and effects
+	/** stores all sprites in the level including the map, units, stones and effects */
 	private Assets assets;
-	// shows a message at the end of each level
+	/** shows a message at the end of each level */
 	private EndScreen endScreen;
 	
 	public Level(String filename) {
@@ -65,7 +65,7 @@ public class Level {
 		g.drawString("Moves: " + properties.getNoMoves(), 0, 0);
 	}
 	
-  // checks if level is won
+  /** checks if level is won */
   public boolean isCompleted() {
     // if there are no targets return false
     if (assets.getTargets().isEmpty()) {
@@ -80,7 +80,7 @@ public class Level {
     // all targets have stones on them
     return true;
   }
-  
+  /** undoes one move, see History class */
   private void undo() {
     Player player = Loader.findPlayer(assets.getUnits());
     if (assets.getHistory().undo(player, properties, assets)) {

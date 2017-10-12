@@ -1,7 +1,7 @@
 package game.assets.sprites;
 
 public class Position{
-	// stores the x and y coordinates of a Sprite and the direction it's facing
+	/** stores the x and y coordinates of a Sprite and the direction it's facing */
 	private int xPos;
 	private int yPos;
 	private Direction direction;
@@ -12,28 +12,28 @@ public class Position{
 		this.direction = direction;
 	}
 	
-	// if a Position is created without specifying a Direction it defaults to DIR_NONE
+	/** if a Position is created without specifying a Direction it defaults to DIR_NONE */
 	public Position(int xPos, int yPos) {
 		this.xPos = xPos;
 		this.yPos = yPos;
 		this.direction = Direction.DIR_NONE;
 	}
 	
-	// copies a position into this
+	/** copies a position into this */
 	public Position(Position another) {
 		this.xPos = another.xPos;
 		this.yPos = another.yPos;
 		this.direction = another.direction;
 	}
 	
-	// creates an empty Position
+	/** creates an empty Position */
 	public Position() {
 	  this.xPos = 0;
 	  this.yPos = 0;
 	  this.direction = Direction.DIR_NONE;
 	}
 	
-	// tests if two positions are equal, note this method is not dependent on direction
+	/** tests if two positions are equal, note this method is not dependent on direction */
 	public boolean equals(Position another) {
 	  if (this == another) {
 	    return true;
@@ -44,7 +44,7 @@ public class Position{
 	  return (this.xPos == another.xPos && this.yPos == another.yPos);
 	}
 	
-	// returns a Position adjacent to the current position (in the the direction this Position is facing)
+	/** returns a Position adjacent to the current position (in the the direction this Position is facing) */
 	public Position nextPos() {
 	  if(direction == Direction.DIR_NONE) {
 	    return this;
@@ -73,7 +73,7 @@ public class Position{
 		return new Position(nextX, nextY, this.direction);
 	}
 	
-	// copies another Position into this one
+	/** copies another Position into this one */
 	public void setPos(Position another) {
 		this.xPos = another.xPos;
 		this.yPos = another.yPos;

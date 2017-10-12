@@ -21,7 +21,7 @@ public class History {
     blockHistory = new LinkedList<Block[][]>();
   }
   
-  // adds a single step to both playerHistory and blockHistory
+  /** adds a single step to both playerHistory and blockHistory */
   public void addStep(Position playerPos, Properties properties, Assets assets) {
     Position playerStep = new Position(playerPos);
     playerHistory.add(playerStep);
@@ -34,8 +34,9 @@ public class History {
     }
   }
   
-  // performs a shallow copy of Block[][], see individual copy constructors for details
-  // this is important as Blocks are mutable and will likely change before an undo is performed
+  /** performs a shallow copy of Block[][], see individual copy constructors for details
+   * this is important as Blocks are mutable and will likely change before an undo is performed 
+   */
   private Block[][] copyBlocks(Properties properties, Assets assets) {
     int width = properties.getLevelWidth();
     int height = properties.getLevelHeight();
@@ -60,7 +61,7 @@ public class History {
     return stoneStep;
   }
   
-  // undoes a single move
+  /** undoes a single move */
   public boolean undo(Player player, Properties properties, Assets assets) {
     if (!playerHistory.isEmpty()) {
       // undoes the player's Position
@@ -83,7 +84,7 @@ public class History {
     return false;
   }
   
-  // clears history, called when Tnt destroys a crackedWall as this cannot be undone
+  /** clears history, called when Tnt destroys a crackedWall as this cannot be undone */
   public void clearHistory() {
     playerHistory.clear();
     blockHistory.clear();

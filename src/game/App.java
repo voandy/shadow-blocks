@@ -1,9 +1,9 @@
 /**
- * Programmer: Andy Vo
+ * @author Andy Vo
  * https://github.com/voandy
  * 
- * Project skeleton for SWEN20003: Object Oriented Software Development 2017
- * by Eleanor McMurtry
+ * SWEN20003: Object Oriented Software Development 2017
+ * Base game design and project skeleton by Eleanor McMurtry
  */
 
 package game;
@@ -21,7 +21,7 @@ import org.newdawn.slick.Input;
  */
 public class App extends BasicGame
 {
- 	/** screen width, in pixels */
+ 	  /** screen width, in pixels */
     public static final int SCREEN_WIDTH = 1024;
     /** screen height, in pixels */
     public static final int SCREEN_HEIGHT = 768;

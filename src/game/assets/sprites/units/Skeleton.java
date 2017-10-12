@@ -45,7 +45,7 @@ public class Skeleton extends Npc {
     }
   }
   
-  // Override isValidMove as the Skeleton cannot push blocks
+  /** Override isValidMove as the Skeleton cannot push blocks */
   public boolean isValidMove(Position destination, Assets assets) {
     if (assets.getMap()[destination.getXPos()][destination.getYPos()].isBlocked() ||
         assets.getBlocks()[destination.getXPos()][destination.getYPos()] instanceof Block) {

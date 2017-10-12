@@ -35,7 +35,7 @@ public class Player extends Unit{
 	  }
 	}
 	
-	// moves the player, makes a sound and updates history
+	/** moves the player, makes a sound and updates history */
 	public void playerMove(Properties properties, Assets assets) {
 	  assets.getHistory().addStep(getPos(), properties, assets);
 	  
@@ -44,7 +44,7 @@ public class Player extends Unit{
 		properties.incrementMoves();
 	}
 	
-	// Rogues and Mages move with the player
+	/** Rogues and Mages move with the player */
 	public void moveNpcs(Properties properties, Assets assets) {
 	  for(Unit unit : assets.getUnits()) {
 	    // we use the getClass method to prevent the Shadow from moving with the player

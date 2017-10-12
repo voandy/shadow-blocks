@@ -12,7 +12,7 @@ public class Block extends Sprite implements Movable{
 		super("res/block.png", "res/block.wav", position);
 	}
 	
-	// this second constructor allows for subclasses to be instantiated with a different image
+	/** this second constructor allows for subclasses to be instantiated with a different image */
 	public Block(String image_src, String sound_src, Position position) {
 		super(image_src, sound_src, position);
 	}
@@ -21,7 +21,7 @@ public class Block extends Sprite implements Movable{
 	  super(another);
   }
 
-	// moves the block one grid position if possible
+	/** moves the block one grid position if possible */
   public boolean move(Properties properties, Assets assets) {	  
 		Position nextPos = getPos().nextPos();
 
@@ -32,7 +32,7 @@ public class Block extends Sprite implements Movable{
 		return false;
 	}
 	
-  // updates the Blocks positions as well as the Block[][] array in Assets to reflect this
+  /** updates the Blocks positions as well as the Block[][] array in Assets to reflect this */
 	private void shift(Position position, Assets assets) {
     assets.getBlocks()[position.nextPos().getXPos()][position.nextPos().getYPos()] = this;
     assets.getBlocks()[position.getXPos()][position.getYPos()] = null;
@@ -42,7 +42,7 @@ public class Block extends Sprite implements Movable{
     }
 	}
 	
-  // returns false if the destination contains a wall, block or unit and true otherwise
+  /** returns false if the destination contains a wall, block or unit and true otherwise */
 	public boolean isValidMove(Position destination, Assets assets) {
     if (assets.getMap()[destination.getXPos()][destination.getYPos()].isBlocked()) {
       return false;

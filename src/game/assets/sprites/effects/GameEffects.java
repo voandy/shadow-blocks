@@ -7,13 +7,13 @@ import game.Properties;
 import game.assets.Assets;
 import game.assets.sprites.Position;
 
-// stores and renders game effects and animations such as Explosion
+/** stores and renders game effects and animations such as Explosion */
 public class GameEffects {
-  // effects currently playing
+  /** effects currently playing */
   private ArrayList<Effect> effects;
-  // effects queued to be added
+  /** effects queued to be added */
   private ArrayList<Effect> effectsToAdd;
-  // effects queued to be removed
+  /** effects queued to be removed */
   private ArrayList<Effect> effectsToRemove;
 
   public GameEffects() {
@@ -22,7 +22,7 @@ public class GameEffects {
     effectsToRemove = new ArrayList<>();
   }
   
-  // adds the given effect to effects to be rendered
+  /** adds the given effect to effects to be rendered */
   public void showEffect(Effect effect, Position position) {
     effectsToAdd.add(effect);
     effect.makeSound();
@@ -58,7 +58,9 @@ public class GameEffects {
     showEffect(kick, position);
   }
   
-  // adds new effects from queue, updates current effects and removes effects that have finished playing from effects
+  /** adds new effects from queue, updates current effects and removes effects 
+   * that have finished playing from effects 
+   */
   public void update(Input input, int delta, Properties properties, Assets assets) {
     if (!effectsToAdd.isEmpty()) {
       effects.addAll(effectsToAdd);

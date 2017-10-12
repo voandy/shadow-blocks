@@ -29,7 +29,10 @@ public class Loader {
 	private static final int NO_DIMENSIONS = 2;
 	private static final int MAX_LEVELS = 20;
 
-	// loads level dimensions from file
+	/** loads level dimensions from file 
+	 * @param name of level file and List of sprites in level
+	 * @return Properties object with level dimensions
+	 */
 	public static Properties loadProperties(String filename, ArrayList<Sprite> sprites) {
 		int levelWidth = 0;
 		int levelHeight = 0;
@@ -51,7 +54,10 @@ public class Loader {
 		return properties;
 	}
 	
-	// loads the list of levels, this is represents as an array of String indicating the filename of the levels
+	/** loads the list of levels, this is represents as an array of String indicating the filename of the levels 
+	 * @param filename of file containing list of levels (one per line)
+	 * @return array of paths to each level file
+	 */
 	public static String[] loadLevelList(String filename) {
 		String[] levelList = new String[MAX_LEVELS];
 		
@@ -69,7 +75,10 @@ public class Loader {
 		return levelList;
 	}
 	
-	// creates a new sprite given the type and position
+	/** creates a new sprite given the type and position 
+	 * @param name of sprite type and Position object
+	 * @return a sprite
+	 */
 	public static Sprite createSprite(String type, Position position) {
 		switch (type) {
 			case "wall":
@@ -106,7 +115,10 @@ public class Loader {
 		return null;
 	}
 	
-	// loads all the level data into an array list of sprites
+	/** loads all the level data into an array list of sprites
+	 * @param filename of level file
+	 * @return List of all sprites in a level
+	 */
 	public static ArrayList<Sprite> loadSprites(String filename) {
 		ArrayList<Sprite> sprites = new ArrayList<>();
 		
@@ -137,7 +149,7 @@ public class Loader {
 		return sprites;
 	}
 	
-	// returns a 2d array of MapItems filtered from sprites
+	/** returns a 2d array of MapItems filtered from sprites */
   public static MapItem[][] loadMap(ArrayList<Sprite> sprites, int levelWidth, int levelHeight) {
     MapItem[][] map = new MapItem[levelWidth][levelHeight];
     
@@ -149,7 +161,7 @@ public class Loader {
     return map;
   }
   
-  // returns a 2d array of Blocks filtered from sprites
+  /** returns a 2d array of Blocks filtered from sprites */
   public static Block[][] loadBlocks(ArrayList<Sprite> sprites, int levelWidth, int levelHeight) {
     Block[][] stones = new Block[levelWidth][levelHeight];
     
@@ -161,8 +173,9 @@ public class Loader {
     return stones;
   }
 	
-	// given an ArrayList of sprites returns an ArrayList of objects that are instances of type
-	// credit: Tamas Rev https://stackoverflow.com/questions/46480748/
+	/** given an ArrayList of sprites returns an ArrayList of objects that are instances of type
+	 * credit: Tamas Rev https://stackoverflow.com/questions/46480748/ 
+	 */
 	@SuppressWarnings("unchecked")
   public static <T> ArrayList<T> getSubset(ArrayList<? super T> sprites, Class<T> type) {
 	  ArrayList<T> subSet = new ArrayList<>();

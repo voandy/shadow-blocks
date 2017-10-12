@@ -11,7 +11,7 @@ import game.assets.sprites.Position;
 import game.assets.sprites.effects.Kick;
 import game.assets.sprites.map.Wall;
 
-// Giles is a unique creation and does not infringe on any international copyrights
+/** Giles is a unique creation and does not infringe on any international copyrights */
 public class Giles extends Player{
   private Image giles_left;
   private Image giles_right;
@@ -105,7 +105,7 @@ public class Giles extends Player{
     }
   }
   
-  // resets image to direction after kick
+  /** resets image to direction after kick */
   public void setImageDir() {
     switch(getPos().getDir()) {
     case DIR_LEFT:

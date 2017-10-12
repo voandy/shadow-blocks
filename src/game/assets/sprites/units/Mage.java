@@ -20,7 +20,7 @@ public class Mage extends Npc {
 	  super(image_src, sound_src, position);
 	}
 	
-  // moves toward the player on the X and Y axis whichever is greater
+  /** moves toward the player on the X and Y axis whichever is greater */
 	public boolean move(Properties properties, Assets assets) {
 	  if (!assets.isPlayerDead()) {
 	    distX = Math.abs(assets.getPlayerPos().getXPos() - getPos().getXPos());
@@ -50,8 +50,9 @@ public class Mage extends Npc {
 	  return false;
 	}
 	
-  // Override isValidMove as the Mage cannot push blocks and cannot move into other units
-	// this prevents Mages and Shadows from merging into one unit
+  /** Override isValidMove as the Mage cannot push blocks and cannot move into other units
+	 * this prevents Mages and Shadows from merging into one unit 
+	 */
   public boolean isValidMove(Position destination, Assets assets) {
     if (assets.getMap()[destination.getXPos()][destination.getYPos()].isBlocked() ||
         assets.getBlocks()[destination.getXPos()][destination.getYPos()] instanceof Block) {

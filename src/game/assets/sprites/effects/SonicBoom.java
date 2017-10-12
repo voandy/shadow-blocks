@@ -22,14 +22,14 @@ public class SonicBoom extends Effect {
   private int squaresMoved;
   private final static int MOVE_DELAY = 150;
   
-  // Offset that changes with delta to allow animation to move smoothly
+  /** Offset that changes with delta to allow animation to move smoothly */
   private float xRenderOffset;
   private float yRenderOffset;
   private final static float SPEED = (float) App.TILE_SIZE / MOVE_DELAY;
   
-  // the actual position of the SonicBoom (invisible)
+  /** the actual position of the SonicBoom (invisible) */
   private Position nextPos;
-  // the initial position of the SonicBoom when it is thrown
+  /** the initial position of the SonicBoom when it is thrown */
   private Position throwPos;
   
   public SonicBoom(Position position) {
@@ -117,7 +117,7 @@ public class SonicBoom extends Effect {
                         throwPos.getYPos() * App.TILE_SIZE + yOffset + yRenderOffset);
   }
   
-  // returns false if the destination contains a wall or block and true otherwise
+  /** returns false if the destination contains a wall or block and true otherwise */
   public boolean isValidMove(Position destination, Assets assets) {
     if (assets.getBlocks()[destination.getXPos()][destination.getYPos()] != null ||
         assets.getMap()[destination.getXPos()][destination.getYPos()].isBlocked()) {

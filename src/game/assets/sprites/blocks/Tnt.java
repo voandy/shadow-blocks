@@ -37,7 +37,7 @@ public class Tnt extends Block {
 	  return moved;
 	}
 	
-	// as well as being able to do anything a block can do Tnt can move into CrackedWalls
+	/** as well as being able to do anything a block can do Tnt can move into CrackedWalls */
 	public boolean isValidMove(Position destination, Assets assets) {
 	   if (super.isValidMove(destination, assets)) {
 	     return true;

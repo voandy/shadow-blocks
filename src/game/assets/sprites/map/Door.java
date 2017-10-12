@@ -23,7 +23,7 @@ public class Door extends Wall{
 		
 	}
 	
-	// opens door if not already open
+	/** opens door if not already open */
 	public void open() {
 	  if (!open) {
 	    setBlocked(false);
@@ -33,7 +33,7 @@ public class Door extends Wall{
 	  }
 	}
 	
-	// closes door if not already closed
+	/** closes door if not already closed */
 	public void close() {
 	  if (open) {
 	    setBlocked(true);

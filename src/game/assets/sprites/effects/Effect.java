@@ -22,7 +22,7 @@ private SpriteSheet sheet;
   private int timeSinceShown;
   private int timeToShow;
   
-  // true when the animation has completed, GameEffects now knows to remove it
+  /** true when the animation has completed, GameEffects now knows to remove it */
   private boolean finished;
 	
 	public Effect(String animation_src, String sound_src, Position position, int width, int height, int duration, int timeToShow) {

@@ -9,9 +9,9 @@ import game.Properties;
 import game.assets.Assets;
 import game.assets.sprites.Position;
 
-//moves like the Mage but on a timer like the skeleton, respawns after being killed
+/** moves like the Mage but on a timer like the skeleton, respawns after being killed */
 public class Shadow extends Mage{
-  // it's just a flesh wound
+  /** it's just a flesh wound */
   private Sound wound;
   
   private static final int MOVE_DELAY = 1000;
@@ -68,7 +68,7 @@ public class Shadow extends Mage{
     timeSinceMove = 0;
   }
   
-  // shadow is only rendered if it is alive
+  /** shadow is only rendered if it is alive */
   public void render(Graphics g, float xOffset, float yOffset) {
     if (!dead) {
       super.render(g, xOffset, yOffset);
